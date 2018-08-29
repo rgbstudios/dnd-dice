@@ -62,6 +62,9 @@ $(document).ready(function() {
   	}
   }
 
+  //update params
+  updateParams();
+
 // ---------------- update display of console, speak button, night ----------------
 
 	consoleDiv.css('display','none');
@@ -213,8 +216,22 @@ $(document).ready(function() {
 	});
 
 	uploadMods.on('click', function() {
-		//TODO
+		$('#fileInput').click();
 	});
+
+
+	$("#fileInput").on('click',function() {
+	  	if (!window.FileReader) { 
+	  		return; //browser not supported TODO: error alert
+	  	}
+		let input = $('#fileInput').get(0);
+		let reader = new FileReader();
+		if(input.files.length) { //file exists
+			let textFile = input.files[0];
+		 	reader.readAsText(textFile);
+		 	$(reader).on('load', processFile);
+		}
+  	});
 
 	$('#modModal input[type=number]').on('change', function() {
 		updateParams();
@@ -222,6 +239,26 @@ $(document).ready(function() {
 
 
 }); //end doc ready
+
+
+
+
+
+
+function processFile(e) {
+  let file = e.target.result, results;
+  if(file && file.length) {
+    results = file.split("\n");
+    for(let i=2; i<results.length-1; i++) {
+	  if(results[i].trim() != "") {
+	  	console.log(results[i].substr(4,3) );
+		$('#'+modNames[i]).val(results[i].substr(4,3) );
+	  }
+	}
+  }
+}
+
+
 
 
 // ---------------- utility ----------------
@@ -406,7 +443,9 @@ add info modal with how advantage works, that expertiece is double proficiency, 
 mention that dnd is (c) wizards of the coast and we do not own any of their assets
 option to click to roll die by itself
 menton that modifiers are stored in the website url 
-
+add alerts for copying
+restyle sharethis for night?
+sticky head? footer?
 
 todo: dynamiclly change text on select options to show the value in parentheses being added for modifiers
 todo: sticky footer with rolls
