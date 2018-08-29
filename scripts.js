@@ -53,11 +53,11 @@ $(document).ready(function() {
 
 
 // ---------------- get url params ----------------
+//atob decodes base 64
   let url = new URL(window.location.href);
   let m = url.searchParams.get("m");
   if(m) {
-  	m = atob(m).split(' '); //new
-  	// m = m.split('a');
+  	m = atob(m).split(' ');
   	for(let i=0; i<m.length; i++) {
   		$('#'+modNames[i]).val(m[i] || 0);
   	}
@@ -283,6 +283,7 @@ function updateParams() {
 		m += $('#'+modNames[i]).val() + ' ';
 	}
 	m +=  $('#'+modNames[modNames.length-1]).val();
+	//btoa encodes base 64
 	m = btoa(m);
 	history.replaceState({}, "", "?m=" + m);
 }
