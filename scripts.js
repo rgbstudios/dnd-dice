@@ -391,7 +391,7 @@ function doRolls(numDice = getNumDice(), diceSides = getDiceSides(), advantage =
 	historyText.val(historyText.val() + '\n' + rollTextwithRolls);
 	numDiceRolled.html(parseInt(numDiceRolled.html() )+ (numDice==1 && advantage!='0' ? 2 : numDice) );
 	if(isSpeak) {
-		talk(rollText);
+		talk(rollText + '... Rolls were ' + rolls);
 	}
 }
 
