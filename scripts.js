@@ -221,7 +221,8 @@ $(document).ready(function() {
 
 
 	$("#fileInput").on('click',function() {
-	  	if (!window.FileReader) { 
+	  	console.log(window.FileReader);
+	  	if(!window.FileReader) { 
 	  		return; //browser not supported TODO: error alert
 	  	}
 		let input = $('#fileInput').get(0);
@@ -230,6 +231,7 @@ $(document).ready(function() {
 			let textFile = input.files[0];
 		 	reader.readAsText(textFile);
 		 	$(reader).on('load', processFile);
+		 	//TODO: fix not updating. for now must click the button again
 		}
   	});
 
@@ -246,13 +248,14 @@ $(document).ready(function() {
 
 
 function processFile(e) {
+  console.log('processing file...');
   let file = e.target.result, results;
   if(file && file.length) {
-    results = file.split("\n");
+    results = file.split("\r\n");
     for(let i=2; i<results.length-1; i++) {
 	  if(results[i].trim() != "") {
-	  	console.log(results[i].substr(4,3) );
-		$('#'+modNames[i]).val(results[i].substr(4,3) );
+	  	//index 5 is 6th character, which is number after 3 char abrev and then colon and space. 4 is length which is max for -999
+		$('#'+modNames[i-2]).val(parseInt(results[i].substr(5,4) ) );
 	  }
 	}
   }
