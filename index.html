@@ -79,13 +79,14 @@
 						</div>
 						<br>
 						<div class="btn-group">
-							<button class="btn btn-default">
+							<button id="clearMods" class="btn btn-default">
 								Clear Modifiers <i class="fas fa-eraser"></i>
 							</button>
-							<button class="btn btn-default">
+							<button id="downloadMods" class="btn btn-default">
 								Download Modifiers <i class="fas fa-download"></i>
 							</button>
-							<button class="btn btn-default">
+							<a id="downloadModsLink" target="_blank" download="history.txt"></a>
+							<button id="uploadMods" class="btn btn-default">
 								Upload Modifiers <i class="fas fa-upload"></i>
 							</button>
 						</div>
@@ -118,7 +119,7 @@
 				</div>
 				<div class="modal-body">
 
-					<textarea id="history" class="form-control" rows="10"></textarea>
+					<textarea id="historyText" class="form-control" rows="10"></textarea>
 					<br>
 					You've rolled <span id="numDiceRolled">0</span> dice
 

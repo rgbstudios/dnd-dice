@@ -1,10 +1,12 @@
 let consoleDiv, consoleButton, speakButton, nightButton, nightTheme, titleImg, copyUrl;
 let numDiceModalInput, numDiceSubmit, numDiceButtonCustom, numDiceModal, diceSidesModalInput, diceSidesSubmit, diceSidesButtonCustom, diceSidesModal;
 let numDiceDiv, numDiceButtonPlus, diceSidesDiv, diceSidesButtonPlus;
-let output, rollButton, resetButton, history, numDiceRolled, clearHistory, downloadHistory, notes, clearNotes, downloadNotes;
+let output, rollButton, resetButton, historyText, numDiceRolled, clearHistory, downloadHistory, notes, clearNotes, downloadNotes, clearMods, downloadMods, uploadMods;
 let modifierForm, modifierInput, advantageSelect, attributeSelect1, attributeSelect2;
 
 let isSpeak = false, isNight = false;
+
+let modNames = ['str', 'dex', 'con', 'int', 'wis', 'cha', 'prf', 'spl', 'itv'];
 
 $(document).ready(function() {
 	consoleDiv = $('#consoleDiv');
@@ -32,19 +34,35 @@ $(document).ready(function() {
 	output = $('#output');
 	rollButton = $('#rollButton');
 	resetButton = $('#resetButton');
-	history = $('#history');
+	historyText = $('#historyText');
 	numDiceRolled = $('#numDiceRolled');
 	clearHistory = $('#clearHistory');
 	downloadHistory = $('#downloadHistory');
 	notes = $('#notes');
 	clearNotes = $('#clearNotes');
 	downloadNotes = $('#downloadNotes');
+	clearMods = $('#clearMods');
+	downloadMods = $('#downloadMods');
+	uploadMods = $('#uploadMods');
 
 	modifierForm = $('#modifierForm');
 	modifierInput = $('#modifierInput');
 	advantageSelect = $('#advantageSelect');
 	attributeSelect1 = $('#attributeSelect1');
 	attributeSelect2 = $('#attributeSelect2');
+
+
+// ---------------- get url params ----------------
+  let url = new URL(window.location.href);
+  let m = url.searchParams.get("m");
+  if(m) {
+  	m = m.split('a');
+  	console.log(m);
+  	for(let i=0; i<m.length; i++) {
+  		console.log($('#'+modNames[i]) );
+  		$('#'+modNames[i]).val(m[i] || 0);
+  	}
+  }
 
 // ---------------- update display of console, speak button, night ----------------
 
@@ -153,15 +171,15 @@ $(document).ready(function() {
 		$('input[name=plusMinusRadio]').val(['+']);
 	});
 
-// ---------------- clear and download history and notes, copy url ----------------
+// ---------------- clear and download history, notes, and mods, copy url, upload mods ----------------
 
 	clearHistory.on('click', function() {
-		history.val('');
+		historyText.val('');
 		numDiceRolled.html('0');
 	});
 
 	downloadHistory.on('click', function() {
-		downloadFile('History:\r\nYou rolled ' + numDiceRolled.html() + ' dice.\r\n' + history.val().replace(/\r?\n/g, '\r\n'), 
+		downloadFile('History:\r\nYou rolled ' + numDiceRolled.html() + ' dice.\r\n' + historyText.val().replace(/\r?\n/g, '\r\n'), 
 			'history ' + getFormattedDate(), 'downloadHistoryLink');
 	});
 
@@ -183,11 +201,44 @@ $(document).ready(function() {
 		tmp.remove();
 	});
 
+	clearMods.on('click', function() {
+		$('#modModal input[type=number]').val('0');
+		updateParams();
+	});
+
+	downloadMods.on('click', function() {
+		let modText = '';
+		for(let i=0; i<modNames.length; i++) {
+			modText += '\r\n' + modNames[i] + ': ' + $('#'+modNames[i]).val();
+		}
+		updateParams();
+		downloadFile('Mods:\r\n' + window.location.href + modText, 'modifiers ' + getFormattedDate(), 'downloadModsLink')
+	});
+
+	uploadMods.on('click', function() {
+		//TODO
+	});
+
+	$('#modModal input[type=number]').on('change', function() {
+		updateParams();
+	});
+
 
 }); //end doc ready
 
 
 // ---------------- utility ----------------
+
+
+
+function updateParams() {
+	let m = '';
+	for(let i=0; i<modNames.length-1; i++) {
+		m += $('#'+modNames[i]).val() + 'a';
+	}
+	m +=  $('#'+modNames[modNames.length-1]).val();
+	history.replaceState({}, "", "?m=" + m);
+}
 
 function downloadFile(str, fileName, linkName) {
 	let data = [];
@@ -290,7 +341,7 @@ function doRolls(numDice = getNumDice(), diceSides = getDiceSides(), advantage =
 		': ' + result + '  |  Rolls: ' + rolls;
 
 	display(rollText);
-	history.val(history.val() + '\n' + rollText);
+	historyText.val(historyText.val() + '\n' + rollText);
 	numDiceRolled.html(parseInt(numDiceRolled.html() )+ (numDice==1 && advantage!='0' ? 2 : numDice) );
 }
 
