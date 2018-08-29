@@ -445,7 +445,7 @@ function doConsoleRoll(str) {
   let advantage = 0;
   let modifier = 0;
   let attr1Name = 'non';
-  let attr2Name = '';
+  let attr2Name;
   
   if(/^([2-9]|([1-9][0-9][0-9]?))?d([2-9]|([1-9][0-9][0-9]?))\s?((\+|\-)[1-9][0-9]?[0-9]?)?\s?(\(str\)|\(dex\)|\(con\)|\(int\)|\(wis\)|\(cha\))?\s?(\(prf\)|\(exp\)|\(spl\)|\(itv\))?$/.test(input) ||
   /^1?d([2-9]|([1-9][0-9][0-9]?))\s?((\+|\-)[1-9][0-9]?[0-9]?)?\s?(\(adv\)|\(advantage\)|\(dis\)|\(disadvantage\)|)?\s?(\(str\)|\(dex\)|\(con\)|\(int\)|\(wis\)|\(cha\))?\s?(\(prf\)|\(exp\)|\(spl\)|\(itv\))?$/.test(input)) {
