@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<meta charset="utf-8">
+	<meta name="title=" content="D&D Dice Roller">
+	<meta name="robots" content="index, follow">
+	<meta name="description" content="Use D&D Dice Roller to easily roll any number any dice, with modifiers and more">
+	<meta name="keywords" content="dnd, d&d, dnd dice, dnd roller, dnd dice roller, d&d dice, d&d roller, d&d dice roller, dungeons and dragons, dice, die, roller, roll, dice roller, die roller">
+
+	<meta name="theme-color" content="#339">
+	<meta name="msapplication-navbutton-color" content="#339">
+	<meta name="apple-mobile-web-app-status-bar-style" content="#339">
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+
+	<link id="nightTheme" rel="stylesheet" type="text/css" href="">
+	<link rel="stylesheet" type="text/css" href="styles.css">
+
+	<!-- <link rel="icon" href="img/icon.png" type="image/png"> -->
+
+	<title>D&D Dice Roller</title>
+
+</head>
+<body>
+	<script src="scripts.js"></script>
+
+	<h3 class="text-center">D&D <img id="titleImg" src="dice/d20.svg" width="32px"> Dice</h3>
+
+	<div class="btn-group">
+		<button class="btn btn-default" data-toggle="modal" data-target="#modModal">
+			Mods and Notes <i class="fas fa-pencil-alt"></i>
+		</button>
+		<button class="btn btn-default" data-toggle="modal" data-target="#historyModal">
+			History <i class="fas fa-history"></i>
+		</button>
+		<button class="btn btn-default" data-toggle="modal" data-target="#settingModal">
+			Settings <i class="fas fa-cog"></i>
+		</button>
+
+		<div class="modal fade" id="modModal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Mods and Notes <i class="fas fa-pencil-alt"></i></h4>
+					</div>
+					<div class="modal-body">
+						<b>Modifiers:</b>
+						<div class="input-group">
+							<input id="str" class="form-control input-sm" type="number" value="0" min="-99" max="99" maxlength="3">
+							<p class="input-group-addon">Str</p>
+							<input id="dex" class="form-control input-sm" type="number" value="0" min="-99" max="99" maxlength="3">
+							<p class="input-group-addon">Dex</p>
+							<input id="con" class="form-control input-sm" type="number" value="0" min="-99" max="99" maxlength="3">
+							<p class="input-group-addon">Con</p>
+						</div>
+						<div class="input-group">
+							<input id="int" class="form-control input-sm" type="number" value="0" min="-99" max="99" maxlength="3">
+							<p class="input-group-addon">Int</p>
+							<input id="wis" class="form-control input-sm" type="number" value="0" min="-99" max="99" maxlength="3">
+							<p class="input-group-addon">Wis</p>
+							<input id="cha" class="form-control input-sm" type="number" value="0" min="-99" max="99" maxlength="3">
+							<p class="input-group-addon">Cha</p>
+						</div>
+						<br>
+						<div class="input-group">
+							<input id="prf" class="form-control input-sm" type="number" value="0" min="-99" max="99" maxlength="3">
+							<p class="input-group-addon">Proficiency</p>
+							<input id="spl" class="form-control input-sm" type="number" value="0" min="-99" max="99" maxlength="3">
+							<p class="input-group-addon">Spell Atk</p>
+							<input id="itv" class="form-control input-sm" type="number" value="0" min="-99" max="99" maxlength="3">
+							<p class="input-group-addon">Initiative</p>
+						</div>
+						<br>
+						<div class="btn-group">
+							<button class="btn btn-default">
+								Clear Modifiers <i class="fas fa-eraser"></i>
+							</button>
+							<button class="btn btn-default">
+								Download Modifiers <i class="fas fa-download"></i>
+							</button>
+							<button class="btn btn-default">
+								Upload Modifiers <i class="fas fa-upload"></i>
+							</button>
+						</div>
+						<hr>
+						<div class="form-group">
+							<label for="notes">Notes:</label>
+							<textarea class="form-control" rows="5" id="notes"></textarea>
+						</div>
+						<div class="btn-group">
+							<button id="clearNotes" class="btn btn-default">
+								Clear Notes <i class="fas fa-eraser"></i>
+							</button>
+							<button id="downloadNotes" class="btn btn-default">
+								Download Notes <i class="fas fa-download"></i>
+							</button>
+							<a id="downloadNotesLink" target="_blank" download="history.txt"></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="historyModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">History <i class="fas fa-history"></i></h4>
+				</div>
+				<div class="modal-body">
+
+					<textarea id="history" class="form-control" rows="10"></textarea>
+					<br>
+					You've rolled <span id="numDiceRolled">0</span> dice
+
+				</div>
+				<div class="modal-footer">
+					<div class="btn-group">
+						<button id="clearHistory" class="btn btn-default">
+							Clear History <i class="fas fa-eraser"></i>
+						</button>
+
+						<button id="downloadHistory" class="btn btn-default">
+							Download History <i class="fas fa-download"></i>
+						</button>
+						<a id="downloadHistoryLink" target="_blank" download="history.txt"></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="settingModal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Settings <i class="fas fa-cog"></i></h4>
+			</div>
+			<div class="modal-body">
+				<button onclick="toggleFullscreen()" class="btn btn-default">
+					Fullscreen <i class="fas fa-arrows-alt"></i>
+				</button>
+				<button id="nightButton" class="btn btn-default">
+					Night Theme <i class="fas fa-moon"></i>
+				</button>
+				<button id="consoleButton" class="btn btn-default">
+					Roll Console <i class="fas fa-terminal"></i>
+				</button>
+				<br><br>
+				<button id="speakButton" class="btn btn-default">
+					Speak Roll Results <i class="fas fa-volume-up"></i>
+				</button>
+
+
+			</div>
+			<div class="modal-footer">
+				<div class="btn-group">
+					<button title="Contact us at contact@rgbstudios.org" onclick="window.open('mailto:contact@rgbstudios.org','_blank');" class="btn btn-default">
+						Contact <i class="fas fa-envelope"></i>
+					</button>
+					<button id="copyUrl" class="btn btn-default" title="Copy link to website">
+						Copy <i class="fas fa-copy"></i>
+					</button>
+					<button title="Donate on PayPal" onclick="window.open('https://www.paypal.me/RGBStudios','_blank');" class="btn btn-default">
+						Donate <i class="fas fa-donate"></i>
+					</button>
+				</div>
+				<br><br>V.0.0.0
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+
+<div class="modal fade" id="numDiceModal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Number of Dice <i class="fas fa-dice"></i></h4>
+			</div>
+			<div class="modal-body">
+				<input id="numDiceModalInput" class="form-control input-lg" type="number" min="6" value="10" max="999" maxlength="3">
+				<br>
+				<button id="numDiceSubmit" class="btn btn-default">Submit</button>
+				<br><br>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="diceSidesModal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Dice Sides <i class="fas fa-dice"></i></h4>
+			</div>
+			<div class="modal-body">
+				<div class="input-group">
+					<p class="input-group-addon">D</p>
+					<input id="diceSidesModalInput" class="form-control input-lg" type="number" min="2" value="10" max="999" maxlength="3">
+				</div>
+				<br>
+				<button id="diceSidesSubmit" class="btn btn-default">Submit</button>
+				<br><br>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="consoleDiv" class="input-group">
+	<input type="text" class="form-control" placeholder="Type a command to roll...">
+	<span class="input-group-btn">
+		<button class="btn btn-default" type="button">Roll <i class="fas fa-dice"></i></button>
+	</span>
+</div>
+
+<hr>
+
+<label>Number of Dice: </label>
+<div id="numDiceDiv" class="btn-group">
+	<buton class="btn active btn-default btn-lg">1</buton>
+	<buton class="btn btn-default btn-lg">2</buton>
+	<buton class="btn btn-default btn-lg">3</buton>
+	<buton class="btn btn-default btn-lg">4</buton>
+	<buton class="btn btn-default btn-lg">5</buton>
+	<buton id="numDiceButtonCustom" class="btn btn-default btn-lg">10</buton>
+	<buton id="numDiceButtonPlus" class="btn btn-info btn-lg" data-toggle="modal" data-target="#numDiceModal">+</buton>
+</div>
+<hr>
+
+<label>Die: </label>
+<div id="diceSidesDiv" class="btn-group">
+	<buton class="btn btn-default btn-md"><img src="dice/d4.svg" class="die-img">D4</buton>
+	<buton class="btn btn-default btn-md"><img src="dice/d6.svg" class="die-img">D6</buton>
+	<buton class="btn btn-default btn-md"><img src="dice/d8.svg" class="die-img">D8</buton>
+	<buton class="btn btn-default btn-md"><img src="dice/d12.svg" class="die-img">D12</buton>
+	<buton class="btn active btn-default btn-md"><img src="dice/d20.svg" class="die-img">D20</buton>
+	<buton id="diceSidesButtonCustom" class="btn btn-default btn-lg">D10</buton>
+	<buton id="diceSidesButtonPlus" class="btn btn-info btn-lg" data-toggle="modal" data-target="#diceSidesModal">+</buton>
+</div>
+<hr>
+
+<div class="row">
+	<div class="col-sm-12 col-md-4">
+		<label>Modifier:</label>
+		<form id="modifierForm">
+			<label class="radio-inline"><input checked type="radio" name="plusMinusRadio" value="+">+</label>
+			<label class="radio-inline"><input type="radio" name="plusMinusRadio" value="-">-</label>
+		</form>
+		<input id="modifierInput" class="form-control input-sm" type="number" value="0" min="0" max="999" maxlength="3">
+	</div>
+<!-- 	<div class="col-sm-6 col-md-3">
+	<label>Multiplier:</label>
+		<form id="multiplierForm">
+			<label class="radio-inline"><input checked type="radio" name="optradio" value="x">&times;</label>
+			<label class="radio-inline"><input type="radio" name="optradio" value="/">/</label>
+		</form>
+		<input id="multiplierInput" class="form-control input-sm" type="number" value="1" min="0" max="999" maxlength="3"> 
+	</div> -->
+	<div class="col-sm-6 col-md-4">
+		<label>Advantage:</label>
+		<select id="advantageSelect" class="form-control input-sm">
+			<option value="0">None</option>
+			<option value="1">Advantage</option>
+			<option value="-1">Disadvantage</option>
+		</select>
+	</div>
+	<div class="col-sm-6 col-md-4">
+		<div class="form-group">
+			<label>Attribute:</label>
+			<select id="attributeSelect1" class="form-control  input-sm">
+				<option value="non">None</option>
+				<option value="str">Str</option>
+				<option value="dex">Dex</option>
+				<option value="con">Con</option>
+				<option value="int">Int</option>
+				<option value="wis">Wis</option>
+				<option value="cha">Cha</option>
+			</select>
+		</div>
+		<select id="attributeSelect2" class="form-control  input-sm">
+			<option value="non">None</option>
+			<option value="prf">Proficiency</option>
+			<option value="exp">Expertise</option>
+			<option value="spl">Spell Atk</option>
+			<option value="itv">Initiative</option>
+		</select>
+
+	</div>
+</div>
+
+<hr>
+
+<button id="rollButton" class="btn btn-default btn-lg">Roll <i class="fas fa-dice"></i></button>
+<button id="resetButton" class="btn btn-default btn-lg">Reset <i class="fas fa-sync-alt"></i></button>
+<br><br>
+<input disabled id="output" class="form-control input-sm" type="text" value="">
+<br>
+</body>
+</html>
