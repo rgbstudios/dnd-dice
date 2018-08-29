@@ -194,6 +194,7 @@ $(document).ready(function() {
 	});
 
 	copyUrl.on('click', function() {
+		updateParams();
 		let tmp = $('<input type="text">').appendTo(document.body);
 		tmp.val(window.location.href);
 		tmp.select();
@@ -219,8 +220,7 @@ $(document).ready(function() {
 		$('#fileInput').click();
 	});
 
-
-	$("#fileInput").on('click',function() {
+	$("#fileInput").change(function() {
 	  	if(!window.FileReader) { 
 	  		return; //browser not supported TODO: error alert
 	  	}
@@ -256,6 +256,7 @@ function processFile(e) {
 		$('#'+modNames[i-2]).val(parseInt(results[i].substr(5,4) ) );
 	  }
 	}
+	updateParams();
   }
 }
 
@@ -264,6 +265,15 @@ function processFile(e) {
 
 // ---------------- utility ----------------
 
+function talk(words) {
+	let synth = window.speechSynthesis;
+	if('speechSynthesis' in window) {
+		let msg = new SpeechSynthesisUtterance(words);
+		msg.rate = 1;
+		msg.pitch = 1;
+		synth.speak(msg);
+	}
+}
 
 
 function updateParams() {
@@ -373,11 +383,16 @@ function doRolls(numDice = getNumDice(), diceSides = getDiceSides(), advantage =
 		(modifier==0 ? '' : modifier>0 ? ' +' + modifier : ' ' + modifier) +
 		(attr1Name=='non' ? '' : ' +' + attr1Name + '(' + attr1 + ')') + 
 		(attr2Name=='' ? '' : ' +' + attr2Name + '(' + attr2 + ')') + 
-		': ' + result + '  |  Rolls: ' + rolls;
+		': ' + result;
 
-	display(rollText);
-	historyText.val(historyText.val() + '\n' + rollText);
+		let rollTextwithRolls = rollText + '  |  Rolls: ' + rolls;
+
+	display(rollTextwithRolls);
+	historyText.val(historyText.val() + '\n' + rollTextwithRolls);
 	numDiceRolled.html(parseInt(numDiceRolled.html() )+ (numDice==1 && advantage!='0' ? 2 : numDice) );
+	if(isSpeak) {
+		talk(rollText);
+	}
 }
 
 
