@@ -92,10 +92,11 @@ $(document).ready(function() {
 // ---------------- set active class on num dice and dice sides button click ----------------
 
 	numDiceDiv.children().on('click', function() {
-		if($(this).html() != '+') {
-			numDiceDiv.children().removeClass('active');
-			$(this).addClass('active');			
+		if($(this).html() == '+') {
+			return;			
 		} 
+		numDiceDiv.children().removeClass('active');
+		$(this).addClass('active');
 		//can only roll with advantage or disadvantage if rolling 1 die
 		if($(this).html()!='1') {
 			advantageSelect.val('0');
