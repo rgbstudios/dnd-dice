@@ -57,9 +57,7 @@ $(document).ready(function() {
   let m = url.searchParams.get("m");
   if(m) {
   	m = m.split('a');
-  	console.log(m);
   	for(let i=0; i<m.length; i++) {
-  		console.log($('#'+modNames[i]) );
   		$('#'+modNames[i]).val(m[i] || 0);
   	}
   }
@@ -188,7 +186,6 @@ $(document).ready(function() {
 	});
 
 	downloadNotes.on('click', function() {
-		console.log('hi');
 		downloadFile('Notes:\r\n' + notes.val().replace(/\r?\n/g, '\r\n'), 
 			'notes ' + getFormattedDate(), 'downloadNotesLink');
 	});
