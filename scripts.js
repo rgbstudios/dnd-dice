@@ -391,7 +391,7 @@ function doConsoleRoll(str) {
 /*
 
 
-todo: make clear, download, upload modifiers work
+todo: make upload modifiers work
 make roll console, speak results, work
 
 
@@ -400,7 +400,6 @@ todo: fix youve rolled 1 dice into '1 die'
 
 animate buttons and UI
 make speak a checkbox not button
-add modifiers to url. have mod download and upload use url
 change modifier plus minus to just typing in + or - and no radio buttons
 
 add info modal with how advantage works, that expertiece is double proficiency, and about rolling for initiative, to attack against AC, and for damage
@@ -408,11 +407,11 @@ mention that dnd is (c) wizards of the coast and we do not own any of their asse
 option to click to roll die by itself
 menton that modifiers are stored in the website url 
 
-todo: add favicon
+
 todo: dynamiclly change text on select options to show the value in parentheses being added for modifiers
 todo: sticky footer with rolls
 
-todo: add share this, google analytics, favicon generator
+todo: add favicon generator
 */
 
 // ----------------  ----------------
