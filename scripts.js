@@ -221,7 +221,6 @@ $(document).ready(function() {
 
 
 	$("#fileInput").on('click',function() {
-	  	console.log(window.FileReader);
 	  	if(!window.FileReader) { 
 	  		return; //browser not supported TODO: error alert
 	  	}
@@ -246,9 +245,8 @@ $(document).ready(function() {
 
 
 
-
+//https://stackoverflow.com/questions/19038919/is-it-possible-to-upload-a-text-file-to-input-in-html-js?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
 function processFile(e) {
-  console.log('processing file...');
   let file = e.target.result, results;
   if(file && file.length) {
     results = file.split("\r\n");
@@ -449,6 +447,10 @@ menton that modifiers are stored in the website url
 add alerts for copying
 restyle sharethis for night?
 sticky head? footer?
+find delimeter other than 'a' for url params
+fix upload file not updating
+add help and info modals
+update github project
 
 todo: dynamiclly change text on select options to show the value in parentheses being added for modifiers
 todo: sticky footer with rolls
