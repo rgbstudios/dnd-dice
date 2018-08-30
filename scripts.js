@@ -512,6 +512,107 @@ function doConsoleRoll(str) {
   }
 }
 
+//eg roll 1 20 +2 -adv -str -spl
+function advancedConsole(str) {
+  const input = str.trim();
+  if(/^roll /.test(input)) {
+    if(/^roll [2-9][0-9]?[0-9]? ([2-9]|([1-9][0-9][0-9]?))( ((\+|\-)?(([1-9][0-9]?[0-9]?)|0))?)?( (\-str|\-dex|\-con|\-int|\-wis|\-cha))?( (\-prf|\-exp|\-spl|\-itv))?$/.test(input)) {
+      let numDice = 1;
+      let numSides = 2;
+      let modifier = 0;
+      const advantage = 0;
+      let attr1Name = 'non';
+      let attr2Name;
+      const fields = input.split(' ');
+      console.log(fields); 
+      numDice = parseInt(fields[1]);
+      numSides = parseInt(fields[2]);
+      if(fields[3].match(/[0-9]/)) {
+        modifier = fields[3].replace("+", "");
+      }
+      let token = input.match(/(\-str|\-dex|\-con|\-int|\-wis|\-cha)/);
+      if(token != null) {
+        attr1Name = token[0].replace("-", "");
+      }
+      token = input.match(/(\-prf|\-exp|\-spl|\-itv)/);
+      if(token != null) {
+        attr2Name = token[0].replace("-", "");
+      }
+      doRolls(parseInt(numDice), parseInt(numSides), parseInt(advantage), parseInt(modifier), getAttribute1(attr1Name), attr1Name, getAttribute1(attr2Name), attr2Name);
+    } else if (/^roll 1 ([2-9]|([1-9][0-9][0-9]?))( ((\+|\-)?(([1-9][0-9]?[0-9]?)|0))?)?( (\-adv|\-dis))?( (\-str|\-dex|\-con|\-int|\-wis|\-cha))?( (\-prf|\-exp|\-spl|\-itv))?$/.test(input)) {
+      let numDice = 1;
+      let numSides = 2;
+      let modifier = 0;
+      let advantage = 0;
+      let attr1Name = 'non';
+      let attr2Name;
+      const fields = input.split(' ');
+      console.log(fields); 
+      numDice = parseInt(fields[1]);
+      numSides = parseInt(fields[2]);
+      if(fields[3].match(/[0-9]/)) {
+        modifier = fields[3].replace("+", "");
+      }
+      let token = input.match(/(\-adv|\-dis)/);
+      if(token != null) {
+        if(token[0] == "-adv") {
+          advantage = 1;
+        } else {
+          advantage = -1;
+        }
+      }
+      token = input.match(/(\-str|\-dex|\-con|\-int|\-wis|\-cha)/);
+      if(token != null) {
+        attr1Name = token[0].replace("-", "");
+      }
+      token = input.match(/(\-prf|\-exp|\-spl|\-itv)/);
+      if(token != null) {
+        attr2Name = token[0].replace("-", "");
+      }
+      doRolls(parseInt(numDice), parseInt(numSides), parseInt(advantage), parseInt(modifier), getAttribute1(attr1Name), attr1Name, getAttribute1(attr2Name), attr2Name);
+    } else if (/^roll \-\-help$/.test(input)) {
+      console.log("roll: Rolls a number of dice");
+      console.log("USAGE:");
+      console.log("  roll [NUMDICE] [NUMSIDES] [MODIFIER] [ADVANTAGE] [ATTRIBUTE] [BONUS]");
+      console.log("  REQUIRED -");
+      console.log("    NUMDICE - An integer between 1 and 999 inclusive.");
+      console.log("      The number of dice to roll.");
+      console.log("    NUMSIDES - An integer between 2 and 999 inclusive.");
+      console.log("      The number of sides on each dice.");
+      console.log("  OPTIONAL -");
+      console.log("    MODIFIER - An integer between 0 and 999 inclusive preceded by a '+' or a '-' for positive and negative respectively.");
+      console.log("      A fixed ammount to add or subtract from the final roll result.");
+      console.log("    ADVANTAGE - ");
+      console.log("      -adv : Advantage. Role 2 dice and take the higher of the two results (before modifiers).");
+      console.log("      -dis : Disadvantage. Role 2 dice and take the lower of the two results (before modifiers).");
+      console.log("      -- Advantage options are mutually exclusive.");
+      console.log("      -- CANNOT be used when NUMDICE is more than 1.");
+      console.log("    ATTRIBUTE - ");
+      console.log("      -str : Strength. Adds strength stat to the roll result.");
+      console.log("      -dex : Dexterity. Adds deterity stat to the roll result.");
+      console.log("      -con : Constitution. Adds constitution stat to the roll result.");
+      console.log("      -int : Intelligence. Adds intelligence stat to the roll result.");
+      console.log("      -wis : Wisdom. Adds wisdom stat to the roll result.");
+      console.log("      -cha : Charisma. Adds charisma stat to the roll result.");
+      console.log("      -- Attribute options are mutually exclusive.");
+      console.log("    Bonus - ");
+      console.log("      -prf : Proficieny. Adds proficiency bonus to the roll result.");
+      console.log("      -exp : expertise. Adds expertise bonus to the roll result.");
+      console.log("      -spl : Spell attack. Adds spell attack to the roll result.");
+      console.log("      -itv : Initiative. Adds initiative bonus to the roll result.");
+      console.log("      -- Bonus options are mutually exclusive.");
+      console.log("  EXAMPLE USAGE -");
+      console.log("    roll 1 20 +1 -adv -dex -itv");
+    } else {
+      console.log("ERROR: Improper usage of 'roll' command.\n-- For usage details input 'roll --help'");
+    }
+  } else {
+    if(input.match(/^[^ ]* /) != null) {
+      console.log("ERROR: no command '" + input.match(/^[^\s]*\s/)[0].trim() + "' found.");
+    }
+  }
+}
+
 /*
 
 
