@@ -32,6 +32,7 @@
 </head>
 <body>
 	<script src="scripts.js"></script>
+	<script src="console.js"></script>
 
 	<h3 class="text-center">D&D <img id="titleImg" src="dice/d20.svg" width="32px"> Dice</h3>
 
@@ -226,9 +227,9 @@
 </div>
 
 <div id="consoleDiv" class="input-group">
-	<input type="text" class="form-control" placeholder="Type a command to roll...">
+	<input id="consoleInput" type="text" class="form-control" placeholder="Type a command to roll...">
 	<span class="input-group-btn">
-		<button class="btn btn-default" type="button">Roll <i class="fas fa-dice"></i></button>
+		<button id="consoleRollButton" class="btn btn-default" type="button">Roll <i class="fas fa-dice"></i></button>
 	</span>
 </div>
 
