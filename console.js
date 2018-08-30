@@ -67,6 +67,7 @@ function doConsoleRoll(str) {
       }
     }
     doRolls(parseInt(numDice), parseInt(diceSides), parseInt(advantage), parseInt(modifier), getAttribute1(attr1Name), attr1Name, getAttribute1(attr2Name), attr2Name);
+    console.log(output.val());
   }
   else {
     console.log('ERROR: Input not recognized');
@@ -110,6 +111,7 @@ function advancedConsole(str) {
         attr2Name = token[0].replace("-", "");
       }
       doRolls(parseInt(numDice), parseInt(numSides), parseInt(advantage), parseInt(modifier), getAttribute1(attr1Name), attr1Name, getAttribute1(attr2Name), attr2Name);
+      console.log(output.val());
     } else if (/^roll 1 ([2-9]|([1-9][0-9][0-9]?))( ((\+|\-)?(([1-9][0-9]?[0-9]?)|0))?)?( (\-adv|\-dis))?( (\-str|\-dex|\-con|\-int|\-wis|\-cha))?( (\-prf|\-exp|\-spl|\-itv))?$/.test(input)) {
       let numDice = 1;
       let numSides = 2;
@@ -141,6 +143,7 @@ function advancedConsole(str) {
         attr2Name = token[0].replace("-", "");
       }
       doRolls(parseInt(numDice), parseInt(numSides), parseInt(advantage), parseInt(modifier), getAttribute1(attr1Name), attr1Name, getAttribute1(attr2Name), attr2Name);
+      console.log(output.val());
     } else if (/^roll \-\-help$/.test(input)) {
       console.log("roll: Rolls a number of dice");
       console.log("USAGE:");
