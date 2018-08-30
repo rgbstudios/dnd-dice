@@ -18,17 +18,17 @@ function doConsoleRoll(str) {
   let attr1Name = 'non';
   let attr2Name;
   
-  if(/^([2-9]|([1-9][0-9][0-9]?))?d([2-9]|([1-9][0-9][0-9]?))\s?((\+|\-)[1-9][0-9]?[0-9]?)?\s?(\(str\)|\(dex\)|\(con\)|\(int\)|\(wis\)|\(cha\))?\s?(\(prf\)|\(exp\)|\(spl\)|\(itv\))?$/.test(input) ||
-  /^1?d([2-9]|([1-9][0-9][0-9]?))\s?((\+|\-)[1-9][0-9]?[0-9]?)?\s?(\(adv\)|\(advantage\)|\(dis\)|\(disadvantage\)|)?\s?(\(str\)|\(dex\)|\(con\)|\(int\)|\(wis\)|\(cha\))?\s?(\(prf\)|\(exp\)|\(spl\)|\(itv\))?$/.test(input)) {
-    let tokens = input.match(/^[1-9][0-9]?[0-9]?d/);
+  if(/^([2-9]|([1-9][0-9][0-9]?))?\s?d\s?([2-9]|([1-9][0-9][0-9]?))\s?((\+|\-)[1-9][0-9]?[0-9]?)?\s?(\(str\)|\(dex\)|\(con\)|\(int\)|\(wis\)|\(cha\))?\s?(\(prf\)|\(exp\)|\(spl\)|\(itv\))?$/.test(input) ||
+  /^1?\s?d\s?([2-9]|([1-9][0-9][0-9]?))\s?((\+|\-)[1-9][0-9]?[0-9]?)?\s?(\(adv\)|\(advantage\)|\(dis\)|\(disadvantage\)|)?\s?(\(str\)|\(dex\)|\(con\)|\(int\)|\(wis\)|\(cha\))?\s?(\(prf\)|\(exp\)|\(spl\)|\(itv\))?$/.test(input)) {
+    let tokens = input.match(/^[1-9][0-9]?[0-9]?d\s?/);
     if(tokens != null) {
-      numDice = tokens[0].replace('d', '');
+      numDice = tokens[0].replace('d', '').replace(' ', '');
     }
-    tokens = input.match(/d(([1-9][0-9][0-9]?)|[2-9])/);
+    tokens = input.match(/d\s?(([1-9][0-9][0-9]?)|[2-9])/);
     diceSides = tokens[0].replace('d', '');
     tokens = input.match(/(\+|\-)[1-9][0-9]?[0-9]?/)
     if(tokens != null) {
-      modifier = tokens[0].replace('+', '');
+      modifier = tokens[0].replace('+', '').replace(' ', '');
     }
     tokens = input.match(/\(advantage\)|\(adv\)|\(disadvantage\)|\(dis\)/);
     if(tokens != null) {
