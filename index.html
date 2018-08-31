@@ -19,10 +19,11 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
 
+	<link rel="stylesheet" type="text/css" href="styles/common.css">
+	<link rel="stylesheet" type="text/css" href="styles/dice-styles.css">
 	<link id="nightTheme" rel="stylesheet" type="text/css" href="">
-	<link rel="stylesheet" type="text/css" href="styles.css">
 
-	<link rel="icon" href="dice/d20.png" type="image/png">
+	<link rel="icon" href="img/d20.png" type="image/png">
 
 	<title>D&D Dice Roller</title>
 
@@ -31,10 +32,11 @@
 
 </head>
 <body>
-	<script src="scripts.js"></script>
-	<script src="console.js"></script>
+	<script src="scripts/common.js"></script>
+	<script src="scripts/dice-scripts.js"></script>
+	<script src="scripts/console.js"></script>
 
-	<h3 class="text-center">D&D <img id="titleImg" src="dice/d20.svg" width="32px"> Dice</h3>
+	<h3 class="text-center">D&D <img id="titleImg" src="img/d20.svg" width="32px"> Dice</h3>
 
 	<div class="btn-group">
 		<button class="btn btn-default" data-toggle="modal" data-target="#modModal">
@@ -55,7 +57,7 @@
 						<h4 class="modal-title">Mods and Notes <i class="fas fa-pencil-alt"></i></h4>
 					</div>
 					<div class="modal-body">
-						<b>Modifiers:</b>
+						<p><b>Modifiers:</b></p>
 						<div class="input-group">
 							<input id="str" class="form-control input-sm" type="number" value="0" min="-99" max="99" maxlength="3">
 							<p class="input-group-addon">Str</p>
@@ -126,7 +128,7 @@
 
 					<textarea id="historyText" class="form-control" rows="10"></textarea>
 					<br>
-					You've rolled <span id="numDiceRolled">0</span> dice
+					<p>You've rolled <span id="numDiceRolled">0</span> dice</p>
 
 				</div>
 				<div class="modal-footer">
@@ -182,7 +184,7 @@
 						Donate <i class="fas fa-donate"></i>
 					</button>
 				</div>
-				<br><br>V.0.0.1
+				<br><br><p>V.0.0.1</p>
 			</div>
 		</div>
 	</div>
@@ -249,11 +251,11 @@
 
 <label>Die: </label>
 <div id="diceSidesDiv" class="btn-group">
-	<buton class="btn btn-default btn-md"><img src="dice/d4.svg" class="die-img">D4</buton>
-	<buton class="btn btn-default btn-md"><img src="dice/d6.svg" class="die-img">D6</buton>
-	<buton class="btn btn-default btn-md"><img src="dice/d8.svg" class="die-img">D8</buton>
-	<buton class="btn btn-default btn-md"><img src="dice/d12.svg" class="die-img">D12</buton>
-	<buton class="btn active btn-default btn-md"><img src="dice/d20.svg" class="die-img">D20</buton>
+	<buton class="btn btn-default btn-md"><img src="img/d4.svg" class="die-img">D4</buton>
+	<buton class="btn btn-default btn-md"><img src="img/d6.svg" class="die-img">D6</buton>
+	<buton class="btn btn-default btn-md"><img src="img/d8.svg" class="die-img">D8</buton>
+	<buton class="btn btn-default btn-md"><img src="img/d12.svg" class="die-img">D12</buton>
+	<buton class="btn active btn-default btn-md"><img src="img/d20.svg" class="die-img">D20</buton>
 	<buton id="diceSidesButtonCustom" class="btn btn-default btn-lg">D10</buton>
 	<buton id="diceSidesButtonPlus" class="btn btn-info btn-lg" data-toggle="modal" data-target="#diceSidesModal">+</buton>
 </div>
@@ -310,7 +312,7 @@
 
 <hr>
 
-<button id="rollButton" class="btn btn-default btn-lg">Roll <i class="fas fa-dice"></i></button>
+<button id="rollButton" class="btn btn-primary btn-lg">Roll <i class="fas fa-dice"></i></button>
 <button id="resetButton" class="btn btn-default btn-lg">Reset <i class="fas fa-sync-alt"></i></button>
 <br><br>
 <input disabled id="output" class="form-control input-sm" type="text" value="">

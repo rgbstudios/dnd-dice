@@ -1,0 +1,47 @@
+* {
+	text-align: center !important;
+}
+body {
+	margin: 20px;
+}
+
+h1,h2,h3,h4,h5,h6,p, label, input, .btn, .btn.active, select, option {
+	color: #333;
+}
+
+img {
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	-webkit-user-drag: none;
+	user-drag: none;
+	-webkit-touch-callout: none;
+}
+::-moz-selection {
+  background: #b3b3e6;
+}
+::selection {
+  background: #b3b3e6;
+}
+
+.btn-primary {
+	background-color: #339;
+	color: #fff;
+	border: 1px solid #19194d;
+}
+.btn-primary:hover, .btn-primary:active, .btn-primary:focus {
+	background-color: #66c !important;
+	color: #fff !important;
+	border: 1px solid #339 !important;
+}
+.btn-info {
+	background-color: #369;
+	color: #fff;
+	border: 1px solid #19334d;
+}
+.btn-info:hover, .btn-info:active, .btn-info:focus {
+	background-color: #69c !important;
+	color: #fff !important;
+	border: 1px solid #369 !important;
+}

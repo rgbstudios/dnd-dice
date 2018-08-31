@@ -1,0 +1,48 @@
+.die-img {
+	width: 32px;
+}
+input:disabled {
+	cursor: text !important;
+}
+select:disabled {
+	cursor: default !important;
+}
+textarea {
+	resize: none;
+}
+hr {
+	border-width: 2px;
+}
+
+
+
+#titleImg:hover {
+	-webkit-animation:spin 1.5s ease-in-out 1;
+    -moz-animation:spin 1.5s ease-in-out 1;
+    animation:spin 1.5s ease-in-out 1;
+}
+#rollButton i, #resetButton i {
+	transition: all .2s ease-in-out;
+}
+#rollButton:hover i, #resetButton:hover i {
+	transform: rotate(180deg);
+}
+
+
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+
+#consoleDiv {
+	margin: 10px;
+}
+
+#downloadHistoryLink, #downloadNotesLink, #downloadModsLink, #fileInput {
+	display: none !important;
+	text-decoration: none !important;
+}
+
+/*sharethis*/
+.st-btn {
+  background-color: #333 !important;
+}
