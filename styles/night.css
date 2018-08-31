@@ -10,3 +10,8 @@ body, .modal-content {
 h1,h2,h3,h4,h5,h6,p:not(.input-group-addon), label {
 	color: #fff !important;
 }
+
+/*sharethis*/
+.st-btn {
+  border: 1px solid #fff !important;
+}
