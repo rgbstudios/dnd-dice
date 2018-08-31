@@ -89,6 +89,11 @@ window.onload = function() {
 			data.push('\r\n');
 		}
 		data.push('\r\nTotal:\t\tVal: ' + currentChar.statTotal + '\tMod: ' + currentChar.modTotal);
+
+		if(allAreSelected() ) {
+			data.push('\r\nRoll with your stats: http://rgbstudios.org/dnd-dice' + getDieRollerParams() );			
+		}
+
 		
 		properties = {type: 'plain/text'};
 		try {
@@ -156,29 +161,7 @@ window.onload = function() {
 	}
 
 	$('#openButton').on('click', function() {
-		let modNames = ['str', 'dex', 'con', 'int', 'wis', 'cha', 'prf', 'spl', 'itv'];
-		let m = '';
-		for(let i=0; i<6; i++) {
-			let j;
-			for(j=0	; j<6; j++) {
-				//TODO: BUG: when you click on a select and dont chose a value even if a vlaue is chosen the entire element stops existing or val is null
-				console.log(j+1);
-				console.log($('#stat' + (j+1) + 'Mod').val() );
-				console.log(modNames[$('#stat' + (j+1) + 'Mod').prop('selectedIndex')-1] );
-				// console.log($('#stat' + (j+1) + 'Mod').val().toString().toLowerCase() );
-				if(modNames[$('#stat' + (j+1) + 'Mod').prop('selectedIndex')-1] == modNames[i]) { //found elem
-					break;
-				}
-			}
-			// console.log(j);
-			// console.log(characters[characters.length-1].stats);
-			// console.log(characters[characters.length-1].stats[j].value);
-			m += characters[characters.length-1].stats[j].mod + ' ';
-			// console.log(m);
-		}
-		m += '0 0 0';
-		m = btoa(m); //encode base 64
-		window.open('index.html?m=' + m);
+		window.open('index.html' + getDieRollerParams() );
 	});
 	
 	$('#copyButton').on('click', function() {
@@ -206,6 +189,35 @@ window.onload = function() {
 	
 }
 
+function allAreSelected() {
+	for(let i=0; i<6; i++) {
+		if($('#stat'+(i+1)+'Mod').prop('selectedIndex') < 1) {
+			return false;
+		}
+	}
+	return true;
+}
+
+function getDieRollerParams() {
+	let modNames = ['str', 'dex', 'con', 'int', 'wis', 'cha', 'prf', 'spl', 'itv'];
+	let m = '';
+	for(let i=0; i<6; i++) {
+		let j;
+		for(j=0	; j<6; j++) {
+
+			// console.log($('#stat' + (j+1) + 'Mod').val() );
+			// console.log(modNames[$('#stat' + (j+1) + 'Mod').prop('selectedIndex')-1] );
+			// console.log($('#stat' + (j+1) + 'Mod').val().toString().toLowerCase() );
+			if(modNames[$('#stat' + (j+1) + 'Mod').prop('selectedIndex')-1] == modNames[i]) { //found elem
+				break;
+			}
+		}
+		m += characters[characters.length-1].stats[j].mod + ' ';
+	}
+	m += '0 0 0';
+	m = btoa(m); //encode base 64
+	return '?m=' + m;
+}
 
 
 
