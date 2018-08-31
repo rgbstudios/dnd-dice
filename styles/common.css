@@ -4,7 +4,7 @@
 body {
 	margin: 20px;
 }
-
+	
 h1,h2,h3,h4,h5,h6,p, label, input, .btn, .btn.active, select, option {
 	color: #333;
 }
@@ -45,3 +45,13 @@ img {
 	color: #fff !important;
 	border: 1px solid #369 !important;
 }
+
+#titleImg:hover {
+	-webkit-animation:spin 1.5s ease-in-out 1;
+    -moz-animation:spin 1.5s ease-in-out 1;
+    animation:spin 1.5s ease-in-out 1;
+}
+
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }

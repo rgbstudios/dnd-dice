@@ -16,11 +16,7 @@ hr {
 
 
 
-#titleImg:hover {
-	-webkit-animation:spin 1.5s ease-in-out 1;
-    -moz-animation:spin 1.5s ease-in-out 1;
-    animation:spin 1.5s ease-in-out 1;
-}
+
 #rollButton i, #resetButton i {
 	transition: all .2s ease-in-out;
 }
@@ -29,9 +25,7 @@ hr {
 }
 
 
-@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
-@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
-@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+
 
 #consoleDiv {
 	margin: 10px;

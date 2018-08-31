@@ -1,0 +1,38 @@
+.statDiv, select, input, button, canvas {
+	border: 2px solid #999;
+	box-shadow: 2px 4px 0px #333;
+	border-radius: 4px !important;
+	padding: 6px;
+	margin: 6px;
+	background-color: transparent;
+}
+.statDiv:hover, select:hover, input:hover, button:hover, canvas:hover {
+	box-shadow: 4px 6px 0px #333;
+}
+button:active {
+	transform: translate(2px, 2px);
+}
+
+.statDiv {
+	display: inline-block;
+}
+
+
+
+
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+	color: #999;
+}
+::-moz-placeholder { /* Firefox 19+ */
+	color: #999;
+}
+:-ms-input-placeholder { /* IE 10+ */
+	color: #999;
+}
+:-moz-placeholder { /* Firefox 18- */
+	color: #999;
+}
+option:disabled {
+	color: #999;
+}

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<!-- TODO
+IMPORTANT: redo chart
+create and download X characters input
+speak option
+show percentile option
+console of old characters?
+roll one at a time
+share rolls and url to load specific rolls, stats, and name
+info button to explain top number is roll and bottom is stat
+info button with explaination of dice roll process and what standard deviation is.
+enter your own mod table option
+
+donate, share, fullscreen
+v.0.0.5 contact email
+animate icons on buttons
+add history option
+percentile option
+bug: night mode + fullscreen
+add option to open character mods in dnd dice
+-->
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<meta charset="utf-8">
+	<meta name="title=" content="D&D Character Roller">
+	<meta name="robots" content="index, follow">
+	<meta name="description" content="Use D&D Character Roller to easily roll stats for a new D&D character, complete with graphs, download, and more">
+	<meta name="keywords" content="dnd, d&d, character, d&d character, dnd character, character roller, character stat, stat roller, character generator, dungeons and dragons, dice, die, roller, roll, dice roller, die roller">
+
+	<meta name="theme-color" content="#339">
+	<meta name="msapplication-navbutton-color" content="#339">
+	<meta name="apple-mobile-web-app-status-bar-style" content="#339">
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+
+	<link rel="stylesheet" type="text/css" href="styles/common.css">
+	<link rel="stylesheet" type="text/css" href="styles/char-styles.css">
+	<link id="nightTheme" rel="stylesheet" type="text/css" href="">
+
+	<link rel="icon" href="img/d20.png" type="image/png">
+
+	<title>D&D Character Roller</title>
+
+	  <!-- google chart -->
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> 
+
+	<!-- sharethis -->
+	<script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5b864aad7b4f100011fe46e7&product=inline-share-buttons' async='async'></script>
+
+</head>
+<body>
+	<script src="scripts/common.js"></script>
+	<script src="scripts/char-scripts.js"></script>
+	<!-- <script src="scripts/chart.js"></script> -->
+
+	<h3 class="text-center">D&D Character <img id="titleImg" src="img/d20.svg" width="32px"> Roller</h3>
+
+	<button id="genButton" class="btn btn-lg btn-primary">Roll New Character <i class="fas fa-dice"></i> </button>
+	<h3 id="numChars"></h3>
+
+	<hr>
+
+	<div class="text-center container">
+		<div class="row">
+			<div class="statDiv">
+				<h4 id="stat1"> </h4>
+				<select autofocus="autofocus" id="stat1Mod" class="statMod"> <option value=" - ">-</option> <option value="Str">Str</option> <option value="Dex">Dex</option> <option value="Con">Con</option> <option value="Int">Int</option> <option value="Wis">Wis</option> <option value="Cha">Cha</option> </select>
+			</div>
+			<div class="statDiv">
+				<h4 id="stat2"> </h4>
+				<select id="stat2Mod" class="statMod"> <option value=" - ">-</option> <option value="Str">Str</option> <option value="Dex">Dex</option> <option value="Con">Con</option> <option value="Int">Int</option> <option value="Wis">Wis</option> <option value="Cha">Cha</option> </select>
+			</div>
+			<div class="statDiv">
+				<h4 id="stat3"> </h4>
+				<select id="stat3Mod" class="statMod"> <option value=" - ">-</option> <option value="Str">Str</option> <option value="Dex">Dex</option> <option value="Con">Con</option> <option value="Int">Int</option> <option value="Wis">Wis</option> <option value="Cha">Cha</option> </select>
+			</div>
+			<div class="statDiv">
+				<h4 id="stat4"> </h4>
+				<select id="stat4Mod" class="statMod"> <option value=" - ">-</option> <option value="Str">Str</option> <option value="Dex">Dex</option> <option value="Con">Con</option> <option value="Int">Int</option> <option value="Wis">Wis</option> <option value="Cha">Cha</option> </select>
+			</div>
+			<div class="statDiv">
+				<h4 id="stat5"> </h4>
+				<select id="stat5Mod" class="statMod"> <option value=" - ">-</option> <option value="Str">Str</option> <option value="Dex">Dex</option> <option value="Con">Con</option> <option value="Int">Int</option> <option value="Wis">Wis</option> <option value="Cha">Cha</option> </select>
+			</div>
+			<div class="statDiv">
+				<h4 id="stat6"> </h4>
+				<select id="stat6Mod" class="statMod"> <option value=" - ">-</option> <option value="Str">Str</option> <option value="Dex">Dex</option> <option value="Con">Con</option> <option value="Int">Int</option> <option value="Wis">Wis</option> <option value="Cha">Cha</option> </select>
+			</div>
+		</div>
+		<hr>
+
+		<div style="text-align:left">
+			<div id="statsInfo" class="statDiv"></div>
+			<div id="statsInfoAvg" class="statDiv"></div>
+			<div id="statsInfoStdDev" class="statDiv"></div>
+
+			<hr>
+
+			<input id="nameInput" maxlength="50" placeholder="character name..." type="text" />
+			<input id="numbersInput" onclick="this.setSelectionRange(0, this.value.length)" type="text" />
+
+		<div class="btn-group">
+				<a id="downloadLink" target="_blank" download="stats.txt"></a>
+				<button id="download" title="download stats as txt file" class="btn btn-default"> <i class="fas fa-download"></i> </button>
+				<button id="copyButton" title="copy stats" class="btn btn-default"> <i class="fas fa-copy"></i> </button>
+				<button id="resetStat" title="reset stat selections" class="btn btn-default"> <i class="fas fa-sync-alt"></i> </button>
+				<button id="nightMode" title="night mode" class="btn btn-default"> <i class="fas fa-moon"></i> </button>
+				<button id="fullscreen" title="fullscreen" class="btn btn-default"> <i class="fas fa-arrows-alt"></i> </button>
+				<!-- <button id="info" title="info" class=""> <i class="fas fa-info"></i> </button> -->
+
+		</div>
+
+	</div>
+</div>
+
+
+
+
+
+<!-- Stat Odds Graph
+<div id="barchart"></div>
+	<p>Odds of each stat (of 1296)</p>
+	<p>Mean: 12.24, Median: 12, Mode: 13, Standard Deviation: 2.85</p> -->
+
+
+<div class="sharethis-inline-share-buttons"></div>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-104632692-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-104632692-3');
+</script>
+
+
+
+
+
+<!-- <div id="infoModal" class="modal">
+	<div class="modal-content">
+		<span id="settingsClose" class="close" >&times;</span>
+		<h3>Info</h3>
+		<ul>
+		<li>Each stat is generated  by rolling 4 d6, taking the 3 highest rolls. There are 6 stats.</li>
+		<br>
+		<li>Use the dropdown menu to choose which stat you want to assign to which roll.</li>
+		<br>
+		<li>Dnd Character Roller is good for a DM who wants to quickly create new NPCs and download their stats for later</li>
+			<br>
+		<li>You can use the tab key to navitage inputs. Use arrow keys to choose your stat, or enter to open the dropdown.</li>
+		<br>
+		</ul>
+		<p id="sources">Sources</p>
+		<a href="https://material.io/icons/">Material Icons</a>
+		<a href="http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300ita‌​lic,400italic,500,500italic,700,700italic,900italic,900">Roboto</a>
+		
+	</div>
+</div>	 -->
+
+
+
+<!-- todo: roll mod table modal -->
+<!-- <details><summary>Roll/Mod Table</summary>
+		<table align="center"><tr>
+			<th>Roll Value</th>
+			<th>Modifier</th>
+		</tr><tr>
+			<td>3</td>
+			<td>-4</td>
+		</tr><tr>
+			<td>4-5</td>
+			<td>-3</td>
+		</tr><tr>
+			<td>6-7</td>
+			<td>-2</td>
+		</tr><tr>
+			<td>8-9</td>
+			<td>-1</td>
+		</tr><tr>
+			<td>10-11</td>
+			<td>+0</td>
+		</tr><tr>
+			<td>12-13</td>
+			<td>+1</td>
+		</tr><tr>
+			<td>14-15</td>
+			<td>+2</td>
+		</tr><tr>
+			<td>16-17</td>
+			<td>+3</td>
+		</tr><tr>
+			<td>18</td>
+			<td>+4</td>
+		</tr>
+	</table>
+
+</details>
+ -->
+
+
+
+
+
+
+<!-- todo: add stat skill modal -->
+<!-- <details><summary>Stat Skills</summary>
+	<div style="text-align:left; column-count: 2; -webkit-column-count: 2; -moz-column-count: 2; ">
+
+		Strength<ul>
+			<li>Athletics</li>
+		</ul>Dexterity<ul>
+			<li>Acrobatics</li>
+			<li>Sleight of Hand</li>
+			<li>Stealth</li>
+		</ul>Intelligence<ul>
+			<li>Arcana</li>
+			<li>History</li>
+			<li>Investigation</li>
+			<li>Nature</li>
+			<li>Religion</li>
+
+		</ul>Wisdom<ul>
+			<li>Animal Handling</li>
+			<li>Insight</li>
+			<li>Medicine</li>
+			<li>Perception</li>
+			<li>Survival</li>
+		</ul>Charisma<ul>
+			<li>Deception</li>
+			<li>Intimidation</li>
+			<li>Performance</li>
+			<li>Persuasion</li>
+
+		</div>
+</details> -->
+
+
+
+</body>
+</html>
