@@ -104,6 +104,7 @@ window.onload = function() {
 	
 	$('#genButton').on('click', function() {
 		resetStats();
+		$('#openButton').css('display', 'none');
 		$('#nameInput').val('')
 		characters.push(new Character() );
 		let currentChar = characters[characters.length-1];
@@ -129,6 +130,7 @@ window.onload = function() {
 	}
 	
 	$('#genButton').click();
+	$('#openButton').css('display', 'none');
 	
 	let statMods = $('.statMod');
 	for(let i=0; i<statMods.length; i++) {
@@ -136,14 +138,48 @@ window.onload = function() {
 			for(let j=0; j<6; j++) {
 				evt.target.options[j+1].disabled = false;			
 			}
+			let allSelected = true;
 			for(let j=0; j<6; j++) {
 				let idx = $('#stat' + (j+1) + 'Mod').prop('selectedIndex');
-				if(idx != 0) {
+				let isThis = $('#stat' + (j+1) + 'Mod').is($(this) ); //don't count this element's current selection
+				if(idx != 0 && ! isThis) {
 					evt.target.options[idx].disabled = true;
 				}
+				if(idx == 0) {
+					allSelected = false;
+				}
 			}
+
+			$('#openButton').css('display', allSelected ? '' : 'none');
+
 		}
 	}
+
+	$('#openButton').on('click', function() {
+		let modNames = ['str', 'dex', 'con', 'int', 'wis', 'cha', 'prf', 'spl', 'itv'];
+		let m = '';
+		for(let i=0; i<6; i++) {
+			let j;
+			for(j=0	; j<6; j++) {
+				//TODO: BUG: when you click on a select and dont chose a value even if a vlaue is chosen the entire element stops existing or val is null
+				console.log(j+1);
+				console.log($('#stat' + (j+1) + 'Mod').val() );
+				console.log(modNames[$('#stat' + (j+1) + 'Mod').prop('selectedIndex')-1] );
+				// console.log($('#stat' + (j+1) + 'Mod').val().toString().toLowerCase() );
+				if(modNames[$('#stat' + (j+1) + 'Mod').prop('selectedIndex')-1] == modNames[i]) { //found elem
+					break;
+				}
+			}
+			// console.log(j);
+			// console.log(characters[characters.length-1].stats);
+			// console.log(characters[characters.length-1].stats[j].value);
+			m += characters[characters.length-1].stats[j].mod + ' ';
+			// console.log(m);
+		}
+		m += '0 0 0';
+		m = btoa(m); //encode base 64
+		window.open('index.html?m=' + m);
+	});
 	
 	$('#copyButton').on('click', function() {
 		let numInput = $('#numbersInput');
