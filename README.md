@@ -6,7 +6,7 @@ Use D&D Dice Roller to easily roll any number any dice, with modifiers and more
 
 https://rgbstudios.org/dnd-dice
 
---------------------------------
+<hr>
 
 RGB Studios
 
