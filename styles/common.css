@@ -61,3 +61,11 @@ img {
   background-color: #fff !important;
   color: #333 !important;
 }
+
+.hidden{
+	display: none !important;
+	text-decoration: none !important;
+	width: 0px !important;
+	padding: 0px !important;
+	margin: 0px !important;
+}

@@ -31,8 +31,5 @@ hr {
 	margin: 10px;
 }
 
-#downloadHistoryLink, #downloadNotesLink, #downloadModsLink, #fileInput {
-	display: none !important;
-	text-decoration: none !important;
-}
+
 
