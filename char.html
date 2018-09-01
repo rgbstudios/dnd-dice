@@ -113,11 +113,12 @@
 
 
 <hr>
-<buton id="infoModalButton" class="btn btn-info" data-toggle="modal" data-target="#infoModal"><i class="fas fa-info-circle"></i></buton>
-<buton id="settingsModalButton" class="btn btn-info" data-toggle="modal" data-target="#settingsModal"><i class="fas fa-cog"></i></buton>
-<buton id="listModalButton" class="btn btn-info" data-toggle="modal" data-target="#listModal"><i class="fas fa-list"></i></buton>
-<buton id="tableModalButton" class="btn btn-info" data-toggle="modal" data-target="#tableModal"><i class="fas fa-table"></i></buton>
-<buton id="chartModalButton" class="btn btn-info" data-toggle="modal" data-target="#chartModal"><i class="fas fa-chart-bar"></i></buton>
+<button class="btn btn-info" data-toggle="modal" data-target="#infoModal"><i class="fas fa-info-circle"></i></button>
+<button class="btn btn-info" data-toggle="modal" data-target="#settingsModal"><i class="fas fa-cog"></i></button>
+<button class="btn btn-info" data-toggle="modal" data-target="#listModal"><i class="fas fa-list"></i></button>
+<button class="btn btn-info" data-toggle="modal" data-target="#tableModal"><i class="fas fa-table"></i></button>
+<button class="btn btn-info" data-toggle="modal" data-target="#chartModal"><i class="fas fa-chart-bar"></i></button>
+<button class="btn btn-info" data-toggle="modal" data-target="#historyModal"><i class="fas fa-history"></i></button>
 
 <div class="modal fade" id="chartModal">
 	<div class="modal-dialog modal-lg">
@@ -284,6 +285,36 @@
 		</div>
 	</div>
 </div>
+
+<div class="modal fade" id="historyModal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">History <i class="fas fa-history"></i></h4>
+			</div>
+			<div class="modal-body">
+
+				<textarea id="historyText" class="form-control" rows="15"></textarea>
+				<br>
+
+			</div>
+			<div class="modal-footer">
+				<div class="btn-group">
+					<button id="clearHistory" class="btn btn-default">
+						Clear History <i class="fas fa-eraser"></i>
+					</button>
+
+					<button id="downloadHistory" class="btn btn-default">
+						Download History <i class="fas fa-download"></i>
+					</button>
+					<a id="downloadHistoryLink" class="hidden" target="_blank" download="history.txt"></a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
 
 
 <hr>

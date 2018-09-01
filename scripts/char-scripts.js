@@ -5,6 +5,7 @@ numStats = 6;
 numRolls = 4;
 numDropped = 1;
 diceSides = 6;
+enter your own mod table option
 show method character was created in download file
 --------
 
@@ -14,10 +15,9 @@ show percentile option
 roll one at a time animation?
 share rolls and url to load specific rolls, stats, and name
 
-enter your own mod table option
+
 
 change checkbox to fontawesome checkbox (like on songssearcher)
-add history option for prev characters
 percentile option
 bug: night mode + fullscreen
 download table img option
@@ -133,6 +133,8 @@ window.onload = function() {
 			displayRolls();			
 		}
 
+		$('#historyText').val($('#historyText').val() + prettyPrint(characters[characters.length-1]) );
+
 	});
 	
 	
@@ -193,8 +195,33 @@ window.onload = function() {
 	$('#fullscreen').on('click', function() {
 		toggleFullscreen();
 	});
+
+	$('#clearHistory').on('click', function() {
+		$('#historyText').val('');
+	});
+
+	$('#downloadHistory').on('click', function() {
+		downloadFile('History:\r\n' + $('#numChars').html() + '.\r\n\r\n' + $('#historyText').val().replace(/\r?\n/g, '\r\n'), 
+			'history ' + getFormattedDate(), 'downloadHistoryLink');
+	});
+
 	
 }
+
+function prettyPrint(character) {
+	let str = 'mod total: ' + character.modTotal + ' | ' +
+		'value total: ' + character.statTotal;
+
+	for(let i=0; i<6; i++) {
+		str += '\r\nmod: ' + character.stats[i].mod + (character.stats[i].mod<0?'':' ') + ' | value: ' + character.stats[i].value + (character.stats[i].value>9?'':' ') + ' | rolls: ' + character.stats[i].rolls;
+	}
+
+	str +='\r\nmean: ' + Math.round(character.statTotal*100/6)/100 +
+		'\r\ndeviation: ' + Math.round(stdDev(statsToValues(character.stats) )*100)/100;
+
+	return str + '\r\n\r\n';
+}
+
 
 function displayRolling() {
 	$('.statDiv h4').css('display', 'none');
