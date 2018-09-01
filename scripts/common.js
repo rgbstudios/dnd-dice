@@ -57,3 +57,14 @@ function toggleFullscreen() {
     }  
   }  
 }
+
+
+// side menu
+function openNav() {
+	$('#sideNav').css('width', '250px');
+	$('#menuButton').css('display', 'none');
+}
+function closeNav() {
+	$('#sideNav').css('width', '0px');
+	$('#menuButton').css('display', '');
+}

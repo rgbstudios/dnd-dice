@@ -1,0 +1,39 @@
+#sideNav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: rgba(255,255,255,.8);
+    overflow-x: hidden;
+    padding-top: 75px;
+    transition: 0.4s ease-in-out;
+    border-right: 1px solid #ccc;
+}
+
+#sideNav a {
+    padding: 10px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #333;
+    display: block;
+    transition: 0.3s;
+}
+#sideNav a:hover {
+    color: #999;
+}
+
+#sideNav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 40px;
+    margin-left: 50px;
+}
+
+
+@media screen and (max-height: 450px) {
+/*    #sideNav {padding-top: 15px;}
+    #sideNav a {font-size: 18px;}*/
+}

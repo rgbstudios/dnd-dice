@@ -25,6 +25,10 @@ button:not(.close):active, .btn-info:active, .btn-primary:active {
 	transform: translate(2px, 2px);
 }
 
+select, label, input[type=checkbox] {
+	cursor: pointer;
+}
+
 .statDiv {
 	display: inline-block;
 }

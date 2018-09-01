@@ -25,7 +25,12 @@ bug: night mode + fullscreen
 
 	<link rel="stylesheet" type="text/css" href="styles/common.css">
 	<link rel="stylesheet" type="text/css" href="styles/dice-styles.css">
+	<link rel="stylesheet" type="text/css" href="styles/side-nav.css">
 	<link id="nightTheme" rel="stylesheet" type="text/css" href="">
+
+	<script src="scripts/common.js"></script>
+	<script src="scripts/dice-scripts.js"></script>
+	<script src="scripts/console.js"></script>
 
 	<link rel="icon" href="img/d20.png" type="image/png">
 
@@ -36,9 +41,19 @@ bug: night mode + fullscreen
 
 </head>
 <body>
-	<script src="scripts/common.js"></script>
-	<script src="scripts/dice-scripts.js"></script>
-	<script src="scripts/console.js"></script>
+
+<div class="sticky-top">
+
+	<div id="menuButton" onclick="openNav()"><i class="fas fa-bars"></i></div>
+	<div id="sideNav">
+		<a href="#" class="closebtn" onclick="closeNav()">&times;</a>
+		<a href="char.html">Character Roller</a>
+		<!-- TODO -->
+		<!-- <a href="#">Initiative Tracker</a> -->
+		<!-- <a href="#">Character Generator</a> -->
+		<div class="sharethis-inline-share-buttons"></div>
+	</div>
+
 
 	<h3 class="text-center">D&D <img id="titleImg" src="img/d20.svg" width="32px"> Dice</h3>
 
@@ -52,74 +67,79 @@ bug: night mode + fullscreen
 		<button class="btn btn-default" data-toggle="modal" data-target="#settingModal">
 			Settings <i class="fas fa-cog"></i>
 		</button>
+	</div>
 
-		<div class="modal fade" id="modModal">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title">Mods and Notes <i class="fas fa-pencil-alt"></i></h4>
+	<hr>
+
+</div>
+
+	<div class="modal fade" id="modModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Mods and Notes <i class="fas fa-pencil-alt"></i></h4>
+				</div>
+				<div class="modal-body">
+					<p><b>Modifiers:</b></p>
+					<div class="input-group">
+						<input id="str" class="form-control input-sm" type="number" value="0" min="-99" max="99" maxlength="3">
+						<p class="input-group-addon">Str</p>
+						<input id="dex" class="form-control input-sm" type="number" value="0" min="-99" max="99" maxlength="3">
+						<p class="input-group-addon">Dex</p>
+						<input id="con" class="form-control input-sm" type="number" value="0" min="-99" max="99" maxlength="3">
+						<p class="input-group-addon">Con</p>
 					</div>
-					<div class="modal-body">
-						<p><b>Modifiers:</b></p>
-						<div class="input-group">
-							<input id="str" class="form-control input-sm" type="number" value="0" min="-99" max="99" maxlength="3">
-							<p class="input-group-addon">Str</p>
-							<input id="dex" class="form-control input-sm" type="number" value="0" min="-99" max="99" maxlength="3">
-							<p class="input-group-addon">Dex</p>
-							<input id="con" class="form-control input-sm" type="number" value="0" min="-99" max="99" maxlength="3">
-							<p class="input-group-addon">Con</p>
-						</div>
-						<div class="input-group">
-							<input id="int" class="form-control input-sm" type="number" value="0" min="-99" max="99" maxlength="3">
-							<p class="input-group-addon">Int</p>
-							<input id="wis" class="form-control input-sm" type="number" value="0" min="-99" max="99" maxlength="3">
-							<p class="input-group-addon">Wis</p>
-							<input id="cha" class="form-control input-sm" type="number" value="0" min="-99" max="99" maxlength="3">
-							<p class="input-group-addon">Cha</p>
-						</div>
-						<br>
-						<div class="input-group">
-							<input id="prf" class="form-control input-sm" type="number" value="0" min="-99" max="99" maxlength="3">
-							<p class="input-group-addon">Proficiency</p>
-							<input id="spl" class="form-control input-sm" type="number" value="0" min="-99" max="99" maxlength="3">
-							<p class="input-group-addon">Spell Atk</p>
-							<input id="itv" class="form-control input-sm" type="number" value="0" min="-99" max="99" maxlength="3">
-							<p class="input-group-addon">Initiative</p>
-						</div>
-						<br>
-						<div class="btn-group">
-							<button id="clearMods" class="btn btn-default">
-								Clear Modifiers <i class="fas fa-eraser"></i>
-							</button>
-							<button id="downloadMods" class="btn btn-default">
-								Download Modifiers <i class="fas fa-download"></i>
-							</button>
-							<a id="downloadModsLink" class="hidden" target="_blank" download="modifiers.txt"></a>
-							<button id="uploadMods" class="btn btn-default">
-								Upload Modifiers <i class="fas fa-upload"></i>
-							</button>
-							<input id="fileInput" class="hidden" type="file" accept=".txt">
-						</div>
-						<hr>
-						<div class="form-group">
-							<label for="notes">Notes:</label>
-							<textarea class="form-control" rows="5" id="notes"></textarea>
-						</div>
-						<div class="btn-group">
-							<button id="clearNotes" class="btn btn-default">
-								Clear Notes <i class="fas fa-eraser"></i>
-							</button>
-							<button id="downloadNotes" class="btn btn-default">
-								Download Notes <i class="fas fa-download"></i>
-							</button>
-							<a id="downloadNotesLink" class="hidden" target="_blank" download="notes.txt"></a>
-						</div>
+					<div class="input-group">
+						<input id="int" class="form-control input-sm" type="number" value="0" min="-99" max="99" maxlength="3">
+						<p class="input-group-addon">Int</p>
+						<input id="wis" class="form-control input-sm" type="number" value="0" min="-99" max="99" maxlength="3">
+						<p class="input-group-addon">Wis</p>
+						<input id="cha" class="form-control input-sm" type="number" value="0" min="-99" max="99" maxlength="3">
+						<p class="input-group-addon">Cha</p>
+					</div>
+					<br>
+					<div class="input-group">
+						<input id="prf" class="form-control input-sm" type="number" value="0" min="-99" max="99" maxlength="3">
+						<p class="input-group-addon">Proficiency</p>
+						<input id="spl" class="form-control input-sm" type="number" value="0" min="-99" max="99" maxlength="3">
+						<p class="input-group-addon">Spell Atk</p>
+						<input id="itv" class="form-control input-sm" type="number" value="0" min="-99" max="99" maxlength="3">
+						<p class="input-group-addon">Initiative</p>
+					</div>
+					<br>
+					<div class="btn-group">
+						<button id="clearMods" class="btn btn-default">
+							Clear Modifiers <i class="fas fa-eraser"></i>
+						</button>
+						<button id="downloadMods" class="btn btn-default">
+							Download Modifiers <i class="fas fa-download"></i>
+						</button>
+						<a id="downloadModsLink" class="hidden" target="_blank" download="modifiers.txt"></a>
+						<button id="uploadMods" class="btn btn-default">
+							Upload Modifiers <i class="fas fa-upload"></i>
+						</button>
+						<input id="fileInput" class="hidden" type="file" accept=".txt">
+					</div>
+					<hr>
+					<div class="form-group">
+						<label for="notes">Notes:</label>
+						<textarea class="form-control" rows="5" id="notes"></textarea>
+					</div>
+					<div class="btn-group">
+						<button id="clearNotes" class="btn btn-default">
+							Clear Notes <i class="fas fa-eraser"></i>
+						</button>
+						<button id="downloadNotes" class="btn btn-default">
+							Download Notes <i class="fas fa-download"></i>
+						</button>
+						<a id="downloadNotesLink" class="hidden" target="_blank" download="notes.txt"></a>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	
 
 	<div class="modal fade" id="historyModal">
 		<div class="modal-dialog">
@@ -173,9 +193,6 @@ bug: night mode + fullscreen
 				<button id="speakButton" class="btn btn-default">
 					Speak Roll Results <i class="fas fa-volume-up"></i>
 				</button>
-
-				<!-- tmp -->
-				<br><br><a href="char.html">D&D Character Roller</a>
 
 			</div>
 			<div class="modal-footer">
@@ -240,8 +257,6 @@ bug: night mode + fullscreen
 		<button id="consoleRollButton" class="btn btn-default" type="button">Roll <i class="fas fa-dice"></i></button>
 	</span>
 </div>
-
-<hr>
 
 <label>Number of Dice: </label>
 <div id="numDiceDiv" class="btn-group">
@@ -323,8 +338,6 @@ bug: night mode + fullscreen
 <br><br>
 <input disabled id="output" class="form-control input-sm" type="text" value="">
 <br>
-
-<div class="sharethis-inline-share-buttons"></div>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-104632692-3"></script>

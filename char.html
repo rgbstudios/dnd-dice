@@ -21,6 +21,7 @@
 
 	<link rel="stylesheet" type="text/css" href="styles/common.css">
 	<link rel="stylesheet" type="text/css" href="styles/char-styles.css">
+	<link rel="stylesheet" type="text/css" href="styles/side-nav.css">
 	<link id="nightTheme" rel="stylesheet" type="text/css" href="">
 
 	<link rel="icon" href="img/d20.png" type="image/png">
@@ -41,14 +42,28 @@
 <body>
 
 
+<div class="sticky-top">
+
+<div id="menuButton" onclick="openNav()"><i class="fas fa-bars"></i></div>
+<div id="sideNav">
+	<a href="#" class="closebtn" onclick="closeNav()">&times;</a>
+	<a href="index.html">Dice Roller</a>
+	<!-- TODO -->
+	<!-- <a href="#">Initiative Tracker</a> -->
+	<!-- <a href="#">Character Generator</a> -->
+	<div class="sharethis-inline-share-buttons"></div>
+</div>
+
 <h3 class="text-center">D&D Character <img id="titleImg" src="img/d20.svg" width="32px"> Roller</h3>
 
 <button id="genButton" class="btn btn-lg btn-primary">Roll New Character <i class="fas fa-dice"></i> </button>
-<h3 id="numChars"></h3>
+<h4 id="numChars"></h4>
+<hr>
+</div>
 
 <button id="openButton" class="btn btn-default"> <i class="fas fa-external-link-alt"></i> Open in D&D Roller  </button>
 
-<hr>
+
 
 
 <div class="row">
@@ -239,8 +254,8 @@
 				<h4 class="modal-title">Settings <i class="fas fa-cog"></i></h4>
 			</div>
 			<div class="modal-body">
-				<input id="enableUnicodeCheckbox" type="checkbox">Use dice unicode characters when downloading stats<br>
-				<input checked id="displayRollingCheckbox" type="checkbox">Display rolling animation
+				<label><input id="enableUnicodeCheckbox" type="checkbox">Use dice unicode characters when downloading stats</label><br>
+				<label><input checked id="displayRollingCheckbox" type="checkbox">Display rolling animation</label>
 				<br>
 				<button id="nightMode" title="Night mode" class="btn btn-default"> Night Theme <i class="fas fa-moon"></i> </button>
 				<button id="fullscreen" title="Fullscreen" class="btn btn-default"> Fullscreen <i class="fas fa-arrows-alt"></i> </button>
@@ -272,8 +287,6 @@
 
 
 <hr>
-
-<div class="sharethis-inline-share-buttons"></div>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-104632692-3"></script>
