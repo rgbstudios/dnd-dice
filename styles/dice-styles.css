@@ -1,6 +1,16 @@
+
 .die-img {
 	width: 32px;
+	transition: all .2s ease-in-out;
 }
+#diceSidesDiv .btn:hover .die-img {
+	transform: scale(1.1);
+}
+
+
+
+
+
 input:disabled {
 	cursor: text !important;
 }
@@ -10,26 +20,6 @@ select:disabled {
 textarea {
 	resize: none;
 }
-hr {
-	border-width: 2px;
-}
-
-
-
-
-#rollButton i, #resetButton i {
-	transition: all .2s ease-in-out;
-}
-#rollButton:hover i, #resetButton:hover i {
-	transform: rotate(180deg);
-}
-
-
-
-
 #consoleDiv {
 	margin: 10px;
 }
-
-
-

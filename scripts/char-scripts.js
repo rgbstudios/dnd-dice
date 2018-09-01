@@ -127,7 +127,7 @@ window.onload = function() {
 		}
 		numbers.sort(sortNumber);
 		$('#numbersInput').val(numbers.join(', ') );
-		// makeChart();
+		makeChart();
 	});
 	
 	function sortNumber(a,b) {
@@ -180,7 +180,11 @@ window.onload = function() {
 		$('#titleImg').prop('src', night ? 'img/d20-white.svg' : 'img/d20.svg');
 		$('select').css('color', night ? '#fff' : '#333');
 		$('input').css('color', night ? '#fff' : '#333');
-		// makeChart();
+		$('button:not(.close):not(.btn-primary):not(.btn-info)').css('color', night ? '#fff' : '#333');
+		$('button:not(.close):not(.btn-primary):not(.btn-info)').css('background-color', night ? '#333' : '#fff');
+		$('.list-group-item').css('background-color', night ? '#333' : '#fff');
+		$('.list-group-item').css('color', night ? '#fff' : '#333');
+		makeChart();
 	});
 	
 	$('#fullscreen').on('click', function() {

@@ -28,12 +28,12 @@ img {
 .btn-primary {
 	background-color: #339;
 	color: #fff;
-	border: 1px solid #19194d;
+	border: 2px solid #19194d;
 }
 .btn-primary:hover, .btn-primary:active, .btn-primary:focus {
 	background-color: #66c !important;
 	color: #fff !important;
-	border: 1px solid #339 !important;
+	border: 2px solid #339 !important;
 }
 .btn-info {
 	background-color: #369;
@@ -67,4 +67,28 @@ img {
 	width: 0px !important;
 	padding: 0px !important;
 	margin: 0px !important;
+}
+
+i {
+	transition: all .2s ease-in-out;
+}
+.btn:hover i {
+	transform: scale(1.2);
+}
+.btn:hover i.fa-dice, .btn:hover i.fa-sync-alt {
+	transform: rotate(180deg);
+}
+.btn:hover i.fa-pencil-alt, .btn:hover i.fa-cog  {
+	transform: rotate(-60deg);
+}
+
+
+.btn:hover i.fa-eraser, .btn:hover i.fa-moon, .btn:hover i.fa-copy {
+	transform: scale(-1,1);
+}
+.btn:hover i.fa-download, .btn:hover i.fa-donate {
+	transform: translateY(2px);
+}
+.btn:hover i.fa-upload {
+	transform: translateY(-2px);
 }

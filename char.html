@@ -10,7 +10,7 @@ show percentile option
 console of old characters?
 roll one at a time
 share rolls and url to load specific rolls, stats, and name
-info button to explain top number is roll and bottom is stat
+
 info button with explaination of dice roll process and what standard deviation is.
 enter your own mod table option
 
@@ -20,8 +20,9 @@ animate icons on buttons
 add history option
 percentile option
 bug: night mode + fullscreen
-add option to open character mods in dnd dice
-clean old char-scripts.js. update with jquery
+
+
+download table img option
 -->
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -54,85 +55,203 @@ clean old char-scripts.js. update with jquery
 
 	<script src="scripts/common.js"></script>
 	<script src="scripts/char-scripts.js"></script>
-	<!-- <script src="scripts/chart.js"></script> -->
+	<script src="scripts/chart.js"></script>
 
 	<!-- sharethis -->
-	<script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5b864aad7b4f100011fe46e7&product=inline-share-buttons' async='async'></script>
+	<!-- <script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5b864aad7b4f100011fe46e7&product=inline-share-buttons' async='async'></script> -->
 
 </head>
 <body>
 
 
-	<h3 class="text-center">D&D Character <img id="titleImg" src="img/d20.svg" width="32px"> Roller</h3>
+<h3 class="text-center">D&D Character <img id="titleImg" src="img/d20.svg" width="32px"> Roller</h3>
 
-	<button id="genButton" class="btn btn-lg btn-primary">Roll New Character <i class="fas fa-dice"></i> </button>
-	<h3 id="numChars"></h3>
+<button id="genButton" class="btn btn-lg btn-primary">Roll New Character <i class="fas fa-dice"></i> </button>
+<h3 id="numChars"></h3>
 
-	<button id="openButton" class="btn btn-default"> <i class="fas fa-external-link-alt"></i> Open in D&D Roller  </button>
+<button id="openButton" class="btn btn-default"> <i class="fas fa-external-link-alt"></i> Open in D&D Roller  </button>
 
-	<hr>
+<hr>
 
-	<div class="text-center container">
-		<div class="row">
-			<div class="statDiv">
-				<h4 id="stat1"> </h4>
-				<select autofocus="autofocus" id="stat1Mod" class="statMod"> <option value=" - ">-</option> <option value="Str">Str</option> <option value="Dex">Dex</option> <option value="Con">Con</option> <option value="Int">Int</option> <option value="Wis">Wis</option> <option value="Cha">Cha</option> </select>
+
+<div class="row">
+	<div class="statDiv">
+		<h4 id="stat1"> </h4>
+		<select autofocus="autofocus" id="stat1Mod" class="statMod"> <option value=" - ">-</option> <option value="Str">Str</option> <option value="Dex">Dex</option> <option value="Con">Con</option> <option value="Int">Int</option> <option value="Wis">Wis</option> <option value="Cha">Cha</option> </select>
+	</div>
+	<div class="statDiv">
+		<h4 id="stat2"> </h4>
+		<select id="stat2Mod" class="statMod"> <option value=" - ">-</option> <option value="Str">Str</option> <option value="Dex">Dex</option> <option value="Con">Con</option> <option value="Int">Int</option> <option value="Wis">Wis</option> <option value="Cha">Cha</option> </select>
+	</div>
+	<div class="statDiv">
+		<h4 id="stat3"> </h4>
+		<select id="stat3Mod" class="statMod"> <option value=" - ">-</option> <option value="Str">Str</option> <option value="Dex">Dex</option> <option value="Con">Con</option> <option value="Int">Int</option> <option value="Wis">Wis</option> <option value="Cha">Cha</option> </select>
+	</div>
+	<div class="statDiv">
+		<h4 id="stat4"> </h4>
+		<select id="stat4Mod" class="statMod"> <option value=" - ">-</option> <option value="Str">Str</option> <option value="Dex">Dex</option> <option value="Con">Con</option> <option value="Int">Int</option> <option value="Wis">Wis</option> <option value="Cha">Cha</option> </select>
+	</div>
+	<div class="statDiv">
+		<h4 id="stat5"> </h4>
+		<select id="stat5Mod" class="statMod"> <option value=" - ">-</option> <option value="Str">Str</option> <option value="Dex">Dex</option> <option value="Con">Con</option> <option value="Int">Int</option> <option value="Wis">Wis</option> <option value="Cha">Cha</option> </select>
+	</div>
+	<div class="statDiv">
+		<h4 id="stat6"> </h4>
+		<select id="stat6Mod" class="statMod"> <option value=" - ">-</option> <option value="Str">Str</option> <option value="Dex">Dex</option> <option value="Con">Con</option> <option value="Int">Int</option> <option value="Wis">Wis</option> <option value="Cha">Cha</option> </select>
+	</div>
+</div>
+<hr>
+
+
+<div id="statsInfo" class="statDiv"></div>
+<div id="statsInfoAvg" class="statDiv"></div>
+<div id="statsInfoStdDev" class="statDiv"></div>
+<hr>
+<input id="nameInput" maxlength="50" placeholder="character name..." type="text" />
+<input id="numbersInput" onclick="this.setSelectionRange(0, this.value.length)" type="text" />
+
+<div class="btn-group">
+	<a id="downloadLink" class="hidden" target="_blank" download="stats.txt"></a>
+	<button id="download" title="Download stats as txt file" class="btn btn-default"> <i class="fas fa-download"></i> </button>
+	<button id="copyButton" title="Copy stats" class="btn btn-default"> <i class="fas fa-copy"></i> </button>
+	<button id="resetStat" title="Reset stat selections" class="btn btn-default"> <i class="fas fa-sync-alt"></i> </button>
+	<button id="nightMode" title="Night mode" class="btn btn-default"> <i class="fas fa-moon"></i> </button>
+	<button id="fullscreen" title="Fullscreen" class="btn btn-default"> <i class="fas fa-arrows-alt"></i> </button>
+	<br>
+</div>
+
+
+<hr>
+<buton id="chartModalButton" class="btn btn-info" data-toggle="modal" data-target="#chartModal"><i class="fas fa-chart-bar"></i></buton>
+<buton id="infoModalButton" class="btn btn-info" data-toggle="modal" data-target="#infoModal"><i class="fas fa-info-circle"></i></buton>
+<buton id="listModalButton" class="btn btn-info" data-toggle="modal" data-target="#listModal"><i class="fas fa-list"></i></buton>
+<buton id="tableModalButton" class="btn btn-info" data-toggle="modal" data-target="#tableModal"><i class="fas fa-table"></i></buton>
+
+<div class="modal fade" id="chartModal">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Roll Stat Chart <i class="fas fa-chart-bar"></i></h4>
 			</div>
-			<div class="statDiv">
-				<h4 id="stat2"> </h4>
-				<select id="stat2Mod" class="statMod"> <option value=" - ">-</option> <option value="Str">Str</option> <option value="Dex">Dex</option> <option value="Con">Con</option> <option value="Int">Int</option> <option value="Wis">Wis</option> <option value="Cha">Cha</option> </select>
-			</div>
-			<div class="statDiv">
-				<h4 id="stat3"> </h4>
-				<select id="stat3Mod" class="statMod"> <option value=" - ">-</option> <option value="Str">Str</option> <option value="Dex">Dex</option> <option value="Con">Con</option> <option value="Int">Int</option> <option value="Wis">Wis</option> <option value="Cha">Cha</option> </select>
-			</div>
-			<div class="statDiv">
-				<h4 id="stat4"> </h4>
-				<select id="stat4Mod" class="statMod"> <option value=" - ">-</option> <option value="Str">Str</option> <option value="Dex">Dex</option> <option value="Con">Con</option> <option value="Int">Int</option> <option value="Wis">Wis</option> <option value="Cha">Cha</option> </select>
-			</div>
-			<div class="statDiv">
-				<h4 id="stat5"> </h4>
-				<select id="stat5Mod" class="statMod"> <option value=" - ">-</option> <option value="Str">Str</option> <option value="Dex">Dex</option> <option value="Con">Con</option> <option value="Int">Int</option> <option value="Wis">Wis</option> <option value="Cha">Cha</option> </select>
-			</div>
-			<div class="statDiv">
-				<h4 id="stat6"> </h4>
-				<select id="stat6Mod" class="statMod"> <option value=" - ">-</option> <option value="Str">Str</option> <option value="Dex">Dex</option> <option value="Con">Con</option> <option value="Int">Int</option> <option value="Wis">Wis</option> <option value="Cha">Cha</option> </select>
+			<div class="modal-body">
+				<div id="barchart"></div>
+				<p>Mean: 12.24, Median: 12, Mode: 13, Standard Deviation: 2.85</p>
 			</div>
 		</div>
-		<hr>
+	</div>
+</div>
 
-		<div style="text-align:left">
-			<div id="statsInfo" class="statDiv"></div>
-			<div id="statsInfoAvg" class="statDiv"></div>
-			<div id="statsInfoStdDev" class="statDiv"></div>
+<div class="modal fade" id="infoModal">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Info <i class="fas fa-info-circle"></i></h4>
+			</div>
+			<div class="modal-body">
 
-			<hr>
+<!-- TODO: list more features -->
 
-			<input id="nameInput" maxlength="50" placeholder="character name..." type="text" />
-			<input id="numbersInput" onclick="this.setSelectionRange(0, this.value.length)" type="text" />
+				<li>Each stat is generated by rolling 4 d6 and taking the 3 highest rolls.</li><br>
+				<li>The number immedatly below the dice is the sum of the 3 largest rolls. The number below that is its corresponding stat. You can find the table by clicking <buton id="tableModalButton" class="btn btn-info" data-toggle="modal" data-target="#tableModal"><i class="fas fa-table"></i></buton> </li><br>
+				<li>There are 6 stats: strength, dexterity, constitution, intelligence, wisdom, and charisma.</li><br>
+				<li>Use the dropdown menu to choose which stat you want to assign to which roll.</li><br>
+				<li>D&d Character Roller is great for a DM who wants to quickly create new NPCs and download their stats for later.</li><br>
+				<li>You can use the <kbd>tab</kbd> key to navitage inputs. Use arrow keys to choose your stat, or <kbd>enter</kbd> to open the dropdown.</li><br>
 
-		<div class="btn-group">
-				<a id="downloadLink" class="hidden" target="_blank" download="stats.txt"></a>
-				<button id="download" title="download stats as txt file" class="btn btn-default"> <i class="fas fa-download"></i> </button>
-				<button id="copyButton" title="copy stats" class="btn btn-default"> <i class="fas fa-copy"></i> </button>
-				<button id="resetStat" title="reset stat selections" class="btn btn-default"> <i class="fas fa-sync-alt"></i> </button>
-				<button id="nightMode" title="night mode" class="btn btn-default"> <i class="fas fa-moon"></i> </button>
-				<button id="fullscreen" title="fullscreen" class="btn btn-default"> <i class="fas fa-arrows-alt"></i> </button>
-				<!-- <button id="info" title="info" class=""> <i class="fas fa-info"></i> </button> -->
 
+			</div>
 		</div>
-
 	</div>
 </div>
 
 
+<div class="modal fade" id="listModal">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">List of Skills by Stat <i class="fas fa-list"></i></h4>
+			</div>
+			<div class="modal-body">
+				<div id="skillsList">
+					<b>Strength</b><ul class="list-group">
+						<li class="list-group-item">Athletics</li>
+					</ul><b>Dexterity</b><ul class="list-group">
+						<li class="list-group-item">Acrobatics</li>
+						<li class="list-group-item">Sleight of Hand</li>
+						<li class="list-group-item">Stealth</li>
+						<li class="list-group-item">Arcana</li>
+					</ul><b>Intelligence</b><ul class="list-group">
+						<li class="list-group-item">History</li>
+						<li class="list-group-item">Investigation</li>
+						<li class="list-group-item">Nature</li>
+						<li class="list-group-item">Religion</li>
+					</ul><b>Wisdom</b><ul class="list-group">
+						<li class="list-group-item">Animal Handling</li>
+						<li class="list-group-item">Insight</li>
+						<li class="list-group-item">Medicine</li>
+						<li class="list-group-item">Perception</li>
+						<li class="list-group-item">Survival</li>
+					</ul><b>Charisma</b><ul class="list-group">
+						<li class="list-group-item">Deception</li>
+						<li class="list-group-item">Intimidation</li>
+						<li class="list-group-item">Performance</li>
+						<li class="list-group-item">Persuasion</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 
 
-
-<!-- Stat Odds Graph
-<div id="barchart"></div>
-	<p>Odds of each stat (of 1296)</p>
-	<p>Mean: 12.24, Median: 12, Mode: 13, Standard Deviation: 2.85</p> -->
+<div class="modal fade" id="tableModal">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Roll Modifier Table <i class="fas fa-table"></i></h4>
+			</div>
+			<div class="modal-body">
+				<table class="table table-bordered table-sm">
+				<tr>
+					<th>Roll Value</th>
+					<th>Modifier</th>
+				</tr><tr>
+					<td>3</td>
+					<td>-4</td>
+				</tr><tr>
+					<td>4-5</td>
+					<td>-3</td>
+				</tr><tr>
+					<td>6-7</td>
+					<td>-2</td>
+				</tr><tr>
+					<td>8-9</td>
+					<td>-1</td>
+				</tr><tr>
+					<td>10-11</td>
+					<td>+0</td>
+				</tr><tr>
+					<td>12-13</td>
+					<td>+1</td>
+				</tr><tr>
+					<td>14-15</td>
+					<td>+2</td>
+				</tr><tr>
+					<td>16-17</td>
+					<td>+3</td>
+				</tr><tr>
+					<td>18</td>
+					<td>+4</td>
+				</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
 
 <hr>
 
@@ -154,103 +273,16 @@ clean old char-scripts.js. update with jquery
 
 
 
-<!-- <div id="infoModal" class="modal">
-	<div class="modal-content">
-		<span id="settingsClose" class="close" >&times;</span>
-		<h3>Info</h3>
-		<ul>
-		<li>Each stat is generated  by rolling 4 d6, taking the 3 highest rolls. There are 6 stats.</li>
-		<br>
-		<li>Use the dropdown menu to choose which stat you want to assign to which roll.</li>
-		<br>
-		<li>Dnd Character Roller is good for a DM who wants to quickly create new NPCs and download their stats for later</li>
-			<br>
-		<li>You can use the tab key to navitage inputs. Use arrow keys to choose your stat, or enter to open the dropdown.</li>
-		<br>
-		</ul>
-		<p id="sources">Sources</p>
-		<a href="https://material.io/icons/">Material Icons</a>
-		<a href="http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300ita‌​lic,400italic,500,500italic,700,700italic,900italic,900">Roboto</a>
-		
-	</div>
-</div>	 -->
-
-
-
-<!-- todo: roll mod table modal -->
-<!-- <details><summary>Roll/Mod Table</summary>
-		<table align="center"><tr>
-			<th>Roll Value</th>
-			<th>Modifier</th>
-		</tr><tr>
-			<td>3</td>
-			<td>-4</td>
-		</tr><tr>
-			<td>4-5</td>
-			<td>-3</td>
-		</tr><tr>
-			<td>6-7</td>
-			<td>-2</td>
-		</tr><tr>
-			<td>8-9</td>
-			<td>-1</td>
-		</tr><tr>
-			<td>10-11</td>
-			<td>+0</td>
-		</tr><tr>
-			<td>12-13</td>
-			<td>+1</td>
-		</tr><tr>
-			<td>14-15</td>
-			<td>+2</td>
-		</tr><tr>
-			<td>16-17</td>
-			<td>+3</td>
-		</tr><tr>
-			<td>18</td>
-			<td>+4</td>
-		</tr>
-	</table>
-
-</details>
- -->
 
 
 
 
 
 
-<!-- todo: add stat skill modal -->
-<!-- <details><summary>Stat Skills</summary>
-	<div style="text-align:left; column-count: 2; -webkit-column-count: 2; -moz-column-count: 2; ">
 
-		Strength<ul>
-			<li>Athletics</li>
-		</ul>Dexterity<ul>
-			<li>Acrobatics</li>
-			<li>Sleight of Hand</li>
-			<li>Stealth</li>
-		</ul>Intelligence<ul>
-			<li>Arcana</li>
-			<li>History</li>
-			<li>Investigation</li>
-			<li>Nature</li>
-			<li>Religion</li>
 
-		</ul>Wisdom<ul>
-			<li>Animal Handling</li>
-			<li>Insight</li>
-			<li>Medicine</li>
-			<li>Perception</li>
-			<li>Survival</li>
-		</ul>Charisma<ul>
-			<li>Deception</li>
-			<li>Intimidation</li>
-			<li>Performance</li>
-			<li>Persuasion</li>
 
-		</div>
-</details> -->
+
 
 
 

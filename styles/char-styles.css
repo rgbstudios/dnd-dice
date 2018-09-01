@@ -1,15 +1,27 @@
-.statDiv, select, input, button, canvas {
-	border: 2px solid #999;
-	box-shadow: 2px 4px 0px #333;
+.statDiv, select, input, canvas {
 	border-radius: 4px !important;
 	padding: 6px;
 	margin: 6px;
+	border: 2px solid #999;
+	box-shadow: 2px 4px 0px #333;
 	background-color: transparent;
 }
-.statDiv:hover, select:hover, input:hover, button:hover, canvas:hover {
+button:not(.close), .btn-info, .btn-primary {
+	border-radius: 4px !important;
+	padding: 6px;
+	margin: 6px;
+	box-shadow: 2px 4px 0px #333 !important;
+}
+button:not(.close):not(.btn-primary):not(.btn-info) {
+	border: 2px solid #999;
+	
+	background-color: transparent;
+}
+
+.statDiv:hover, select:hover, input:hover, button:not(.close):hover, canvas:hover {
 	box-shadow: 4px 6px 0px #333;
 }
-button:active {
+button:not(.close):active, .btn-info:active, .btn-primary:active {
 	transform: translate(2px, 2px);
 }
 
@@ -17,9 +29,17 @@ button:active {
 	display: inline-block;
 }
 
+hr {
+	border-width: 2px;
+}
 
 
-
+#skillsList {
+	text-align:left;
+	column-count: 2;
+	-webkit-column-count: 2;
+	-moz-column-count: 2;
+}
 
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
 	color: #999;

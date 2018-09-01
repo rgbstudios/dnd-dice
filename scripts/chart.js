@@ -1,59 +1,57 @@
-//todo: sometime bars dont have width
+//todo: bug: sometime bars dont have width
 function makeChart() {
-//google charts
-  google.charts.load('current', {'packages':['corechart','bar']});
+  google.charts.load('current', {'packages':['corechart']});
   google.charts.setOnLoadCallback(drawChart);
+}
 
-  function drawChart() {
-    //bar
-    let chartdata = [['','', { role: 'style' } ]];
-    for(let i=0; i<odds.length; i++) {
-      chartdata.push([i+3, odds[i], '#19194d']);
-    }
+function drawChart() {
 
-    for(let i=0; i<6; i++) {
-      //hardcoded 20 to display larger as if 20 occurences of stat
-      //todo: doesnt work for repeats of same stat
-      chartdata.push([characters[characters.length-1].stats[i].value, 20, '#d9d9f2']);
-   }
+  let graphColor = night ? '#999' : '#333';
 
+  //bar
+  let chartdata = [['','', { role: 'style' } ]];
+  for(let i=0; i<odds.length; i++) {
+    chartdata.push([i+3, odds[i], graphColor]);
+  }
 
+ //  for(let i=0; i<6; i++) {
+ //    //hardcoded 20 to display larger as if 20 occurences of stat
+ //    //todo: doesnt work for repeats of same stat
+ //    chartdata.push([characters[characters.length-1].stats[i].value, 20, '#fff']);
+ // }
 
+  data = google.visualization.arrayToDataTable(chartdata);
 
-    data = google.visualization.arrayToDataTable(chartdata);
-
-    options = {
-      title: 'Odds by number of successes', 
-      titleTextStyle:{color: night ? '#66c' : '#19194d'},
-      legend: 'none',
-      chartArea: {width: '75%', legend:{position: 'none'} },
-      hAxis: {
-        title: 'Stat Value',
-        viewWindow: {
-          min: 3
-        },
-        gridlines: {
-          count: 16,
-          color: night ? '#66c' : '#19194d'
-        },
-        textStyle:{color: night ? '#66c' : '#19194d'},
-        titleTextStyle:{color: night ? '#66c' : '#19194d'}
+  options = {
+    title: '', 
+    bar: {groupWidth: '60%'},
+    titleTextStyle:{color: graphColor},
+    legend: 'none',
+    chartArea: {width: '60%', legend:{position: 'none'} },
+    hAxis: {
+      title: 'Stat',
+      viewWindow: {
+        min: 3
       },
-      vAxis: {
-        title: 'Occurences',
-        gridlines: {
-          count: 8,
-          color: night ? '#66c' : '#19194d'
-        },
-        textStyle:{color: night ? '#66c' : '#19194d'},
-        titleTextStyle:{color: night ? '#66c' : '#19194d'}
+      gridlines: {
+        count: 16,
+        color: graphColor
       },
-      backgroundColor: { fill:'transparent' }
-    };
-  
-    chart = new google.visualization.ColumnChart(document.getElementById('barchart') );
-    chart.draw(data, options);
-  } //end drawChart
+      textStyle:{color: graphColor},
+      titleTextStyle:{color: graphColor}
+    },
+    vAxis: {
+      title: 'Odds of each stat (of 1296)',
+      gridlines: {
+        count: 8,
+        color: graphColor
+      },
+      textStyle:{color: graphColor},
+      titleTextStyle:{color: graphColor}
+    },
+    backgroundColor: { fill:'transparent' }
+  };
 
-
+  chart = new google.visualization.ColumnChart(document.getElementById('barchart') );
+  chart.draw(data, options);
 }
