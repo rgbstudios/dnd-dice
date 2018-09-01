@@ -14,9 +14,7 @@ share rolls and url to load specific rolls, stats, and name
 info button with explaination of dice roll process and what standard deviation is.
 enter your own mod table option
 
-donate, share, fullscreen
-v.0.0.5 contact email
-animate icons on buttons
+change checkbox to fontawesome checkbox (like on songssearcher)
 add history option
 percentile option
 bug: night mode + fullscreen
@@ -76,27 +74,27 @@ download table img option
 
 <div class="row">
 	<div class="statDiv">
-		<h4 id="stat1"> </h4>
+		<h2 id="stat1rolls" class="statRolls"></h2><h4 id="stat1"></h4>
 		<select autofocus="autofocus" id="stat1Mod" class="statMod"> <option value=" - ">-</option> <option value="Str">Str</option> <option value="Dex">Dex</option> <option value="Con">Con</option> <option value="Int">Int</option> <option value="Wis">Wis</option> <option value="Cha">Cha</option> </select>
 	</div>
 	<div class="statDiv">
-		<h4 id="stat2"> </h4>
+		<h2 id="stat2rolls" class="statRolls"></h2><h4 id="stat2"></h4>
 		<select id="stat2Mod" class="statMod"> <option value=" - ">-</option> <option value="Str">Str</option> <option value="Dex">Dex</option> <option value="Con">Con</option> <option value="Int">Int</option> <option value="Wis">Wis</option> <option value="Cha">Cha</option> </select>
 	</div>
 	<div class="statDiv">
-		<h4 id="stat3"> </h4>
+		<h2 id="stat3rolls" class="statRolls"></h2><h4 id="stat3"></h4>
 		<select id="stat3Mod" class="statMod"> <option value=" - ">-</option> <option value="Str">Str</option> <option value="Dex">Dex</option> <option value="Con">Con</option> <option value="Int">Int</option> <option value="Wis">Wis</option> <option value="Cha">Cha</option> </select>
 	</div>
 	<div class="statDiv">
-		<h4 id="stat4"> </h4>
+		<h2 id="stat4rolls" class="statRolls"></h2><h4 id="stat4"></h4>
 		<select id="stat4Mod" class="statMod"> <option value=" - ">-</option> <option value="Str">Str</option> <option value="Dex">Dex</option> <option value="Con">Con</option> <option value="Int">Int</option> <option value="Wis">Wis</option> <option value="Cha">Cha</option> </select>
 	</div>
 	<div class="statDiv">
-		<h4 id="stat5"> </h4>
+		<h2 id="stat5rolls" class="statRolls"></h2><h4 id="stat5"></h4>
 		<select id="stat5Mod" class="statMod"> <option value=" - ">-</option> <option value="Str">Str</option> <option value="Dex">Dex</option> <option value="Con">Con</option> <option value="Int">Int</option> <option value="Wis">Wis</option> <option value="Cha">Cha</option> </select>
 	</div>
 	<div class="statDiv">
-		<h4 id="stat6"> </h4>
+		<h2 id="stat6rolls" class="statRolls"></h2><h4 id="stat6"></h4>
 		<select id="stat6Mod" class="statMod"> <option value=" - ">-</option> <option value="Str">Str</option> <option value="Dex">Dex</option> <option value="Con">Con</option> <option value="Int">Int</option> <option value="Wis">Wis</option> <option value="Cha">Cha</option> </select>
 	</div>
 </div>
@@ -115,8 +113,7 @@ download table img option
 	<button id="download" title="Download stats as txt file" class="btn btn-default"> <i class="fas fa-download"></i> </button>
 	<button id="copyButton" title="Copy stats" class="btn btn-default"> <i class="fas fa-copy"></i> </button>
 	<button id="resetStat" title="Reset stat selections" class="btn btn-default"> <i class="fas fa-sync-alt"></i> </button>
-	<button id="nightMode" title="Night mode" class="btn btn-default"> <i class="fas fa-moon"></i> </button>
-	<button id="fullscreen" title="Fullscreen" class="btn btn-default"> <i class="fas fa-arrows-alt"></i> </button>
+	
 	<br>
 </div>
 
@@ -126,6 +123,7 @@ download table img option
 <buton id="infoModalButton" class="btn btn-info" data-toggle="modal" data-target="#infoModal"><i class="fas fa-info-circle"></i></buton>
 <buton id="listModalButton" class="btn btn-info" data-toggle="modal" data-target="#listModal"><i class="fas fa-list"></i></buton>
 <buton id="tableModalButton" class="btn btn-info" data-toggle="modal" data-target="#tableModal"><i class="fas fa-table"></i></buton>
+<buton id="settingsModalButton" class="btn btn-info" data-toggle="modal" data-target="#settingsModal"><i class="fas fa-cog"></i></buton>
 
 <div class="modal fade" id="chartModal">
 	<div class="modal-dialog modal-lg">
@@ -253,11 +251,50 @@ download table img option
 	</div>
 </div>
 
+
+<div class="modal fade" id="settingsModal">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Settings <i class="fas fa-cog"></i></h4>
+			</div>
+			<div class="modal-body">
+				<input id="enableUnicodeCheckbox" type="checkbox">Use dice unicode characters when downloading stats<br>
+				<input checked id="displayRollingCheckbox" type="checkbox">Display rolling animation
+				<br>
+				<button id="nightMode" title="Night mode" class="btn btn-default"> Night Theme <i class="fas fa-moon"></i> </button>
+				<button id="fullscreen" title="Fullscreen" class="btn btn-default"> Fullscreen <i class="fas fa-arrows-alt"></i> </button>
+
+				<br><br>
+<!-- 				<button id="speakButton" class="btn btn-default">
+					Speak Roll Results <i class="fas fa-volume-up"></i>
+				</button> -->
+
+			</div>
+			<div class="modal-footer">
+				<div class="btn-group">
+					<button title="Contact us at contact@rgbstudios.org" onclick="window.open('mailto:contact@rgbstudios.org','_blank');" class="btn btn-default">
+						Contact <i class="fas fa-envelope"></i>
+					</button>
+<!-- 					<button id="copyUrl" class="btn btn-default" title="Copy link to website">
+						Copy <i class="fas fa-copy"></i>
+					</button> -->
+					<button title="Donate on PayPal" onclick="window.open('https://www.paypal.me/RGBStudios','_blank');" class="btn btn-default">
+						Donate <i class="fas fa-donate"></i>
+					</button>
+				</div>
+				<br><br><p>V.0.0.2</p>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+
 <hr>
 
 <div class="sharethis-inline-share-buttons"></div>
-
-<p>V.0.0.1</p>
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-104632692-3"></script>

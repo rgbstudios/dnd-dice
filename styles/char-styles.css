@@ -1,4 +1,4 @@
-.statDiv, select, input, canvas {
+.statDiv, select, input:not([type=checkbox]), canvas {
 	border-radius: 4px !important;
 	padding: 6px;
 	margin: 6px;
@@ -18,7 +18,7 @@ button:not(.close):not(.btn-primary):not(.btn-info) {
 	background-color: transparent;
 }
 
-.statDiv:hover, select:hover, input:hover, button:not(.close):hover, canvas:hover {
+.statDiv:hover, select:hover, input:not([type=checkbox]):hover, button:not(.close):hover, canvas:hover {
 	box-shadow: 4px 6px 0px #333;
 }
 button:not(.close):active, .btn-info:active, .btn-primary:active {

@@ -59,6 +59,9 @@ function getStatMod(stat) {
 function getDieCode(roll) {
 	return '&#98' + (55 + roll);
 }
+function getDieUnicode(roll){
+	return ['\u2680','\u2681','\u2682','\u2683','\u2684','\u2685'][roll-1];
+}
 
 function getDiceCodes(rolls) {
 	let diceCodes = '';
@@ -80,7 +83,12 @@ window.onload = function() {
 		for(let i=0; i<currentChar.stats.length; i++) {
 			data.push($('#stat' + (i+1) + 'Mod').val() + ': ');
 			for(let j=0; j<currentChar.stats[i].rolls.length; j++) {
-				data.push(currentChar.stats[i].rolls[j].toString() );
+				if($('#enableUnicodeCheckbox').is(':checked') ) {
+					data.push(getDieUnicode(currentChar.stats[i].rolls[j]) );					
+				} else {
+					data.push(currentChar.stats[i].rolls[j].toString() );
+				}
+
 				if(j < currentChar.stats[i].rolls.length-1) {
 					data.push(',');
 				}
@@ -112,27 +120,16 @@ window.onload = function() {
 		$('#openButton').css('display', 'none');
 		$('#nameInput').val('')
 		characters.push(new Character() );
-		let currentChar = characters[characters.length-1];
-		for(let i=0; i<6; i++) {
-			$('#stat' + (i+1) ).html(getDiceCodes(currentChar.stats[i].rolls) + '<br><b>' + currentChar.stats[i].value + '</b><br>' + (currentChar.stats[i].mod > 0 ? '+' : '') + currentChar.stats[i].mod);
-		}
-		$('#statsInfoStdDev').html('Deviation:<br><b>' + Math.round(stdDev(statsToValues(currentChar.stats))*100)/100 + '</b><br>' + Math.round(stdDev(statsToMods(currentChar.stats))*100)/100);
-		$('#statsInfoAvg').html('Mean:<br><b>' + Math.round(currentChar.statTotal*100/6)/100 + '</b><br>' + Math.round(currentChar.modTotal*100/6)/100);
-		$('#statsInfo').html('Total:<br><b>' + currentChar.statTotal+ '</b><br>' + currentChar.modTotal);
-		$('#numChars').html(characters.length + ' character' + (characters.length > 1 ? 's' : '') + ' generated');
 		
-		let numbers = [];
-		for(let i=0; i<6; i++) {
-			numbers.push(parseInt(currentChar.stats[i].value) );
+		if($('#displayRollingCheckbox').is(':checked') ) {
+			displayRolling();
+		} else {
+			displayRolls();			
 		}
-		numbers.sort(sortNumber);
-		$('#numbersInput').val(numbers.join(', ') );
-		makeChart();
+
 	});
 	
-	function sortNumber(a,b) {
-		return a - b;
-	}
+	
 	
 	$('#genButton').click();
 	$('#openButton').css('display', 'none');
@@ -192,6 +189,50 @@ window.onload = function() {
 	});
 	
 }
+
+function displayRolling() {
+	$('.statDiv h4').css('display', 'none');
+	$('#statsInfo').css('display', 'none');
+	$('#statsInfoAvg').css('display', 'none');
+	$('#statsInfoStdDev').css('display', 'none');
+	let intvl = setInterval(function() {
+		$('.statRolls').each(function(idx) {
+			$(this).html(getDiceCodes([getRoll(6),getRoll(6),getRoll(6),getRoll(6)]) );
+		});
+	}, 100);
+	setTimeout(function() {
+		clearInterval(intvl);
+		$('.statDiv h4').css('display', '');
+		$('#statsInfo').css('display', '');
+		$('#statsInfoAvg').css('display', '');
+		$('#statsInfoStdDev').css('display', '');
+		displayRolls();
+	}, 1000);
+}
+
+function displayRolls() {
+	let currentChar = characters[characters.length-1];
+
+	for(let i=0; i<6; i++) {
+		$('#stat' + (i+1) + 'rolls').html(getDiceCodes(currentChar.stats[i].rolls) + '<br>');
+		$('#stat' + (i+1) ).html('<b>' + currentChar.stats[i].value + '</b><br>' + (currentChar.stats[i].mod > 0 ? '+' : '') + currentChar.stats[i].mod);
+
+	}
+
+	$('#statsInfoStdDev').html('Deviation:<br><b>' + Math.round(stdDev(statsToValues(currentChar.stats))*100)/100 + '</b><br>' + Math.round(stdDev(statsToMods(currentChar.stats))*100)/100);
+	$('#statsInfoAvg').html('Mean:<br><b>' + Math.round(currentChar.statTotal*100/6)/100 + '</b><br>' + Math.round(currentChar.modTotal*100/6)/100);
+	$('#statsInfo').html('Total:<br><b>' + currentChar.statTotal+ '</b><br>' + currentChar.modTotal);
+	$('#numChars').html(characters.length + ' character' + (characters.length > 1 ? 's' : '') + ' generated');
+	
+	let numbers = [];
+	for(let i=0; i<6; i++) {
+		numbers.push(parseInt(currentChar.stats[i].value) );
+	}
+	numbers.sort( (a,b)=>a-b );
+	$('#numbersInput').val(numbers.join(', ') );
+	makeChart();
+}
+
 
 function allAreSelected() {
 	for(let i=0; i<6; i++) {
