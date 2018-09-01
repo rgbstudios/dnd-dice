@@ -1,21 +1,27 @@
 /*TODO:
 
-text file has mean and std dev
-
-
-
-add console
-option to chose to roll one stat at a time?
-
 option to choose:
 numStats = 6;
 numRolls = 4;
 numDropped = 1;
 diceSides = 6;
 show method character was created in download file
+--------
 
-add history
-add percentile
+create and download X characters input
+speak option
+show percentile option
+roll one at a time animation?
+share rolls and url to load specific rolls, stats, and name
+
+enter your own mod table option
+
+change checkbox to fontawesome checkbox (like on songssearcher)
+add history option for prev characters
+percentile option
+bug: night mode + fullscreen
+download table img option
+text file has mean and std dev
 */
 
 let characters = [];
@@ -233,6 +239,12 @@ function displayRolls() {
 	makeChart();
 }
 
+function downloadMany(num) {
+	for(let i=0; i<num; i++) {
+		$('#genButton').click();
+		$('#download').click();
+	}
+}
 
 function allAreSelected() {
 	for(let i=0; i<6; i++) {
