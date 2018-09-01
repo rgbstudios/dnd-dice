@@ -7,16 +7,6 @@
 	transform: scale(1.1);
 }
 
-
-
-
-
-input:disabled {
-	cursor: text !important;
-}
-select:disabled {
-	cursor: default !important;
-}
 textarea {
 	resize: none;
 }

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<meta charset="utf-8">
+	<meta name="title=" content="D&D Initiative Tracker">
+	<meta name="robots" content="index, follow">
+	<meta name="description" content="Use D&D Initiative Tracker to easily track initative for D&D games">
+	<meta name="keywords" content="dnd, d&d, initiative, tracker, initiative tracer, d&d initiative, dnd initiative">
+
+	<meta name="theme-color" content="#339">
+	<meta name="msapplication-navbutton-color" content="#339">
+	<meta name="apple-mobile-web-app-status-bar-style" content="#339">
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+
+	<link rel="stylesheet" type="text/css" href="styles/common.css">
+	<link rel="stylesheet" type="text/css" href="styles/init-styles.css">
+	<link rel="stylesheet" type="text/css" href="styles/side-nav.css">
+	<link id="nightTheme" rel="stylesheet" type="text/css" href="">
+
+	<link rel="icon" href="img/d20.png" type="image/png">
+
+	<title>D&D Initiative Tracker</title>
+
+
+	<script src="scripts/common.js"></script>
+	<script src="scripts/init-scripts.js"></script>
+
+	<!-- sharethis -->
+	<!-- <script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5b864aad7b4f100011fe46e7&product=inline-share-buttons' async='async'></script> -->
+
+</head>
+<body>
+
+
+<div class="sticky-top">
+
+<div id="menuButton" onclick="openNav()"><i class="fas fa-bars"></i></div>
+<div id="sideNav">
+	<a href="#" class="closebtn" onclick="closeNav()">&times;</a>
+	<a href="index.html">Dice Roller</a>
+	<!-- TODO -->
+	<!-- <a href="#">Initiative Tracker</a> -->
+	<!-- <a href="#">Character Generator</a> -->
+	
+</div>
+<h3 class="text-center">D&D Initiative <img id="titleImg" src="img/d20.svg" width="32px"> Tracker</h3>
+<button id="rollAllButton" class="btn btn-sm btn-primary"><i class="fas fa-dice"></i> Roll All</button>
+<button id="clearAllButton" class="btn btn-sm btn-warning"><i class="fas fa-eraser"></i> Clear All</button>
+<button id="deleteAllButton" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Delete All</button>
+<button id="newCharButton" class="btn btn-sm btn-success"><i class="fas fa-plus"></i> New Character</button>
+<hr>
+</div>
+
+
+<div id="charsDiv">
+	<div class="charDiv">
+		<button class="btn btn-sm btn-danger delete-char-button"><i class="fas fa-times"></i> Remove</button>
+		Character Name: <input type="text" class="form-control input-sm char-name-input" value="Character 1">
+		Initiative Bonus <input type="number" class="form-control input-sm init-bonus-input" value="0">
+		<br><br>
+		<button onclick="rollChar()" class="btn btn-sm btn-primary roll-char-button"><i class="fas fa-dice"></i> Roll</button>
+		Roll Result: <input type="number" class="form-control input-sm roll-result-output" value="0">
+		Total Result: <input disabled type="number" class="form-control input-sm total-result-output" value="">
+	</div>
+</div>
+
+<hr>
+Results:
+<button class="btn btn-sm btn-info"><i class="fas fa-sync-alt"></i> Reload Results</button>
+<div class="form-group">
+  <label for="resultSelect">Select list:</label>
+  <select multiple class="form-control" id="resultSelect">
+    <option>Character 1: 0 (+0)</option>
+    <option>Character 1: 0 (+0)</option>
+    <option>Character 1: 0 (+0)</option>
+
+  </select>
+</div>
+
+
+
+<div class="sharethis-inline-share-buttons"></div>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-104632692-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-104632692-3');
+</script>
+
+</body>
+</html>

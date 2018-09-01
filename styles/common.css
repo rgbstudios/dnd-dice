@@ -46,6 +46,10 @@ img {
 	border: 1px solid #369 !important;
 }
 
+.btn-danger, .btn-warning, .btn-success {
+	color: #fff;
+}
+
 #titleImg:hover {
 	-webkit-animation:spin 1.5s ease-in-out 1;
     -moz-animation:spin 1.5s ease-in-out 1;
@@ -69,29 +73,28 @@ img {
 	margin: 0px !important;
 }
 
-i {
+.btn:not(.no-animate) i {
 	transition: all .2s ease-in-out;
 }
-.btn:hover i {
+.btn:not(.no-animate):hover i {
 	transform: scale(1.2);
 }
-.btn:hover i.fa-dice, .btn:hover i.fa-sync-alt {
+.btn:not(.no-animate):hover i.fa-dice, .btn:not(.no-animate):hover i.fa-sync-alt {
 	transform: rotate(180deg);
 }
-.btn:hover i.fa-cog  {
+.btn:not(.no-animate):hover i.fa-cog  {
 	transform: rotate(60deg);
 }
-.btn:hover i.fa-pencil-alt {
+.btn:not(.no-animate):hover i.fa-pencil-alt {
 	transform: rotate(-90deg);
 }
-
-.btn:hover i.fa-eraser, .btn:hover i.fa-moon, .btn:hover i.fa-copy {
+.btn:not(.no-animate):hover i.fa-eraser, .btn:not(.no-animate):hover i.fa-moon, .btn:not(.no-animate):hover i.fa-copy {
 	transform: scale(-1,1);
 }
-.btn:hover i.fa-download, .btn:hover i.fa-donate {
+.btn:not(.no-animate):hover i.fa-download, .btn:not(.no-animate):hover i.fa-donate {
 	transform: translateY(2px);
 }
-.btn:hover i.fa-upload {
+.btn:not(.no-animate):hover i.fa-upload {
 	transform: translateY(-2px);
 }
 
@@ -117,5 +120,12 @@ i {
 }
 #menuButton:hover {
 	color: #999;
+}
+
+input:disabled {
+	cursor: text !important;
+}
+select:disabled {
+	cursor: default !important;
 }
 
