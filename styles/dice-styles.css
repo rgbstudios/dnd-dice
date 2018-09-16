@@ -1,14 +1,9 @@
-
 .die-img {
 	width: 32px;
 	transition: all .2s ease-in-out;
 }
 #diceSidesDiv .btn:hover .die-img {
 	transform: scale(1.1);
-}
-
-textarea {
-	resize: none;
 }
 #consoleDiv {
 	margin: 10px;
