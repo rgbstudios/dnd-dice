@@ -190,6 +190,8 @@ window.onload = function() {
 		$('.list-group-item').css('background-color', night ? '#333' : '#fff');
 		$('.list-group-item').css('color', night ? '#fff' : '#333');
 		makeChart();
+		// let n = night ? "1" : "0";
+		// history.replaceState({}, "", "?n=" + n);
 	});
 	
 	$('#fullscreen').on('click', function() {
@@ -205,7 +207,20 @@ window.onload = function() {
 			'history ' + getFormattedDate(), 'downloadHistoryLink');
 	});
 
-	
+	let url = new URL(window.location.href);
+	// let n = url.searchParams.get("n");
+	// if(n=="1") {
+	// 	$('#nightMode').click();
+	// }
+
+	let r = url.searchParams.get("r");
+	if(r) {
+		r = atob(r);
+		console.log(r);
+	}
+	//TODO: write text that says displaying linked rolls and then display rolls
+
+
 }
 
 function prettyPrint(character) {
@@ -264,6 +279,19 @@ function displayRolls() {
 	numbers.sort( (a,b)=>a-b );
 	$('#numbersInput').val(numbers.join(', ') );
 	makeChart();
+
+	//url params
+	let r = '';
+	for(let i=0; i<6; i++) {
+		for(let j=0; j<4; j++) {
+			//no need to delimit since all possible vals 1-6 are 1 digit
+			r += currentChar.stats[i].rolls[j];
+		}
+	}
+	r = btoa(r); //encode base64
+	// history.replaceState({}, "", "?r=" + r);
+	//TODO: add link to share these rolls followed by link below:
+	console.log(window.location.href.split('char.html')[0] + 'char.html' + '?r=' + r);
 }
 
 function downloadMany(num) {

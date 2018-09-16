@@ -67,6 +67,11 @@ $(document).ready(function() {
   	}
   }
 
+  // let n = url.searchParams.get("n");
+  // if(n=="1") {
+  // 	nightButton.click();
+  // }
+
   //update params
   updateParams();
 
@@ -93,6 +98,8 @@ $(document).ready(function() {
 			titleImg.prop('src', 'img/d20.svg');
 		}
 		isNight = !isNight;
+		// let n = isNight ? "1" : "0";
+		// history.replaceState({}, "", "?n=" + n);
 	});
 
 // ---------------- update num dice and dice sides on modal submit ----------------
