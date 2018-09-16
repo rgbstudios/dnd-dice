@@ -15,13 +15,15 @@ h1,h2,h3,h4,h5,h6,p:not(.input-group-addon), label {
 .st-btn {
   border: 1px solid #fff !important;
 }
-
 .sticky-top {
   background-color: rgba(51,51,51,.8);
 }
 
 
-
+textarea {
+  background-color: #333 !important;
+  color: #fff !important;
+}
 
 
 #sideNav {
