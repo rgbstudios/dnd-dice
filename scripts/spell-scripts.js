@@ -6,7 +6,8 @@ let resultData = {};
 function getData(term) {
   console.log(window.location.href.indexOf('https') );
   if(window.location.href.indexOf('https')!=-1) {
-    window.location.href = window.location.href.replace('https','http'); //bleh
+    results.html('The api is not https. Please replace "https" with "http" in the website url.');
+    // window.location.href = window.location.href.replace('https','http'); //bleh
   }
   try {
   $.ajax({
