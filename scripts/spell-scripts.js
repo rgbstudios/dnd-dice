@@ -1,4 +1,8 @@
 //api isn't https... :(
+//http://www.dnd5eapi.co/docs/
+//http://www.dnd5eapi.co/api/spells
+//https://github.com/adrpadua/5e-database/blob/master/5e-SRD-Spells.json
+//https://github.com/adrpadua/5e-srd-api
 //https://rgbstudios.org/dnd-dice/spell.html
 //TODO: change linear search to binary search
 let results, input, isNight;
