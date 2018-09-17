@@ -4,6 +4,7 @@ let results, input, isNight;
 let resultData = {};
 
 function getData(term) {
+  console.log(window.location.href.indexOf('https') );
   if(window.location.href.indexOf('https')!=-1) {
     window.location.href = window.location.href.replace('https','http'); //bleh
   }
