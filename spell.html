@@ -16,11 +16,10 @@
 <meta id="theme2" name="msapplication-navbutton-color" content="#339">
 <meta id="theme3" name="apple-mobile-web-app-status-bar-style" content="#339">
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
-
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>  
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
 
 
 
@@ -62,6 +61,9 @@
 		<button onclick="toggleFullscreen()" class="btn btn-default">
 			Fullscreen <i class="fas fa-arrows-alt"></i>
 		</button>
+<!-- 		<button onclick="copyUrl()" class="btn btn-default">
+			Copy Link to Spell <i class="fas fa-copy"></i>
+		</button> -->
 	</div>
 
 	<hr>
@@ -69,13 +71,17 @@
 </div>
 
 
-
 <div class="input-group">
-	<input autofocus id="input" type="search" class="form-control bg-primary text-light input-lg" placeholder="Search for a spell..." aria-label="Search" aria-describedby="basic-addon" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
-	<div class="input-group-append">
-		<button id="search" title="Click to search" type="button" class="btn btn-primary btn-lg"><i class="fas fa-search"></i></button>
+	<input autofocus id="input" onclick="this.select();" type="search" class="form-control bg-primary text-light input-lg" placeholder="Search for a spell..." aria-label="Search" aria-describedby="basic-addon" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+	<div class="input-group-btn">
+		<button id="search" title="Click to search" type="button" class="btn btn-primary btn-lg" type="submit">
+			<i class="fas fa-search"></i>
+		</button>
 	</div>
 </div>
+
+
+
 <br>
 <div id="results" style="text-align: left !important;">
 </div>
@@ -87,13 +93,17 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title"><i class="fas fa-info"></i> Info</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
+		<button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"><i class="fas fa-info-circle"></i> About</h4>
       </div>
       <div class="modal-body">
+      	<p><b>About Searching</b></p>
         <p>Search for the name of a spell.</p>
         <p>Find info such as description, range, level, classes, and more.</p>
         <p>Also featuring night mode.</p>
+        <p><b>Useful Links:</b></p>
+        <a href="http://media.wizards.com/2014/downloads/dnd/PlayerDnDBasicRules_v0.2_PrintFriendly.pdf" target="_blank">D&D 5e Basic Rules for Players</a><br>
+        <a href="http://media.wizards.com/2014/downloads/dnd/DMBasicRulesv.0.3_PrinterFriendly.pdf" target="_blank">D&D 5e Basic Rules for DMs</a>
       </div>
       <div class="modal-footer">
 			<div class="btn-group">

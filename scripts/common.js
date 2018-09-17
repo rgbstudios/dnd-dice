@@ -13,6 +13,15 @@ function handleNight() {
   isNight = !isNight;
 }
 
+function copyUrl() {
+    let tmp = $('<input type="text">').appendTo(document.body);
+    tmp.val(window.location.href);
+    tmp.select();
+    document.execCommand('copy');
+    tmp.remove();
+	//todo: display alert for copied sucessfully
+}
+
 function getRoll(sides) {
     return Math.floor(Math.random() * sides) + 1;
 }

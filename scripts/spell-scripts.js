@@ -55,7 +55,7 @@ function getSpellData(spellUrl) {
 	      		itemDescription = (data[item].name ? data[item].name : data[item]).toString();
 			}
 			itemDescription = itemDescription.replace('â€™', '\''); //fix apostrophie that wasn't escaped properly in api
-	    	results.html(results.html() + '<p>' + item.replace('_',' ').capitalize() + ' : ' + itemDescription + '</p>');    			
+	    	results.html(results.html() + '<p style="text-align:left !important;">' + item.replace('_',' ').capitalize() + ' : ' + itemDescription + '</p>');    			
     	}
       },
       error: function(e){
@@ -72,7 +72,8 @@ function getSpellData(spellUrl) {
 function doSearch(term) {
     for(idx in resultData) {
     	if(resultData[idx].name.toLowerCase().replace(' ','').indexOf(term.toLowerCase().replace(' ','') ) != -1) {
-    		results.html('<p class="text-center">' + resultData[idx].name + '</p><hr>');
+    		results.html('<p style="display:inline-block;">' + resultData[idx].name + '');
+        results.html(results.html() + ' <button onclick="copyUrl()" class="btn btn-default">Copy Link to Spell <i class="fas fa-copy"></i></button></p><hr>');
     		getSpellData(resultData[idx].url);
     		history.replaceState({}, '', '?q=' + term);
     		return;

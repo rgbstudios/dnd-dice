@@ -1,4 +1,4 @@
-let consoleDiv, consoleButton, speakButton, copyUrl;
+let consoleDiv, consoleButton, speakButton;
 let numDiceModalInput, numDiceSubmit, numDiceButtonCustom, numDiceModal, diceSidesModalInput, diceSidesSubmit, diceSidesButtonCustom, diceSidesModal;
 let numDiceDiv, numDiceButtonPlus, diceSidesDiv, diceSidesButtonPlus;
 let output, rollButton, resetButton, historyText, numDiceRolled, clearHistory, downloadHistory, notes, clearNotes, downloadNotes, clearMods, downloadMods, uploadMods;
@@ -13,7 +13,6 @@ $(document).ready(function() {
 	consoleDiv = $('#consoleDiv');
 	consoleButton = $('#consoleButton');
 	speakButton = $('#speakButton');
-	copyUrl = $('#copyUrl');
 
 	numDiceModalInput = $('#numDiceModalInput');
 	numDiceSubmit = $('#numDiceSubmit');
@@ -204,13 +203,9 @@ $(document).ready(function() {
 			'notes ' + getFormattedDate(), 'downloadNotesLink');
 	});
 
-	copyUrl.on('click', function() {
+	$('#copyUrl').on('click', function() {
 		updateParams();
-		let tmp = $('<input type="text">').appendTo(document.body);
-		tmp.val(window.location.href);
-		tmp.select();
-		document.execCommand('copy');
-		tmp.remove();
+		copyUrl();
 	});
 
 	clearMods.on('click', function() {
@@ -382,13 +377,11 @@ make roll console, speak results, work
 
 todo: fix youve rolled 1 dice into '1 die'
 
-animate buttons and UI
 make speak a checkbox not button
 change modifier plus minus to just typing in + or - and no radio buttons
 
-add multiple consoles option
+add multiple roll consoles option
 
-static header with menu for switching to other dnd websites
 
 
 add info modal with how advantage works, that expertiece is double proficiency, and about rolling for initiative, to attack against AC, and for damage

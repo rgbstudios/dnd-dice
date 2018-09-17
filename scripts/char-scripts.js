@@ -16,7 +16,6 @@ roll one at a time animation?
 share rolls and url to load specific rolls, stats, and name
 
 
-
 change checkbox to fontawesome checkbox (like on songssearcher)
 percentile option
 download table img option
