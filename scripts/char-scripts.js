@@ -25,7 +25,6 @@ text file has mean and std dev
 */
 
 let characters = [];
-let night = false;
 let odds = [1,4,10,21,38,62,91,122,148,167,172,160,131,94,54,21];
 
 function Character() {
@@ -178,20 +177,16 @@ window.onload = function() {
 	$('#resetStat').on('click', function() {
 		resetStats();
 	});
-	
-	$('#nightMode').on('click', function() {
-		night = !night;
-		$('#nightTheme').prop('href', night ? 'styles/night.css' : '');
-		$('#titleImg').prop('src', night ? 'img/d20-white.svg' : 'img/d20.svg');
-		$('select').css('color', night ? '#fff' : '#333');
-		$('input').css('color', night ? '#fff' : '#333');
-		$('button:not(.close):not(.btn-primary):not(.btn-info)').css('color', night ? '#fff' : '#333');
-		$('button:not(.close):not(.btn-primary):not(.btn-info)').css('background-color', night ? '#333' : '#fff');
-		$('.list-group-item').css('background-color', night ? '#333' : '#fff');
-		$('.list-group-item').css('color', night ? '#fff' : '#333');
-		makeChart();
-		// let n = night ? "1" : "0";
-		// history.replaceState({}, "", "?n=" + n);
+
+	$('#nightButton').on('click', function() {
+		handleNight(); //in common.js
+		$('select').css('color', isNight ? '#fff' : '#333');
+		$('input').css('color', isNight ? '#fff' : '#333');
+		$('button:not(.close):not(.btn-primary):not(.btn-info)').css('color', isNight ? '#fff' : '#333');
+		$('button:not(.close):not(.btn-primary):not(.btn-info)').css('background-color', isNight ? '#333' : '#fff');
+		$('.list-group-item').css('background-color', isNight ? '#333' : '#fff');
+		$('.list-group-item').css('color', isNight ? '#fff' : '#333');
+		makeChart();	
 	});
 	
 	$('#fullscreen').on('click', function() {
@@ -210,7 +205,7 @@ window.onload = function() {
 	let url = new URL(window.location.href);
 	// let n = url.searchParams.get("n");
 	// if(n=="1") {
-	// 	$('#nightMode').click();
+	// 	$('#nightButton').click();
 	// }
 
 	let r = url.searchParams.get("r");

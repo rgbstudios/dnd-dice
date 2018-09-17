@@ -6,7 +6,7 @@ function makeChart() {
 
 function drawChart() {
 
-  let graphColor = night ? '#999' : '#333';
+  let graphColor = isNight ? '#999' : '#333';
 
   //bar
   let chartdata = [['','', { role: 'style' } ]];

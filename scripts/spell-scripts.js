@@ -5,7 +5,7 @@
 //https://github.com/adrpadua/5e-srd-api
 //https://rgbstudios.org/dnd-dice/spell.html
 //TODO: change linear search to binary search
-let results, input, isNight;
+let results, input;
 let resultData = {};
 
 function getData(term) {
@@ -89,7 +89,6 @@ String.prototype.capitalize = function() {
 $(function() {
   results = $('#results');
   input = $('#input');
-  nightButton = $('#nightButton');
 
   //get url params
   let url = new URL(window.location.href);
@@ -110,18 +109,8 @@ $(function() {
   	}
   });
 
-  nightButton.on('click', function() {
-    if(!isNight) {
-      nightButton.html("Day Theme <i class='fas fa-sun'></i>");
-      $('#nightTheme').prop('href', 'styles/night.css');
-      $('#titleImg').prop('src', 'img/d20-white.svg');
-    } else {
-      nightButton.html("Night Theme <i class='fas fa-moon'></i>");
-      $('#nightTheme').prop('href', '');
-      $('#titleImg').prop('src', 'img/d20.svg');
-    }
-    isNight = !isNight;
+  $('#nightButton').on('click', function() {
+    handleNight(); //in common.js
   });
-
 
 });

@@ -1,3 +1,35 @@
+let isNight;
+
+
+
+
+
+
+
+function handleNight() {
+  if(!isNight) {
+    $('#nightButton').html("Day Theme <i class='fas fa-sun'></i>");
+    $('#nightTheme').prop('href', 'styles/night.css');
+    $('#titleImg').prop('src', 'img/d20-white.svg');
+  } else {
+    $('#nightButton').html("Night Theme <i class='fas fa-moon'></i>");
+    $('#nightTheme').prop('href', '');
+    $('#titleImg').prop('src', 'img/d20.svg');
+  }
+  isNight = !isNight;
+}
+
+
+
+
+
+
+
+
+
+
+//---------------------------------
+
 function getRoll(sides) {
     return Math.floor(Math.random() * sides) + 1;
 }

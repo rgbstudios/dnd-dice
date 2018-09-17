@@ -1,11 +1,11 @@
-let consoleDiv, consoleButton, speakButton, nightButton, nightTheme, titleImg, copyUrl;
+let consoleDiv, consoleButton, speakButton, nightTheme, titleImg, copyUrl;
 let numDiceModalInput, numDiceSubmit, numDiceButtonCustom, numDiceModal, diceSidesModalInput, diceSidesSubmit, diceSidesButtonCustom, diceSidesModal;
 let numDiceDiv, numDiceButtonPlus, diceSidesDiv, diceSidesButtonPlus;
 let output, rollButton, resetButton, historyText, numDiceRolled, clearHistory, downloadHistory, notes, clearNotes, downloadNotes, clearMods, downloadMods, uploadMods;
 let modifierForm, modifierInput, advantageSelect, attributeSelect1, attributeSelect2;
 let consoleInput, consoleRollButton;
 
-let isSpeak = false, isNight = false;
+let isSpeak = false;
 
 let modNames = ['str', 'dex', 'con', 'int', 'wis', 'cha', 'prf', 'spl', 'itv'];
 
@@ -13,7 +13,6 @@ $(document).ready(function() {
 	consoleDiv = $('#consoleDiv');
 	consoleButton = $('#consoleButton');
 	speakButton = $('#speakButton');
-	nightButton = $('#nightButton');
 	nightTheme = $('#nightTheme');
 	titleImg = $('#titleImg');
 	copyUrl = $('#copyUrl');
@@ -69,7 +68,7 @@ $(document).ready(function() {
 
   // let n = url.searchParams.get("n");
   // if(n=="1") {
-  // 	nightButton.click();
+  // 	$('#nightButton').click();
   // }
 
   //update params
@@ -87,19 +86,8 @@ $(document).ready(function() {
 		isSpeak = !isSpeak;		
 	});
 
-	nightButton.on('click', function() {
-		if(!isNight) {
-			nightButton.html("Day Theme <i class='fas fa-sun'></i>");
-			nightTheme.prop('href', 'styles/night.css');
-			titleImg.prop('src', 'img/d20-white.svg');
-		} else {
-			nightButton.html("Night Theme <i class='fas fa-moon'></i>");
-			nightTheme.prop('href', '');
-			titleImg.prop('src', 'img/d20.svg');
-		}
-		isNight = !isNight;
-		// let n = isNight ? "1" : "0";
-		// history.replaceState({}, "", "?n=" + n);
+	$('#nightButton').on('click', function() {
+		handleNight(); //in common.js
 	});
 
 // ---------------- update num dice and dice sides on modal submit ----------------
@@ -265,6 +253,8 @@ $(document).ready(function() {
 
 
 }); //end doc ready
+
+
 
 //https://stackoverflow.com/questions/19038919/is-it-possible-to-upload-a-text-file-to-input-in-html-js?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
 function processFile(e) {
