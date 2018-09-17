@@ -1,8 +1,9 @@
-//TODO: url param
+//api isn't https... :(
 let results, input, isNight;
 let resultData = {};
 
 function getData(term) {
+  window.location.href = window.location.href.replace('https','http'); //bleh
   try {
   $.ajax({
       url: 'http://www.dnd5eapi.co/api/spells',
