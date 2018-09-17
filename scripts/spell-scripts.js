@@ -1,5 +1,6 @@
 //api isn't https... :(
 //https://rgbstudios.org/dnd-dice/spell.html
+//TODO: change linear search to binary search
 let results, input, isNight;
 let resultData = {};
 
