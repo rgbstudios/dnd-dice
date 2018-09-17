@@ -24,6 +24,15 @@
     color: #999;
 }
 
+#sideNav a:not(.closebtn) {
+    margin: 20px;
+    background-color: #99f;
+}
+#sideNav a:not(.closebtn):hover {
+    color: #fff;
+    background-color: #66c;
+}
+
 #sideNav .closebtn {
     position: absolute;
     top: 0;

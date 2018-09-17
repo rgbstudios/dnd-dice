@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<title>Spell Searcher</title>
+<meta charset="utf-8">
+<meta name="title=" content="Spell Searcher">
+<meta name="robots" content="index, follow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Search for d&d spells">
+<meta name="keywords" content="dnd, d&d, dnd spell, d&d spell, dnd5e, spell, spellbook, spell, searcher">
+
+<link rel="icon" href="img/d20.png" type="image/png">
+
+<meta id="theme1" name="theme-color" content="#339">
+<meta id="theme2" name="msapplication-navbutton-color" content="#339">
+<meta id="theme3" name="apple-mobile-web-app-status-bar-style" content="#339">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>  
+
+
+
+<link rel="stylesheet" type="text/css" href="styles/common.css">
+<link rel="stylesheet" type="text/css" href="styles/side-nav.css">
+<link id="nightTheme" rel="stylesheet" type="text/css" href="">
+<script src="scripts/common.js"></script>
+
+
+<script src="scripts/spell-scripts.js"></script>
+<link rel="stylesheet" href="styles/spell-styles.css">
+
+
+<!-- sharethis -->
+<script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5b864aad7b4f100011fe46e7&product=inline-share-buttons' async='async'></script>
+
+
+</head>
+<body>
+
+<div class="sticky-top">
+
+	<div id="menuButton" onclick="openNav()"><i class="fas fa-bars"></i></div>
+	<div id="sideNav">
+		<a href="#" class="closebtn" onclick="closeNav()">&times;</a>
+		<a href="index.html">Die Roller</a>
+		<a href="char.html">Character Roller</a>
+		<!-- <a href="init.html">Initiative Tracker</a> -->
+	</div>
+
+
+	<h3 class="text-center">D&D Spell <img id="titleImg" src="img/d20.svg" width="32px"> Search</h3>
+
+	<div class="btn-group">
+		<button class="btn btn-default" data-toggle="modal" data-target="#infoModal">
+			About <i class="fas fa-info-circle"></i>
+		</button>
+		<button id="nightButton" class="btn btn-default">Night Theme <i class="fas fa-moon"></i></button>
+	</div>
+
+	<hr>
+
+</div>
+
+
+
+<div class="input-group">
+	<input autofocus id="input" type="search" class="form-control bg-primary text-light input-lg" placeholder="Search for a spell..." aria-label="Search" aria-describedby="basic-addon" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+	<div class="input-group-append">
+		<button id="search" title="Click to search" type="button" class="btn btn-primary btn-lg"><i class="fas fa-search"></i></button>
+	</div>
+</div>
+<br>
+<div id="results" style="text-align: left !important;">
+</div>
+
+
+
+<!-- Modals -->
+<div class="modal fade" id="infoModal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title"><i class="fas fa-info"></i> Info</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Search for the name of a spell.</p>
+        <p>Find info such as description, range, level, classes, and more.</p>
+        <p>Also featuring night mode.</p>
+      </div>
+      <div class="modal-footer">
+			<div class="btn-group">
+				<button title="Contact us at contact@rgbstudios.org" onclick="window.open('mailto:contact@rgbstudios.org','_blank');" class="btn btn-default">
+					Contact <i class="fas fa-envelope"></i>
+				</button>
+				<button title="Donate on PayPal" onclick="window.open('https://www.paypal.me/RGBStudios','_blank');" class="btn btn-default">
+					Donate <i class="fas fa-donate"></i>
+				</button>
+			</div>
+			<br><br><p>V.0.0.1</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div class="sharethis-inline-share-buttons"></div>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-104632692-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-104632692-3');
+</script>
+
+
+</body>
+</html>

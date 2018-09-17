@@ -9,7 +9,7 @@ h1,h2,h3,h4,h5,h6,p, label, input, .btn, .btn.active, select, option {
 	color: #333;
 }
 
-img {
+img, br {
 	-moz-user-select: none;
 	-webkit-user-select: none;
 	-ms-user-select: none;
@@ -25,12 +25,12 @@ img {
   background: #b3b3e6;
 }
 
-.btn-primary {
-	background-color: #339;
+.btn-primary, .bg-primary {
+	background-color: #339 !important;
 	color: #fff;
 	border: 2px solid #19194d;
 }
-.btn-primary:hover, .btn-primary:active, .btn-primary:focus {
+.btn-primary:hover, .btn-primary:active, .btn-primary:focus, .bg-primary:hover {
 	background-color: #66c !important;
 	color: #fff !important;
 	border: 2px solid #339 !important;
