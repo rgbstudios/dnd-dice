@@ -19,7 +19,7 @@ function copyUrl() {
     tmp.select();
     document.execCommand('copy');
     tmp.remove();
-	//todo: display alert for copied sucessfully
+	//todo: display toast for copied sucessfully
 }
 
 function getRoll(sides) {
