@@ -1,11 +1,5 @@
 let isNight;
 
-
-
-
-
-
-
 function handleNight() {
   if(!isNight) {
     $('#nightButton').html("Day Theme <i class='fas fa-sun'></i>");
@@ -18,17 +12,6 @@ function handleNight() {
   }
   isNight = !isNight;
 }
-
-
-
-
-
-
-
-
-
-
-//---------------------------------
 
 function getRoll(sides) {
     return Math.floor(Math.random() * sides) + 1;

@@ -19,7 +19,6 @@ share rolls and url to load specific rolls, stats, and name
 
 change checkbox to fontawesome checkbox (like on songssearcher)
 percentile option
-bug: night mode + fullscreen
 download table img option
 text file has mean and std dev
 */

@@ -1,3 +1,6 @@
+html { /*fix for fullscreen*/
+  background-color: #333 !important;
+}
 body, .modal-content {
 	background-color: #333 !important;
 	color: #fff !important;

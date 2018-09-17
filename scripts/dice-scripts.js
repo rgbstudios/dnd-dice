@@ -1,4 +1,4 @@
-let consoleDiv, consoleButton, speakButton, nightTheme, titleImg, copyUrl;
+let consoleDiv, consoleButton, speakButton, copyUrl;
 let numDiceModalInput, numDiceSubmit, numDiceButtonCustom, numDiceModal, diceSidesModalInput, diceSidesSubmit, diceSidesButtonCustom, diceSidesModal;
 let numDiceDiv, numDiceButtonPlus, diceSidesDiv, diceSidesButtonPlus;
 let output, rollButton, resetButton, historyText, numDiceRolled, clearHistory, downloadHistory, notes, clearNotes, downloadNotes, clearMods, downloadMods, uploadMods;
@@ -13,8 +13,6 @@ $(document).ready(function() {
 	consoleDiv = $('#consoleDiv');
 	consoleButton = $('#consoleButton');
 	speakButton = $('#speakButton');
-	nightTheme = $('#nightTheme');
-	titleImg = $('#titleImg');
 	copyUrl = $('#copyUrl');
 
 	numDiceModalInput = $('#numDiceModalInput');
