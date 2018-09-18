@@ -27,14 +27,11 @@
 	padding-top: 2px;
 	padding-bottom: 2px;
 }
-.tt-suggestion:hover, .tt-highlight {
+.tt-suggestion:hover, .tt-highlight, .tt-cursor {
 	background-color: #66c !important;
 }
 .twitter-typeahead { 
 	/*seriously? fuck twitter. why to you have to force your styles upon my searchbar.
 	you're a js library not a css library*/
 	display: block !important;
-}
-.tt-dataset, .tt-suggestion {
-	text-align: center !important;
 }
