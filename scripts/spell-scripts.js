@@ -131,8 +131,6 @@ $(function() {
 });
 
 
-
-
 //-------- typeahead --------
 function makeTypeAhead() {
 
