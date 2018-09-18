@@ -68,8 +68,8 @@ function getSpellData(spellUrl) {
     	     	itemDescription = (data[item].name ? data[item].name : data[item]).toString();
             itemDescription = itemDescription.replace('phb ',''); //page number fix
     			}
-    			itemDescription = itemDescription.replace('â€™', '\''); //fix apostrophie that wasn't escaped properly in api
-    	    	results.html(results.html() + '<p style="text-align:left !important;">' + item.replace('_',' ').capitalize() + ' : ' + itemDescription + '</p>');    			
+    			itemDescription = itemDescription.split('â€™').join('\''); //fix apostrophie that wasn't escaped properly in api
+   	    	results.html(results.html() + '<p style="text-align:left !important;">' + item.replace('_',' ').capitalize() + ' : ' + itemDescription + '</p>');
         	}
         },
       error: function(e){
