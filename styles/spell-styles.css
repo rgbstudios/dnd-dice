@@ -35,3 +35,6 @@
 	you're a js library not a css library*/
 	display: block !important;
 }
+.tt-dataset, .tt-suggestion {
+	text-align: center !important;
+}

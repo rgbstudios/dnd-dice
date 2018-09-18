@@ -55,19 +55,24 @@ function getSpellData(spellUrl) {
       method: 'GET',
       success: function(data) {
       	// console.log(data);
-      	for(item in data) {
-			let itemDescription = ' ';
-			if(data[item][0] && data[item][0].name) {
-				for(let i=0; i<data[item].length; i++) {
-					itemDescription += data[item][i].name + (i==data[item].length-1 ? '' : ', ');
-      			}
-			} else {
-	      		itemDescription = (data[item].name ? data[item].name : data[item]).toString();
-			}
-			itemDescription = itemDescription.replace('â€™', '\''); //fix apostrophie that wasn't escaped properly in api
-	    	results.html(results.html() + '<p style="text-align:left !important;">' + item.replace('_',' ').capitalize() + ' : ' + itemDescription + '</p>');    			
-    	}
-      },
+       	for(item in data) {
+          console.log(item);
+          if(item=='_id' || item=='url' || item=='index') {
+            continue; //skip id and url
+          }
+    			let itemDescription = ' ';
+    			if(data[item][0] && data[item][0].name) {
+    				for(let i=0; i<data[item].length; i++) {
+    					itemDescription += data[item][i].name + (i==data[item].length-1 ? '' : ', ');
+          			}
+    			} else {
+    	     	itemDescription = (data[item].name ? data[item].name : data[item]).toString();
+            itemDescription = itemDescription.replace('phb ',''); //page number fix
+    			}
+    			itemDescription = itemDescription.replace('â€™', '\''); //fix apostrophie that wasn't escaped properly in api
+    	    	results.html(results.html() + '<p style="text-align:left !important;">' + item.replace('_',' ').capitalize() + ' : ' + itemDescription + '</p>');    			
+        	}
+        },
       error: function(e){
         console.warn(e);
       }
@@ -78,6 +83,7 @@ function getSpellData(spellUrl) {
 }
 
 function doSearch(term) {
+    $('#input').typeahead('close');
     for(idx in resultData) {
     	if(resultData[idx].name.toLowerCase().replace(' ','').indexOf(term.toLowerCase().replace(' ','') ) != -1) {
     		results.html('<p style="display:inline-block;">' + resultData[idx].name + '');
@@ -105,7 +111,6 @@ $(function() {
   let q = url.searchParams.get('q');
   input.val(q || 'magic missile');
 
-  //search
   getData();
 
   $('#search').on('click', function() {
@@ -129,32 +134,38 @@ $(function() {
 
 
 
-//--------------------------------- typeahead/bloodhound
+//-------- typeahead --------
 function makeTypeAhead() {
 
-//http://twitter.github.io/typeahead.js/examples/
-let substringMatcher = function(strs) {
-  return function findMatches(q, cb) {
-    let matches, substringRegex;
-    matches = [];
-    substrRegex = new RegExp(q, 'i');
-    $.each(strs, function(i, str) {
-      if (substrRegex.test(str) ) {
-        matches.push(str);
-      }
-    });
-    cb(matches);
+  //http://twitter.github.io/typeahead.js/examples/
+  let substringMatcher = function(strs) {
+    return function findMatches(q, cb) {
+      let matches, substringRegex;
+      matches = [];
+      substrRegex = new RegExp(q, 'i');
+      $.each(strs, function(i, str) {
+        if (substrRegex.test(str) ) {
+          matches.push(str);
+        }
+      });
+      cb(matches);
+    };
   };
-};
 
-$('#input').typeahead({
-  hint: true,
-  highlight: true,
-  minLength: 1
-},
-{
-  name: 'spells',
-  source: substringMatcher(spellNames)
-});
+  $('#input').typeahead({
+    hint: true,
+    highlight: true,
+    minLength: 1
+  },
+  {
+    name: 'spells',
+    source: substringMatcher(spellNames)
+  });
+
+
+  $('.typeahead').bind('typeahead:select', function(ev, suggestion) {
+    doSearch(suggestion); //search suggestion when selected
+    // console.log('Selection: ' + suggestion);
+  });
 
 }
