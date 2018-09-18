@@ -69,7 +69,8 @@ function getSpellData(spellUrl) {
             itemDescription = itemDescription.replace('phb ',''); //page number fix
     			}
     			itemDescription = itemDescription.split('â€™').join('\''); //fix apostrophie that wasn't escaped properly in api
-   	    	results.html(results.html() + '<p style="text-align:left !important;">' + item.replace('_',' ').capitalize() + ' : ' + itemDescription + '</p>');
+          itemDescription = itemDescription.split(',-').join('<br>').split('.,').join('.<br>');
+   	    	results.html(results.html() + '<p style="text-align:left !important;">' + item.replace('_',' ').replace('desc','description').capitalize() + ': ' + itemDescription + '</p>');
         	}
         },
       error: function(e){
@@ -85,8 +86,7 @@ function doSearch(term) {
     $('#input').typeahead('close');
     for(idx in resultData) {
     	if(resultData[idx].name.toLowerCase().replace(' ','').indexOf(term.toLowerCase().replace(' ','') ) != -1) {
-    		results.html('<p style="display:inline-block;">' + resultData[idx].name + '');
-        results.html(results.html() + ' <button onclick="copyUrl()" class="btn btn-default">Copy Link to Spell <i class="fas fa-copy"></i></button></p><hr>');
+    		results.html('<b style="display:inline-block;">' + resultData[idx].name + '</b><hr>');
     		getSpellData(resultData[idx].url);
         $('#input').val(resultData[idx].name);
     		history.replaceState({}, '', '?q=' + resultData[idx].name);
@@ -126,7 +126,7 @@ $(function() {
     handleNight(); //in common.js
   });
 
-  input.select();
+  // input.select();
 
 });
 
