@@ -56,7 +56,6 @@ function getSpellData(spellUrl) {
       success: function(data) {
       	// console.log(data);
        	for(item in data) {
-          console.log(item);
           if(item=='_id' || item=='url' || item=='index') {
             continue; //skip id and url
           }
