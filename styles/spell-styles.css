@@ -12,3 +12,26 @@
 #results {
   text-align: left !important;
 }
+
+/*typeahead*/
+.tt-menu {
+	background-color: #ccc;
+}
+.tt-suggestion {
+	background-color: #339;
+	color: #fff;
+	padding: 10px;
+	cursor: pointer;
+}
+.tt-highlight {
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+.tt-suggestion:hover, .tt-highlight {
+	background-color: #66c !important;
+}
+.twitter-typeahead { 
+	/*seriously? fuck twitter. why to you have to force your styles upon my searchbar.
+	you're a js library not a css library*/
+	display: block !important;
+}

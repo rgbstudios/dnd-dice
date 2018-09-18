@@ -5,11 +5,13 @@
 //https://github.com/adrpadua/5e-srd-api
 //https://rgbstudios.org/dnd-dice/spell.html
 //TODO: change linear search to binary search
+//TODO: update url with spell name before copy
 let results, input;
 let resultData = {};
+let spellNames = [];
 
 function getData(term) {
-  console.log(window.location.href.indexOf('https') );
+  // console.log(window.location.href.indexOf('https') );
   if(window.location.href.indexOf('https')!=-1) {
     results.html('The api is not https. Please replace "https" with "http" in the website url.');
     // window.location.href = window.location.href.replace('https','http'); //bleh
@@ -21,8 +23,17 @@ function getData(term) {
       method: 'GET',
       success: function(data){
         resultData = data.results;
-		console.log(resultData);
-		doSearch(input.val() );
+    		// console.log(resultData);
+    		doSearch(input.val() );
+
+        //NOTE: this part slows down page load
+        for(let i=0; i<resultData.length; i++) {
+          spellNames[i] = resultData[i].name;
+        }
+        // console.log(spellNames);
+
+        makeTypeAhead();
+        $('#input').select();
 
       },
       error: function(e){
@@ -37,14 +48,13 @@ function getData(term) {
 }
 
 function getSpellData(spellUrl) {
-  console.log('searching url: ' + spellUrl);
   try {
   $.ajax({
       url: spellUrl,
       dataType: 'json',
       method: 'GET',
       success: function(data) {
-      	console.log(data);
+      	// console.log(data);
       	for(item in data) {
 			let itemDescription = ' ';
 			if(data[item][0] && data[item][0].name) {
@@ -59,12 +69,10 @@ function getSpellData(spellUrl) {
     	}
       },
       error: function(e){
-        console.warn('Error retrieving spell data');
         console.warn(e);
       }
     });
     } catch(e) {
-      console.warn('Caught error getting spell data');
       console.warn(e);
     }
 }
@@ -75,7 +83,8 @@ function doSearch(term) {
     		results.html('<p style="display:inline-block;">' + resultData[idx].name + '');
         results.html(results.html() + ' <button onclick="copyUrl()" class="btn btn-default">Copy Link to Spell <i class="fas fa-copy"></i></button></p><hr>');
     		getSpellData(resultData[idx].url);
-    		history.replaceState({}, '', '?q=' + term);
+        $('#input').val(resultData[idx].name);
+    		history.replaceState({}, '', '?q=' + resultData[idx].name);
     		return;
     	}
     }
@@ -96,7 +105,6 @@ $(function() {
   let q = url.searchParams.get('q');
   input.val(q || 'magic missile');
 
-  input.select();
   //search
   getData();
 
@@ -114,4 +122,39 @@ $(function() {
     handleNight(); //in common.js
   });
 
+  input.select();
+
 });
+
+
+
+
+//--------------------------------- typeahead/bloodhound
+function makeTypeAhead() {
+
+//http://twitter.github.io/typeahead.js/examples/
+let substringMatcher = function(strs) {
+  return function findMatches(q, cb) {
+    let matches, substringRegex;
+    matches = [];
+    substrRegex = new RegExp(q, 'i');
+    $.each(strs, function(i, str) {
+      if (substrRegex.test(str) ) {
+        matches.push(str);
+      }
+    });
+    cb(matches);
+  };
+};
+
+$('#input').typeahead({
+  hint: true,
+  highlight: true,
+  minLength: 1
+},
+{
+  name: 'spells',
+  source: substringMatcher(spellNames)
+});
+
+}
