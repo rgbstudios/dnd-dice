@@ -16,18 +16,30 @@
     padding: 10px;
     text-decoration: none;
     font-size: 20px;
-    color: #333;
     display: block;
     transition: 0.3s;
 }
-#sideNav a:hover {
-    color: #999;
+#sideNav .closebtn {
+    color: #333;
+}
+#sideNav .closebtn:hover {
+    color: #933;
 }
 
 #sideNav a:not(.closebtn) {
     margin: 20px;
     color: #fff;
 }
+
+.fa-bars {
+    color: #339;
+}
+
+/*.fa-bars:hover {
+    background-color: #339;
+    color: #fff;
+}*/
+
 a.nav-red {
     background-color: #c66;
 }
