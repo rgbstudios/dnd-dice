@@ -1,0 +1,3 @@
+fix http to https for spellsearch, download api json
+
+char roller link to open rolls
