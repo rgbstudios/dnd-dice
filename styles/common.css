@@ -132,3 +132,13 @@ select:disabled {
 textarea {
 	resize: vertical;
 }
+
+.text-red {
+	color: #933;
+}
+.text-green {
+	color: #393;
+}
+.text-blue {
+	color: #339;
+}

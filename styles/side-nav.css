@@ -27,12 +27,30 @@
 #sideNav a:not(.closebtn) {
     margin: 20px;
     color: #fff;
+}
+a.nav-red {
+    background-color: #c66;
+}
+a.nav-green {
+    background-color: #6c6;
+}
+a.nav-blue {
     background-color: #66c;
 }
-#sideNav a:not(.closebtn):hover {
-    /*color: #fff;*/
+
+a.nav-red:hover {
+    background-color: #933;
+}
+a.nav-green:hover {
+    background-color: #393;
+}
+a.nav-blue:hover {
     background-color: #339;
 }
+
+/*#sideNav a:not(.closebtn):hover {
+    background-color: #66c;
+}*/
 
 #sideNav .closebtn {
     position: absolute;
