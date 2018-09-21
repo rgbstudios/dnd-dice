@@ -85,6 +85,7 @@ $(document).ready(function() {
 
 	$('#nightButton').on('click', function() {
 		handleNight(); //in common.js
+		$('#titleImg').prop('src', isNight ? 'img/d20-white.svg' : 'img/d20.svg');
 	});
 
 // ---------------- update num dice and dice sides on modal submit ----------------

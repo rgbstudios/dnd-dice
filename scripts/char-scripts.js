@@ -178,6 +178,7 @@ window.onload = function() {
 
 	$('#nightButton').on('click', function() {
 		handleNight(); //in common.js
+		$('#titleImg').prop('src', isNight ? 'img/d6-white.svg' : 'img/d6.svg');
 		$('select').css('color', isNight ? '#fff' : '#333');
 		$('input').css('color', isNight ? '#fff' : '#333');
 		$('button:not(.close):not(.btn-primary):not(.btn-info)').css('color', isNight ? '#fff' : '#333');
