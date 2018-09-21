@@ -19,13 +19,37 @@ https://rgbstudios.org/dnd-dice/char.html
 
 Use D&D Character Roller to easily roll stats for a new D&D character, complete with graphs, download, and more
 
-# Spell Searcher <img src="img/d8.svg" width="48px">
+## Spell Searcher <img src="img/d8.svg" width="48px">
 
 https://rgbstudios.org/dnd-dice/spell.html
 
 Search for D&D spells and find description, range, class, level, and more
 
 <hr>
+
+## To Do
+
+- Add initiative tracker
+
+- Use url params to maintain night mode across menu links
+
+- Add option for permalink to character roller rolls
+
+- Update this readme with in-depth descriptions of each website/tool
+
+<hr>
+
+## Author
+
+Justin Golden
+
+https://github.com/justingolden21
+
+https://justingolden21.github.io
+
+<hr>
+
+## Links
 
 https://github.com/rgbstudios/dnd-dice
 
