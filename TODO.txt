@@ -7,3 +7,5 @@ finish init tracker
 char roller link to open rolls
 
 make pages keep track of night between menu clicks. cookies? url param?
+
+update readme with indepth description of each page and what they can do, with screenshots
