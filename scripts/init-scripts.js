@@ -27,6 +27,13 @@ class Character {
 }
 
 $(document).ready(function() {
+	//---------------- util ----------------
+	$('#nightButton').on('click', function() {
+		handleNight(); //in common.js
+		$('#titleImg').prop('src', isNight ? 'img/d20-white.svg' : 'img/d20.svg');
+	});
+
+	//tracker functionality
 	$('#newCharButton').on('click', function() {
 		$('#charsDiv').append('	<div class="charDiv"><button onclick="$(this).parent().remove();" class="btn btn-sm btn-danger delete-char-button"><i class="fas fa-times"></i> Remove</button> Character Name: <input type="text" class="form-control input-sm char-name-input" value="Character 1"> Initiative Bonus <input type="number" class="form-control input-sm init-bonus-input" value="0"><br><br><button onclick="rollChar($(this) )" class="btn btn-sm btn-primary roll-char-button"><i class="fas fa-dice"></i> Roll</button> Roll Result: <input type="number" class="form-control input-sm roll-result-output" value=""> Total Result: <input disabled type="number" class="form-control input-sm total-result-output" value=""></div>');});
 

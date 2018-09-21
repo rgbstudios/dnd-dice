@@ -5,3 +5,5 @@ add sharethis back
 finish init tracker
 
 char roller link to open rolls
+
+make pages keep track of night between menu clicks. cookies? url param?
