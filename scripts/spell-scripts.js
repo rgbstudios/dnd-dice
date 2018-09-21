@@ -86,7 +86,7 @@ function doSearch(term) {
     $('#input').typeahead('close');
     for(idx in resultData) {
     	if(resultData[idx].name.toLowerCase().replace(' ','').indexOf(term.toLowerCase().replace(' ','') ) != -1) {
-    		results.html('<b style="display:inline-block;">' + resultData[idx].name + '</b><hr>');
+    		results.html('<b style="display:inline-block;" class="spell-name"> <i class="fas fa-book"></i> ' + resultData[idx].name + '</b><hr>');
     		getSpellData(resultData[idx].url);
         $('#input').val(resultData[idx].name);
     		history.replaceState({}, '', '?q=' + resultData[idx].name);

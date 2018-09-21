@@ -12,6 +12,9 @@
 #results {
   text-align: left !important;
 }
+.spell-name {
+	font-size: 150%;
+}
 
 /*typeahead*/
 .tt-menu {
