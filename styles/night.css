@@ -33,9 +33,18 @@ textarea {
     background-color: rgba(51,51,51,.8);
     border-right: 1px solid #ccc;
 }
-#sideNav a {
+
+.closebtn, .fa-bars {
+  color: #fff;
+}
+
+/*#sideNav a {
     color: #999;
 }
 #sideNav a:hover {
     color: #fff;
-}
+}*/
+
+/*#sideNav .closebtn {
+    color: #fff;
+}*/

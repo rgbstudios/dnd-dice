@@ -2,7 +2,6 @@
     height: 100%;
     width: 0;
     position: fixed;
-    z-index: 1;
     top: 0;
     left: 0;
     background-color: rgba(255,255,255,.8);
@@ -19,28 +18,34 @@
     display: block;
     transition: 0.3s;
 }
-#sideNav .closebtn {
+
+/*#sideNav .closebtn {
     color: #333;
 }
 #sideNav .closebtn:hover {
     color: #933;
-}
+}*/
 
 #sideNav a:not(.closebtn) {
     margin: 20px;
     color: #fff;
 }
 
-.fa-bars:hover {
-    color: #339;
+.fa-bars, .closebtn {
+    color: #333;
+}
+.fa-bars:hover, .closebtn:hover {
+    color: #66c;
 }
 
-/*.fa-bars:hover {
+#sideNav a:not(.closebtn) {
+    background-color: #66c;
+}
+#sideNav a:not(.closebtn):hover {
     background-color: #339;
-    color: #fff;
-}*/
+}
 
-a.nav-red {
+/*a.nav-red {
     background-color: #c66;
 }
 a.nav-green {
@@ -49,7 +54,6 @@ a.nav-green {
 a.nav-blue {
     background-color: #66c;
 }
-
 a.nav-red:hover {
     background-color: #933;
 }
@@ -58,7 +62,7 @@ a.nav-green:hover {
 }
 a.nav-blue:hover {
     background-color: #339;
-}
+}*/
 
 /*#sideNav a:not(.closebtn):hover {
     background-color: #66c;
