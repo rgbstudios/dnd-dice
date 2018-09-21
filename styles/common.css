@@ -20,9 +20,11 @@ img, br {
 }
 ::-moz-selection {
   background: #b3b3e6;
+  color: #fff;
 }
 ::selection {
   background: #b3b3e6;
+  color: #fff;
 }
 
 .btn-primary, .bg-primary {
@@ -110,7 +112,6 @@ img, br {
 }
 
 #menuButton {
-/*	padding-top: 5px;*/
 	padding-left: 5px;
 	margin-bottom: -50px;
 	text-align: left !important;
