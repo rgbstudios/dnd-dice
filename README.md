@@ -47,6 +47,8 @@ https://github.com/justingolden21
 
 https://justingolden21.github.io
 
+<a href="mailto:justingolden@rgbstudios.org">justingolden@rgbstudios.org</a>
+
 <hr>
 
 ## Links
