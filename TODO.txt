@@ -1,3 +1,7 @@
 fix http to https for spellsearch, download api json
 
+add sharethis back
+
+finish init tracker
+
 char roller link to open rolls

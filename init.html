@@ -33,7 +33,7 @@
 	<script src="scripts/init-scripts.js"></script>
 
 	<!-- sharethis -->
-	<script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5b864aad7b4f100011fe46e7&product=inline-share-buttons' async='async'></script>
+	<!-- <script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5b864aad7b4f100011fe46e7&product=inline-share-buttons' async='async'></script> -->
 
 </head>
 <body>
@@ -43,44 +43,42 @@
 
 <div id="menuButton" onclick="openNav()"><i class="fas fa-bars"></i></div>
 <div id="sideNav">
-	<a href="#" class="closebtn" onclick="closeNav()">&times;</a>
-	<a href="index.html">Dice Roller</a>
-	<a href="char.html">Character Roller</a>
-	<a href="spell.html">Spell Searcher</a>
+	<a tabindex="-1" href="#" class="closebtn" onclick="closeNav()">&times;</a>
+	<a tabindex="-1" href="index.html"><img src="img/d20-white.svg" width="32px"> Dice Roller</a>
+	<a tabindex="-1" href="char.html"><img src="img/d6-white.svg" width="32px"> Character Roller</a>
+	<a tabindex="-1" href="spell.html"><img src="img/d8-white.svg" width="32px"> Spell Searcher</a>
+
 </div>
 
-<h1 class="bg-danger text-danger">WORK IN PROGRESS</h1>
+<!-- TODO: remove -->
+<h1 class="bg-danger">WORK IN PROGRESS</h1>
 
 <h3 class="text-center">D&D Initiative <img id="titleImg" src="img/d20.svg" width="32px"> Tracker</h3>
-<button id="rollAllButton" class="btn btn-sm btn-primary"><i class="fas fa-dice"></i> Roll All</button>
-<button id="clearAllButton" class="btn btn-sm btn-warning"><i class="fas fa-eraser"></i> Clear All</button>
-<button id="deleteAllButton" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Delete All</button>
-<button id="newCharButton" class="btn btn-sm btn-success"><i class="fas fa-plus"></i> New Character</button>
+<button id="rollAllButton" title="Roll all charcters" class="btn btn-sm btn-primary"><i class="fas fa-dice"></i> Roll All</button>
+<button id="clearAllButton" title="Clear all roll results and total results" class="btn btn-sm btn-default"><i class="fas fa-eraser"></i> Clear All</button>
+<button id="deleteAllButton" title="Delete all Characters" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i> Delete All</button>
+<button id="newCharButton" title="Create new charcter" class="btn btn-sm btn-success"><i class="fas fa-plus"></i> New Character</button>
 <hr>
 </div>
 
 
 <div id="charsDiv">
 	<div class="charDiv">
-		<button class="btn btn-sm btn-danger delete-char-button"><i class="fas fa-times"></i> Remove</button>
+		<button onclick="$(this).parent().remove();" class="btn btn-sm btn-danger delete-char-button"><i class="fas fa-times"></i> Remove</button>
 		Character Name: <input type="text" class="form-control input-sm char-name-input" value="Character 1">
 		Initiative Bonus <input type="number" class="form-control input-sm init-bonus-input" value="0">
 		<br><br>
-		<button onclick="rollChar()" class="btn btn-sm btn-primary roll-char-button"><i class="fas fa-dice"></i> Roll</button>
-		Roll Result: <input type="number" class="form-control input-sm roll-result-output" value="0">
+		<button onclick="rollChar($(this) )" class="btn btn-sm btn-primary roll-char-button"><i class="fas fa-dice"></i> Roll</button>
+		Roll Result: <input type="number" class="form-control input-sm roll-result-output" value="">
 		Total Result: <input disabled type="number" class="form-control input-sm total-result-output" value="">
 	</div>
 </div>
 
 <hr>
-Results:
-<button class="btn btn-sm btn-info"><i class="fas fa-sync-alt"></i> Reload Results</button>
 <div class="form-group">
-  <label for="resultSelect">Select list:</label>
+  <label for="resultSelect"><button id="reloadResultsButton" class="btn btn-sm btn-default"><i class="fas fa-sync-alt"></i> Reload</button> Characters by Initiative:</label>
   <select multiple class="form-control" id="resultSelect">
-    <option>Character 1: 0 (+0)</option>
-    <option>Character 1: 0 (+0)</option>
-    <option>Character 1: 0 (+0)</option>
+
 
   </select>
 </div>
