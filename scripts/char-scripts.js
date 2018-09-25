@@ -139,6 +139,10 @@ window.onload = function() {
 			displayRolls();			
 		}
 
+		//if loaded from roll params earlier, remove alert and url param
+		$('#givenRollsAlert').css('display', 'none');
+		history.replaceState({}, "", "");
+
 		$('#historyText').val($('#historyText').val() + prettyPrint(characters[characters.length-1]) );
 
 	});
