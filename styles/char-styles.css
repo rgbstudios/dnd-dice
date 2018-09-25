@@ -45,6 +45,10 @@ hr {
 	-moz-column-count: 2;
 }
 
+#givenRollsAlert {
+	display: none;
+}
+
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
 	color: #999;
 }

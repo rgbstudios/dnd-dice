@@ -1,3 +1,5 @@
+add toast/alert that says link copied successfully
+
 fix http to https for spellsearch, download api json
 
 add sharethis back

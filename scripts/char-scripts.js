@@ -25,22 +25,31 @@ text file has mean and std dev
 let characters = [];
 let odds = [1,4,10,21,38,62,91,122,148,167,172,160,131,94,54,21];
 
-function Character() {
+function Character(givenRolls) {
 	this.stats = [];
 	this.statTotal = 0;
 	this.modTotal = 0;
 	for(let i=0; i<6; i++) { //6 stats
-		let newStat = new Stat();
+		let newStat;
+		if(givenRolls) {
+			newStat = new Stat(givenRolls[i]);
+		} else {
+			newStat = new Stat(false);
+		}
 		this.stats.push(newStat);
 		this.statTotal += newStat.value;
 		this.modTotal += newStat.mod;
 	}
 }
 
-function Stat() { //rolls is array of 4 dice results
-	this.rolls = [];
-	for(let i=0; i<4; i++) { //4 rolls take highest 3
-		this.rolls.push(getRoll(6) );
+function Stat(givenRolls) { //rolls is array of 4 dice results
+	if(givenRolls) {
+		this.rolls = givenRolls;
+	} else {
+		this.rolls = [];
+		for(let i=0; i<4; i++) { //4 rolls take highest 3
+			this.rolls.push(getRoll(6) );
+		}		
 	}
 	this.value = 0;
 	for(let i=0, minIdx=this.rolls.indexOf(Math.min.apply(Math, this.rolls) ); i<4; i++) {
@@ -121,7 +130,7 @@ window.onload = function() {
 	$('#genButton').on('click', function() {
 		resetStats();
 		$('#openButton').css('display', 'none');
-		$('#nameInput').val('')
+		$('#nameInput').val('');
 		characters.push(new Character() );
 		
 		if($('#displayRollingCheckbox').is(':checked') ) {
@@ -134,10 +143,6 @@ window.onload = function() {
 
 	});
 	
-	
-	
-	$('#genButton').click();
-	$('#openButton').css('display', 'none');
 	
 	let statMods = $('.statMod');
 	for(let i=0; i<statMods.length; i++) {
@@ -201,6 +206,10 @@ window.onload = function() {
 			'history ' + getFormattedDate(), 'downloadHistoryLink');
 	});
 
+	$('#copyLinkButton').on('click', function() {
+		copyUrl(getRollLink() );
+	});
+
 	let url = new URL(window.location.href);
 	// let n = url.searchParams.get("n");
 	// if(n=="1") {
@@ -211,8 +220,38 @@ window.onload = function() {
 	if(r) {
 		r = atob(r);
 		console.log(r);
+
+
+		let givenRolls = [];
+		let idx = 0;
+		for(let i=0; i<6; i++) {
+			let tmp = [];
+			for(let j=0; j<4; j++) {
+				tmp[j] = parseInt(r.charAt(idx) );
+				idx++;
+			}
+			givenRolls.push(tmp);
+		}
+
+		characters.push(new Character(givenRolls) );
+
+		resetStats();
+		$('#openButton').css('display', 'none');
+		$('#nameInput').val('');
+		displayRolls();
+		console.log(characters[0]);
+
+		$('#givenRollsAlertSpan').html('loaded given rolls from url:<br> ' + window.location.href);
+		$('#givenRollsAlert').css('display', 'inline-block');
+
+	} else {
+		$('#genButton').click();
+		$('#openButton').css('display', 'none');
 	}
-	//TODO: write text that says displaying linked rolls and then display rolls
+
+
+
+
 
 
 }
@@ -274,18 +313,19 @@ function displayRolls() {
 	$('#numbersInput').val(numbers.join(', ') );
 	makeChart();
 
+}
+
+function getRollLink() {
 	//url params
 	let r = '';
 	for(let i=0; i<6; i++) {
 		for(let j=0; j<4; j++) {
 			//no need to delimit since all possible vals 1-6 are 1 digit
-			r += currentChar.stats[i].rolls[j];
+			r += characters[characters.length-1].stats[i].rolls[j];
 		}
 	}
 	r = btoa(r); //encode base64
-	// history.replaceState({}, "", "?r=" + r);
-	//TODO: add link to share these rolls followed by link below:
-	console.log(window.location.href.split('char.html')[0] + 'char.html' + '?r=' + r);
+	return window.location.href.split('char.html')[0] + 'char.html' + '?r=' + r;
 }
 
 function downloadMany(num) {

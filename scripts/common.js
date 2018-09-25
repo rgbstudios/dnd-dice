@@ -13,9 +13,9 @@ function handleNight() {
   isNight = !isNight;
 }
 
-function copyUrl() {
+function copyUrl(url = window.location.href) {
     let tmp = $('<input type="text">').appendTo(document.body);
-    tmp.val(window.location.href);
+    tmp.val(url);
     tmp.select();
     document.execCommand('copy');
     tmp.remove();

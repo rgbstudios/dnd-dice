@@ -42,13 +42,13 @@ img, br {
 	color: #fff;
 	border: 1px solid #19334d;
 }
-.btn-info:hover, .btn-info:active, .btn-info:focus {
+.btn-info:hover, .btn-info:active, .btn-info:focus, .alert-info {
 	background-color: #69c !important;
 	color: #fff !important;
 	border: 1px solid #369 !important;
 }
 
-.btn-danger, .btn-warning, .btn-success {
+.btn-danger, .btn-warning, .btn-success, .alert .close  {
 	color: #fff;
 }
 
@@ -143,3 +143,4 @@ textarea {
 .text-blue {
 	color: #339;
 }
+

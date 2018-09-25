@@ -53,11 +53,18 @@
 	
 </div>
 
-<h3 class="text-center">D&D Character <img id="titleImg" src="img/d6.svg" width="32px"> Roller</h3>
+<h3 class="text-center">D&D Character <img id="titleImg" src="img/d6.svg" width="32px"> Roller
+<button id="copyLinkButton" title="copy link to rolls" class="btn btn-primary"><i class="fas fa-copy"></i></button>
+</h3>
 
 <button id="genButton" class="btn btn-lg btn-primary">Roll New Character <i class="fas fa-dice"></i> </button>
 <h4 id="numChars"></h4>
 <hr>
+</div>
+
+<div id="givenRollsAlert" class="alert alert-info alert-dismissible" role="alert">
+<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+<span id="givenRollsAlertSpan"></span>
 </div>
 
 <button id="openButton" class="btn btn-default"> <i class="fas fa-external-link-alt"></i> Open in D&D Roller  </button>
@@ -93,7 +100,7 @@
 </div>
 <hr>
 
-
+<br>
 <div id="statsInfo" class="statDiv"></div>
 <div id="statsInfoAvg" class="statDiv"></div>
 <div id="statsInfoStdDev" class="statDiv"></div>
