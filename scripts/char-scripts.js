@@ -109,6 +109,7 @@ window.onload = function() {
 			data.push('\r\n');
 		}
 		data.push('\r\nTotal:\t\tVal: ' + currentChar.statTotal + '\tMod: ' + currentChar.modTotal);
+		data.push('\r\n\r\nLink:\t\t' + getRollLink() );
 
 		if(allAreSelected() ) {
 			data.push('\r\nRoll with your stats: http://rgbstudios.org/dnd-dice' + getDieRollerParams() );			
@@ -141,7 +142,7 @@ window.onload = function() {
 
 		//if loaded from roll params earlier, remove alert and url param
 		$('#givenRollsAlert').css('display', 'none');
-		history.replaceState({}, "", "");
+		history.replaceState({}, "", "?r=");
 
 		$('#historyText').val($('#historyText').val() + prettyPrint(characters[characters.length-1]) );
 
@@ -332,6 +333,7 @@ function getRollLink() {
 	return window.location.href.split('char.html')[0] + 'char.html' + '?r=' + r;
 }
 
+//todo: add this?
 function downloadMany(num) {
 	for(let i=0; i<num; i++) {
 		$('#genButton').click();
