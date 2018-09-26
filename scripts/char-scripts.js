@@ -255,7 +255,7 @@ window.onload = function() {
 		displayRolls();
 		console.log(characters[0]);
 
-		$('#givenRollsAlertSpan').html('loaded given rolls from url:<br> ' + window.location.href);
+		$('#givenRollsAlertSpan').html('Loaded rolls from url'); //add window.location.href?
 		$('#givenRollsAlert').css('display', 'inline-block');
 
 	} else {
