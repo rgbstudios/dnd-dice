@@ -245,11 +245,13 @@ window.onload = function() {
 			statMods[i].selectedIndex = parseInt(r.charAt(idx++) );
 		}
 
+		$('#nameInput').val(r.substring(idx) );
+
+
 		characters.push(new Character(givenRolls) );
 
-
 		$('#openButton').css('display', 'none');
-		$('#nameInput').val('');
+		
 		displayRolls();
 		console.log(characters[0]);
 
@@ -260,10 +262,6 @@ window.onload = function() {
 		$('#genButton').click();
 		$('#openButton').css('display', 'none');
 	}
-
-
-
-
 
 
 }
@@ -340,6 +338,7 @@ function getRollLink() {
 		//these values are also 1-7 so one digit
 		r += $('#stat' + (i+1) + 'Mod').prop('selectedIndex');
 	}
+	r += $('#nameInput').val();
 	r = btoa(r); //encode base64
 	return window.location.href.split('char.html')[0] + 'char.html' + '?r=' + r;
 }
