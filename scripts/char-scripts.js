@@ -24,6 +24,7 @@ text file has mean and std dev
 
 let characters = [];
 let odds = [1,4,10,21,38,62,91,122,148,167,172,160,131,94,54,21];
+let modNames = ['str', 'dex', 'con', 'int', 'wis', 'cha', 'prf', 'spl', 'itv'];
 
 function Character(givenRolls) {
 	this.stats = [];
@@ -221,7 +222,7 @@ window.onload = function() {
 	// 	$('#nightButton').click();
 	// }
 
-	let r = url.searchParams.get("r");
+	let r = url.searchParams.get('r');
 	if(r) {
 		r = atob(r);
 		console.log(r);
@@ -232,15 +233,21 @@ window.onload = function() {
 		for(let i=0; i<6; i++) {
 			let tmp = [];
 			for(let j=0; j<4; j++) {
-				tmp[j] = parseInt(r.charAt(idx) );
-				idx++;
+				tmp[j] = parseInt(r.charAt(idx++) );
 			}
 			givenRolls.push(tmp);
 		}
 
+		resetStats();
+
+		let statMods = $('.statMod');
+		for(let i=0; i<statMods.length; i++) {
+			statMods[i].selectedIndex = parseInt(r.charAt(idx++) );
+		}
+
 		characters.push(new Character(givenRolls) );
 
-		resetStats();
+
 		$('#openButton').css('display', 'none');
 		$('#nameInput').val('');
 		displayRolls();
@@ -329,6 +336,10 @@ function getRollLink() {
 			r += characters[characters.length-1].stats[i].rolls[j];
 		}
 	}
+	for(let i=0; i<6; i++) {
+		//these values are also 1-7 so one digit
+		r += $('#stat' + (i+1) + 'Mod').prop('selectedIndex');
+	}
 	r = btoa(r); //encode base64
 	return window.location.href.split('char.html')[0] + 'char.html' + '?r=' + r;
 }
@@ -351,7 +362,7 @@ function allAreSelected() {
 }
 
 function getDieRollerParams() {
-	let modNames = ['str', 'dex', 'con', 'int', 'wis', 'cha', 'prf', 'spl', 'itv'];
+	
 	let m = '';
 	for(let i=0; i<6; i++) {
 		let j;
