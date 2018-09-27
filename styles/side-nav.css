@@ -4,6 +4,7 @@
     position: fixed;
     top: 0;
     left: 0;
+    z-index: 99;
     background-color: rgba(255,255,255,.8);
     overflow-x: hidden;
     padding-top: 75px;
