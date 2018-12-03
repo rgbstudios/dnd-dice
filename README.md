@@ -21,7 +21,7 @@ Use D&D Character Roller to easily roll stats for a new D&D character, complete 
 
 ## Spell Searcher <img src="img/d8.svg" width="48px">
 
-https://rgbstudios.org/dnd-dice/spell.html
+http://rgbstudios.org/dnd-dice/spell.html
 
 Search for D&D spells and find description, range, class, level, and more
 
