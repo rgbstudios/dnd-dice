@@ -13,6 +13,7 @@
 	<meta name="theme-color" content="#339">
 	<meta name="msapplication-navbutton-color" content="#339">
 	<meta name="apple-mobile-web-app-status-bar-style" content="#339">
+	<link rel="manifest" href="manifest.webmanifest">
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -23,6 +24,18 @@
 	<link rel="stylesheet" type="text/css" href="styles/init-styles.css">
 	<link rel="stylesheet" type="text/css" href="styles/side-nav.css">
 	<link id="nightTheme" rel="stylesheet" type="text/css" href="">
+
+	<script>
+	//https://codelabs.developers.google.com/codelabs/add-to-home-screen/#5
+	if('serviceWorker' in navigator) {
+		navigator.serviceWorker.register('scripts/service-worker.js')
+			.then(function(reg){
+				console.log("Service worker successfully registered");
+		}).catch(function(err) {
+				console.log("Service worker registration failed: ", err);
+		});
+	}
+	</script>
 
 	<link rel="icon" href="img/d20.png" type="image/png">
 

@@ -15,6 +15,7 @@
 <meta id="theme1" name="theme-color" content="#339">
 <meta id="theme2" name="msapplication-navbutton-color" content="#339">
 <meta id="theme3" name="apple-mobile-web-app-status-bar-style" content="#339">
+<link rel="manifest" href="manifest.webmanifest">
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -27,6 +28,8 @@
 <link id="nightTheme" rel="stylesheet" type="text/css" href="">
 
 
+
+
 <!-- <script src="scripts/typeahead.js/bloodhound.min.js"></script> -->
 <!-- <script src="scripts/typeahead.js/typeahead.bundle.min.js"></script> -->
 <script src="scripts/typeahead.js/typeahead.jquery.min.js"></script>
@@ -35,7 +38,17 @@
 <script src="scripts/common.js"></script>
 <script src="scripts/spell-scripts.js"></script>
 
-
+	<script>
+	//https://codelabs.developers.google.com/codelabs/add-to-home-screen/#5
+	if('serviceWorker' in navigator) {
+		navigator.serviceWorker.register('scripts/service-worker.js')
+			.then(function(reg){
+				console.log("Service worker successfully registered");
+		}).catch(function(err) {
+				console.log("Service worker registration failed: ", err);
+		});
+	}
+	</script>
 
 
 
