@@ -10,7 +10,7 @@ let results, input;
 let resultData = {};
 let spellNames = [];
 
-function getData(term) {
+function getData() {
   // console.log(window.location.href.indexOf('https') );
   if(window.location.href.indexOf('https')!=-1) {
     results.html('The api is not https. Please replace "https" with "http" in the website url.');
@@ -48,10 +48,12 @@ function getData(term) {
     }
 }
 
-function getSpellData(spellUrl) {
+// function getSpellData(spellUrl) {
+function getSpellData(num) {
   try {
   $.ajax({
-      url: spellUrl,
+      // url: spellUrl,
+      url: 'https://raw.githubusercontent.com/rgbstudios/dnd-dice/master/data/spells/' + num + '.json',
       dataType: 'json',
       method: 'GET',
       success: function(data) {
@@ -88,7 +90,10 @@ function doSearch(term) {
     for(idx in resultData) {
     	if(resultData[idx].name.toLowerCase().replace(' ','').indexOf(term.toLowerCase().replace(' ','') ) != -1) {
     		results.html('<b style="display:inline-block;" class="spell-name"> <i class="fas fa-book"></i> ' + resultData[idx].name + '</b><hr>');
-    		getSpellData(resultData[idx].url);
+    		// getSpellData(resultData[idx].url);
+        let tmpArr = resultData[idx].url.split('/');
+        let num = tmpArr[tmpArr.length-1];
+        getSpellData(num);
         $('#input').val(resultData[idx].name);
     		history.replaceState({}, '', '?q=' + resultData[idx].name);
     		return;
