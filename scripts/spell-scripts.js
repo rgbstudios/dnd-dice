@@ -18,7 +18,8 @@ function getData(term) {
   }
   try {
   $.ajax({
-      url: 'http://www.dnd5eapi.co/api/spells',
+      // url: 'http://www.dnd5eapi.co/api/spells',
+      url: 'https://raw.githubusercontent.com/rgbstudios/dnd-dice/master/data/spells.json',
       dataType: 'json',
       method: 'GET',
       success: function(data){
