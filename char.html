@@ -54,25 +54,22 @@
 </head>
 <body>
 
-
 <div class="sticky-top">
+	<div id="menuButton" onclick="openNav()"><i class="fas fa-bars"></i></div>
+	<div id="sideNav">
+		<a tabindex="-1" href="#" class="closebtn" onclick="closeNav()">&times;</a>
+		<a tabindex="-1" class="nav-blue" href="index.html"><img src="img/d20-white.svg" width="32px"> Dice Roller</a>
+		<a tabindex="-1" class="nav-green" href="spell.html"><img src="img/d8-white.svg" width="32px"> Spell Searcher</a>
+		<!-- <a href="init.html">Initiative Tracker</a> -->
+	</div>
 
-<div id="menuButton" onclick="openNav()"><i class="fas fa-bars"></i></div>
-<div id="sideNav">
-	<a tabindex="-1" href="#" class="closebtn" onclick="closeNav()">&times;</a>
-	<a tabindex="-1" class="nav-blue" href="index.html"><img src="img/d20-white.svg" width="32px"> Dice Roller</a>
-	<a tabindex="-1" class="nav-green" href="spell.html"><img src="img/d8-white.svg" width="32px"> Spell Searcher</a>
-	<!-- <a href="init.html">Initiative Tracker</a> -->
-	
-</div>
+	<h3 class="text-center">D&D Character <img id="titleImg" src="img/d6.svg" width="32px"> Roller
+	<button id="copyLinkButton" title="copy link to rolls" class="btn btn-primary"><i class="fas fa-copy"></i></button>
+	</h3>
 
-<h3 class="text-center">D&D Character <img id="titleImg" src="img/d6.svg" width="32px"> Roller
-<button id="copyLinkButton" title="copy link to rolls" class="btn btn-primary"><i class="fas fa-copy"></i></button>
-</h3>
-
-<button id="genButton" class="btn btn-lg btn-primary">Roll New Character <i class="fas fa-dice"></i> </button>
-<h4 id="numChars"></h4>
-<hr>
+	<button id="genButton" class="btn btn-lg btn-primary">Roll New Character <i class="fas fa-dice"></i> </button>
+	<h4 id="numChars"></h4>
+	<hr>
 </div>
 
 <div id="givenRollsAlert" class="alert alert-info alert-dismissible" role="alert">
@@ -80,10 +77,7 @@
 <span id="givenRollsAlertSpan"></span>
 </div>
 
-<button id="openButton" class="btn btn-default"> <i class="fas fa-external-link-alt"></i> Open in D&D Roller  </button>
-
-
-
+<button id="openButton" class="btn"> <i class="fas fa-external-link-alt"></i> Open in D&D Roller</button>
 
 <div class="row">
 	<div class="statDiv">
@@ -113,31 +107,33 @@
 </div>
 <hr>
 
-<br>
 <div id="statsInfo" class="statDiv"></div>
 <div id="statsInfoAvg" class="statDiv"></div>
 <div id="statsInfoStdDev" class="statDiv"></div>
 <hr>
+
 <input id="nameInput" maxlength="50" placeholder="character name..." type="text" />
 <input id="numbersInput" onclick="this.setSelectionRange(0, this.value.length)" type="text" />
-
 <div class="btn-group">
 	<a id="downloadLink" class="hidden" target="_blank" download="stats.txt"></a>
-	<button id="download" title="Download stats as txt file" class="btn btn-default"> <i class="fas fa-download"></i> </button>
-	<button id="copyButton" title="Copy stats" class="btn btn-default"> <i class="fas fa-copy"></i> </button>
-	<button id="resetStat" title="Reset stat selections" class="btn btn-default"> <i class="fas fa-sync-alt"></i> </button>
-	
-	<br>
+	<button id="download" title="Download stats as txt file" class="btn"> <i class="fas fa-download"></i> Download</button>
+	<button id="copyButton" title="Copy stats" class="btn"> <i class="fas fa-copy"></i> Copy</button>
+	<button id="resetStat" title="Reset stat selections" class="btn"> <i class="fas fa-sync-alt"></i> Reset</button>
 </div>
-
-
 <hr>
-<button title="Info" class="btn btn-info" data-toggle="modal" data-target="#infoModal"><i class="fas fa-info-circle"></i></button>
-<button title="Settings" class="btn btn-info" data-toggle="modal" data-target="#settingsModal"><i class="fas fa-cog"></i></button>
-<button title="List of skills by stat" class="btn btn-info" data-toggle="modal" data-target="#listModal"><i class="fas fa-list"></i></button>
-<button title="Roll modifier table" class="btn btn-info" data-toggle="modal" data-target="#tableModal"><i class="fas fa-table"></i></button>
-<button title="Roll stat chart" class="btn btn-info" data-toggle="modal" data-target="#chartModal"><i class="fas fa-chart-bar"></i></button>
-<button title="History of rolled characters" class="btn btn-info" data-toggle="modal" data-target="#historyModal"><i class="fas fa-history"></i></button>
+
+<div class="row">
+	<div class="col-md-4 col-md-offset-2">
+		<button title="Roll modifier table" class="btn btn-info" data-toggle="modal" data-target="#tableModal"><i class="fas fa-table"></i> Modifiers</button>
+		<button title="List of skills by stat" class="btn btn-info" data-toggle="modal" data-target="#listModal"><i class="fas fa-list"></i> Skills</button>
+		<button title="Roll stat chart" class="btn btn-info" data-toggle="modal" data-target="#chartModal"><i class="fas fa-chart-bar"></i> Stats</button>
+	</div>
+	<div class="col-md-4">
+		<button title="History of rolled characters" class="btn btn-info" data-toggle="modal" data-target="#historyModal"><i class="fas fa-history"></i> History</button>
+		<button title="Info" class="btn btn-info" data-toggle="modal" data-target="#infoModal"><i class="fas fa-info-circle"></i> Info</button>
+		<button title="Settings" class="btn btn-info" data-toggle="modal" data-target="#settingsModal"><i class="fas fa-cog"></i> Settings</button>
+	</div>
+</div>
 
 <div class="modal fade" id="chartModal">
 	<div class="modal-dialog modal-lg">
@@ -162,17 +158,13 @@
 				<h4 class="modal-title">Info <i class="fas fa-info-circle"></i></h4>
 			</div>
 			<div class="modal-body">
-
-<!-- TODO: list more features -->
-
+				<!-- TODO: list more features -->
 				<li>Each stat is generated by rolling 4 d6 and taking the 3 highest rolls.</li><br>
 				<li>The number immedatly below the dice is the sum of the 3 highest rolls. The number below that is its corresponding stat. You can find the table by clicking <buton id="tableModalButton" class="btn btn-info" data-toggle="modal" data-target="#tableModal"><i class="fas fa-table"></i></buton> </li><br>
 				<li>There are 6 stats: strength, dexterity, constitution, intelligence, wisdom, and charisma.</li><br>
 				<li>Use the dropdown menu to choose which stat you want to assign to which roll.</li><br>
 				<li>D&d Character Roller is great for a DM who wants to quickly create new NPCs and download their stats for later.</li><br>
 				<li>You can use the <kbd>tab</kbd> key to navitage inputs. Use arrow keys to choose your stat, or <kbd>enter</kbd> to open the dropdown.</li><br>
-
-
 			</div>
 		</div>
 	</div>
@@ -217,7 +209,6 @@
 		</div>
 	</div>
 </div>
-
 
 <div class="modal fade" id="tableModal">
 	<div class="modal-dialog modal-lg">
@@ -276,24 +267,24 @@
 				<label><input id="enableUnicodeCheckbox" type="checkbox">Use dice unicode characters when downloading stats</label><br>
 				<label><input checked id="displayRollingCheckbox" type="checkbox">Display rolling animation</label>
 				<br>
-				<button id="nightButton" title="Night mode" class="btn btn-default"> Night Theme <i class="fas fa-moon"></i> </button>
-				<button id="fullscreen" title="Fullscreen" class="btn btn-default"> Fullscreen <i class="fas fa-arrows-alt"></i> </button>
+				<button id="nightButton" title="Night mode" class="btn"> Night Theme <i class="fas fa-moon"></i> </button>
+				<button id="fullscreen" title="Fullscreen" class="btn"> Fullscreen <i class="fas fa-arrows-alt"></i> </button>
 
 				<br><br>
-<!-- 				<button id="speakButton" class="btn btn-default">
+<!-- 				<button id="speakButton" class="btn">
 					Speak Roll Results <i class="fas fa-volume-up"></i>
 				</button> -->
 
 			</div>
 			<div class="modal-footer">
 				<div class="btn-group">
-					<button title="Contact us at contact@rgbstudios.org" onclick="window.open('mailto:contact@rgbstudios.org','_blank');" class="btn btn-default">
+					<button title="Contact us at contact@rgbstudios.org" onclick="window.open('mailto:contact@rgbstudios.org','_blank');" class="btn">
 						Contact <i class="fas fa-envelope"></i>
 					</button>
-<!-- 					<button id="copyUrl" class="btn btn-default" title="Copy link to website">
+<!-- 					<button id="copyUrl" class="btn" title="Copy link to website">
 						Copy <i class="fas fa-copy"></i>
 					</button> -->
-					<button title="Donate on PayPal" onclick="window.open('https://www.paypal.me/RGBStudios','_blank');" class="btn btn-default">
+					<button title="Donate on PayPal" onclick="window.open('https://www.paypal.me/RGBStudios','_blank');" class="btn">
 						Donate <i class="fas fa-donate"></i>
 					</button>
 				</div>
@@ -312,18 +303,15 @@
 				<h4 class="modal-title">History <i class="fas fa-history"></i></h4>
 			</div>
 			<div class="modal-body">
-
 				<textarea id="historyText" class="form-control" rows="15"></textarea>
-				<br>
-
 			</div>
 			<div class="modal-footer">
 				<div class="btn-group">
-					<button id="clearHistory" class="btn btn-default">
+					<button id="clearHistory" class="btn">
 						Clear History <i class="fas fa-eraser"></i>
 					</button>
 
-					<button id="downloadHistory" class="btn btn-default">
+					<button id="downloadHistory" class="btn">
 						Download History <i class="fas fa-download"></i>
 					</button>
 					<a id="downloadHistoryLink" class="hidden" target="_blank" download="history.txt"></a>
