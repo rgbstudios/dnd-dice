@@ -20,3 +20,4 @@ speak roller character stats option
 speak spell option
 
 
+have pwa store memory from last use, settings like night mode
