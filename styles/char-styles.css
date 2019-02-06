@@ -14,7 +14,6 @@ button:not(.close), .btn-info, .btn-primary {
 }
 button:not(.close):not(.btn-primary):not(.btn-info) {
 	border: 2px solid #999;
-	
 	background-color: transparent;
 }
 
@@ -23,6 +22,7 @@ button:not(.close):not(.btn-primary):not(.btn-info) {
 }
 button:not(.close):active, .btn-info:active, .btn-primary:active {
 	transform: translate(2px, 2px);
+	box-shadow: 0px 0px 0px #fff !important;
 }
 
 select, label, input[type=checkbox] {
@@ -36,15 +36,12 @@ select, label, input[type=checkbox] {
 hr {
 	border-width: 2px;
 }
-
-
 #skillsList {
 	text-align:left;
 	column-count: 2;
 	-webkit-column-count: 2;
 	-moz-column-count: 2;
 }
-
 #givenRollsAlert {
 	display: none;
 }
