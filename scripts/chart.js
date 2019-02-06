@@ -23,7 +23,7 @@ function drawChart() {
   data = google.visualization.arrayToDataTable(chartdata);
 
   options = {
-    title: '', 
+    title: '',
     bar: {groupWidth: '60%'},
     titleTextStyle:{color: graphColor},
     legend: 'none',
@@ -51,6 +51,12 @@ function drawChart() {
     },
     backgroundColor: { fill:'transparent' }
   };
+
+  //not mobile
+  if(!(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) ) {
+    options.width = 800;
+    options.height = 500;
+  }
 
   chart = new google.visualization.ColumnChart(document.getElementById('barchart') );
   chart.draw(data, options);
