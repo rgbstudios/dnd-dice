@@ -31,12 +31,7 @@ function Character(givenRolls) {
 	this.statTotal = 0;
 	this.modTotal = 0;
 	for(let i=0; i<6; i++) { //6 stats
-		let newStat;
-		if(givenRolls) {
-			newStat = new Stat(givenRolls[i]);
-		} else {
-			newStat = new Stat(false);
-		}
+		let newStat = givenRolls ? new Stat(givenRolls[i]) : new Stat(false);
 		this.stats.push(newStat);
 		this.statTotal += newStat.value;
 		this.modTotal += newStat.mod;
@@ -54,7 +49,7 @@ function Stat(givenRolls) { //rolls is array of 4 dice results
 	}
 	this.value = 0;
 	for(let i=0, minIdx=this.rolls.indexOf(Math.min.apply(Math, this.rolls) ); i<4; i++) {
-		if(i != minIdx) {
+		if(i != minIdx) { //don't count lowest roll
 			this.value += this.rolls[i];
 		}
 	}
@@ -63,9 +58,8 @@ function Stat(givenRolls) { //rolls is array of 4 dice results
 
 function getStatMod(stat) {
 	for(let i=3, j=-4; ; i+=2, j++) {
-		if(i >= stat) {
+		if(i >= stat)
 			return j;
-		}
 	}
 }
 
@@ -78,33 +72,28 @@ function getDieUnicode(roll){
 
 function getDiceCodes(rolls) {
 	let diceCodes = '';
-	for(let i=0; i<rolls.length; i++) {
+	for(let i=0; i<rolls.length; i++)
 		diceCodes += getDieCode(rolls[i]) + ' ';
-	}
 	return diceCodes;
 }
 
-window.onload = function() {
-		
-	$('#download').on('click',function() {
-		if(characters.length == 0) {
+$(function() {
+	$('#download').click(function() {
+		if(characters.length == 0)
 			return -1;
-		}
 		data = [];
 		let currentChar = characters[characters.length-1];
 		data.push($('#nameInput').val() + '\r\n');
 		for(let i=0; i<currentChar.stats.length; i++) {
 			data.push($('#stat' + (i+1) + 'Mod').val() + ': ');
 			for(let j=0; j<currentChar.stats[i].rolls.length; j++) {
-				if($('#enableUnicodeCheckbox').is(':checked') ) {
+				if($('#enableUnicodeCheckbox').is(':checked') )
 					data.push(getDieUnicode(currentChar.stats[i].rolls[j]) );					
-				} else {
+				else
 					data.push(currentChar.stats[i].rolls[j].toString() );
-				}
 
-				if(j < currentChar.stats[i].rolls.length-1) {
+				if(j < currentChar.stats[i].rolls.length-1)
 					data.push(',');
-				}
 			}
 			data.push('\tVal: ' + currentChar.stats[i].value + '\tMod: ' + currentChar.stats[i].mod);
 			data.push('\r\n');
@@ -112,15 +101,13 @@ window.onload = function() {
 		data.push('\r\nTotal:\t\tVal: ' + currentChar.statTotal + '\tMod: ' + currentChar.modTotal);
 		data.push('\r\n\r\nLink:\t\t' + getRollLink() );
 
-		if(allAreSelected() ) {
-			data.push('\r\nRoll with your stats: http://rgbstudios.org/dnd-dice' + getDieRollerParams() );			
-		}
-
+		if(allAreSelected() )
+			data.push('\r\nRoll with your stats: http://rgbstudios.org/dnd-dice' + getDieRollerParams() );
 		
 		properties = {type: 'plain/text'};
 		try {
 			file = new File(data, 'stats.txt', properties);
-		} catch (e) {
+		} catch(e) {
 			file = new Blob(data, properties);
 		}
 
@@ -129,65 +116,53 @@ window.onload = function() {
 		document.getElementById('downloadLink').click(); //idk why this doesn't work with jquery selector
 	});
 	
-	$('#genButton').on('click', function() {
+	$('#genButton').click(function() {
 		resetStats();
 		$('#openButton').css('display', 'none');
 		$('#nameInput').val('');
 		characters.push(new Character() );
 		
-		if($('#displayRollingCheckbox').is(':checked') ) {
+		if($('#displayRollingCheckbox').is(':checked') )
 			displayRolling();
-		} else {
-			displayRolls();			
-		}
+		else
+			displayRolls();
 
 		//if loaded from roll params earlier, remove alert and url param
 		$('#givenRollsAlert').css('display', 'none');
-		history.replaceState({}, "", "?r=");
+		history.replaceState({}, '', '?r=');
 
 		$('#historyText').val($('#historyText').val() + prettyPrint(characters[characters.length-1]) );
-
 	});
-	
-	
-	let statMods = $('.statMod');
-	for(let i=0; i<statMods.length; i++) {
-		statMods[i].onclick = statMods[i].onfocus = function(evt) {
-			for(let j=0; j<6; j++) {
-				evt.target.options[j+1].disabled = false;			
-			}
-			let allSelected = true;
-			for(let j=0; j<6; j++) {
-				let idx = $('#stat' + (j+1) + 'Mod').prop('selectedIndex');
-				let isThis = $('#stat' + (j+1) + 'Mod').is($(this) ); //don't count this element's current selection
-				if(idx != 0 && ! isThis) {
-					evt.target.options[idx].disabled = true;
-				}
-				if(idx == 0) {
-					allSelected = false;
-				}
-			}
-
-			$('#openButton').css('display', allSelected ? '' : 'none');
-
+		
+	$('.statMod').click(checkModsAvailable);
+	$('.statMod').focus(checkModsAvailable);
+	function checkModsAvailable(evt) {
+		for(let j=0; j<6; j++)
+			evt.target.options[j+1].disabled = false;
+		let allSelected = true;
+		for(let j=0; j<6; j++) {
+			let idx = $('#stat' + (j+1) + 'Mod').prop('selectedIndex');
+			let isThis = $('#stat' + (j+1) + 'Mod').is($(this) ); //don't count this element's current selection
+			if(idx != 0 && ! isThis)
+				evt.target.options[idx].disabled = true;
+			if(idx == 0)
+				allSelected = false;
 		}
+		$('#openButton').css('display', allSelected ? '' : 'none');	
 	}
 
-	$('#openButton').on('click', function() {
+	$('#openButton').click(function() {
 		window.open('index.html' + getDieRollerParams() );
 	});
 	
-	$('#copyButton').on('click', function() {
-		let numInput = $('#numbersInput');
-		numInput.select();
+	$('#copyButton').click(function() {
+		$('#numbersInput').select();
 		document.execCommand('copy');
 	});
 	
-	$('#resetStat').on('click', function() {
-		resetStats();
-	});
+	$('#resetStat').click(resetStats);
 
-	$('#nightButton').on('click', function() {
+	$('#nightButton').click(function() {
 		handleNight(); //in common.js
 		$('#titleImg').prop('src', isNight ? 'img/d6-white.svg' : 'img/d6.svg');
 		$('select').css('color', isNight ? '#fff' : '#333');
@@ -199,20 +174,18 @@ window.onload = function() {
 		makeChart();	
 	});
 	
-	$('#fullscreen').on('click', function() {
-		toggleFullscreen();
-	});
+	$('#fullscreen').click(toggleFullscreen);
 
-	$('#clearHistory').on('click', function() {
+	$('#clearHistory').click(function() {
 		$('#historyText').val('');
 	});
 
-	$('#downloadHistory').on('click', function() {
+	$('#downloadHistory').click(function() {
 		downloadFile('History:\r\n' + $('#numChars').html() + '.\r\n\r\n' + $('#historyText').val().replace(/\r?\n/g, '\r\n'), 
 			'history ' + getFormattedDate(), 'downloadHistoryLink');
 	});
 
-	$('#copyLinkButton').on('click', function() {
+	$('#copyLinkButton').click(function() {
 		copyUrl(getRollLink() );
 	});
 
@@ -227,26 +200,22 @@ window.onload = function() {
 		r = atob(r);
 		console.log(r);
 
-
 		let givenRolls = [];
 		let idx = 0;
 		for(let i=0; i<6; i++) {
 			let tmp = [];
-			for(let j=0; j<4; j++) {
+			for(let j=0; j<4; j++)
 				tmp[j] = parseInt(r.charAt(idx++) );
-			}
 			givenRolls.push(tmp);
 		}
 
 		resetStats();
 
 		let statMods = $('.statMod');
-		for(let i=0; i<statMods.length; i++) {
+		for(let i=0; i<statMods.length; i++)
 			statMods[i].selectedIndex = parseInt(r.charAt(idx++) );
-		}
 
 		$('#nameInput').val(r.substring(idx) );
-
 
 		characters.push(new Character(givenRolls) );
 
@@ -263,29 +232,29 @@ window.onload = function() {
 		$('#openButton').css('display', 'none');
 	}
 
-
-}
+});
 
 function prettyPrint(character) {
 	let str = 'mod total: ' + character.modTotal + ' | ' +
 		'value total: ' + character.statTotal;
 
 	for(let i=0; i<6; i++) {
-		str += '\r\nmod: ' + character.stats[i].mod + (character.stats[i].mod<0?'':' ') + ' | value: ' + character.stats[i].value + (character.stats[i].value>9?'':' ') + ' | rolls: ' + character.stats[i].rolls;
+		str += '\r\nmod: ' + character.stats[i].mod + (character.stats[i].mod<0?'':' ')
+			+ ' | value: ' + character.stats[i].value + (character.stats[i].value>9?'':' ')
+			+ ' | rolls: ' + character.stats[i].rolls;
 	}
 
-	str +='\r\nmean: ' + Math.round(character.statTotal*100/6)/100 +
-		'\r\ndeviation: ' + Math.round(stdDev(statsToValues(character.stats) )*100)/100;
-
-	return str + '\r\n\r\n';
+	return str + '\r\nmean: ' + Math.round(character.statTotal*100/6)/100
+		+ '\r\ndeviation: ' + Math.round(stdDev(statsToValues(character.stats) )*100)/100;
+		+ '\r\n\r\n';
 }
-
 
 function displayRolling() {
 	$('.statDiv h4').css('display', 'none');
 	$('#statsInfo').css('display', 'none');
 	$('#statsInfoAvg').css('display', 'none');
 	$('#statsInfoStdDev').css('display', 'none');
+	// roll every 100ms for 1000ms
 	let intvl = setInterval(function() {
 		$('.statRolls').each(function(idx) {
 			$(this).html(getDiceCodes([getRoll(6),getRoll(6),getRoll(6),getRoll(6)]) );
@@ -307,22 +276,19 @@ function displayRolls() {
 	for(let i=0; i<6; i++) {
 		$('#stat' + (i+1) + 'rolls').html(getDiceCodes(currentChar.stats[i].rolls) + '<br>');
 		$('#stat' + (i+1) ).html('<b>' + currentChar.stats[i].value + '</b><br>' + (currentChar.stats[i].mod > 0 ? '+' : '') + currentChar.stats[i].mod);
-
 	}
 
-	$('#statsInfoStdDev').html('Deviation:<br><b>' + Math.round(stdDev(statsToValues(currentChar.stats))*100)/100 + '</b><br>' + Math.round(stdDev(statsToMods(currentChar.stats))*100)/100);
+	$('#statsInfoStdDev').html('Deviation:<br><b>' + Math.round(stdDev(statsToValues(currentChar.stats))*100)/100 + '</b><br>' + Math.round(stdDev(statsToMods(currentChar.stats) )*100)/100);
 	$('#statsInfoAvg').html('Mean:<br><b>' + Math.round(currentChar.statTotal*100/6)/100 + '</b><br>' + Math.round(currentChar.modTotal*100/6)/100);
 	$('#statsInfo').html('Total:<br><b>' + currentChar.statTotal+ '</b><br>' + currentChar.modTotal);
 	$('#numChars').html(characters.length + ' character' + (characters.length > 1 ? 's' : '') + ' generated');
 	
 	let numbers = [];
-	for(let i=0; i<6; i++) {
+	for(let i=0; i<6; i++)
 		numbers.push(parseInt(currentChar.stats[i].value) );
-	}
 	numbers.sort( (a,b)=>a-b );
 	$('#numbersInput').val(numbers.join(', ') );
 	makeChart();
-
 }
 
 function getRollLink() {
@@ -353,26 +319,22 @@ function downloadMany(num) {
 
 function allAreSelected() {
 	for(let i=0; i<6; i++) {
-		if($('#stat'+(i+1)+'Mod').prop('selectedIndex') < 1) {
+		if($('#stat'+(i+1)+'Mod').prop('selectedIndex') < 1)
 			return false;
-		}
 	}
 	return true;
 }
 
 function getDieRollerParams() {
-	
 	let m = '';
 	for(let i=0; i<6; i++) {
 		let j;
 		for(j=0	; j<6; j++) {
-
 			// console.log($('#stat' + (j+1) + 'Mod').val() );
 			// console.log(modNames[$('#stat' + (j+1) + 'Mod').prop('selectedIndex')-1] );
 			// console.log($('#stat' + (j+1) + 'Mod').val().toString().toLowerCase() );
-			if(modNames[$('#stat' + (j+1) + 'Mod').prop('selectedIndex')-1] == modNames[i]) { //found elem
-				break;
-			}
+			if(modNames[$('#stat' + (j+1) + 'Mod').prop('selectedIndex')-1] == modNames[i])
+				break; // found elem
 		}
 		m += characters[characters.length-1].stats[j].mod + ' ';
 	}
@@ -381,52 +343,41 @@ function getDieRollerParams() {
 	return '?m=' + m;
 }
 
-
-
-
 function statsToValues(stats) {
 	let vals = [];
-	for(let i=0; i<stats.length; i++) {
+	for(let i=0; i<stats.length; i++)
 		vals[i] = stats[i].value;
-	}
 	return vals;
 }
 
 function statsToMods(stats) {
 	let mods = [];
-	for(let i=0; i<stats.length; i++) {
+	for(let i=0; i<stats.length; i++)
 		mods[i] = stats[i].mod;
-	}
 	return mods;
 }
 
 function stdDev(array) { //standard deviation
 	let sum = 0, len = array.length;
-	for(let i=0; i<len; i++) {
+	for(let i=0; i<len; i++)
 		sum += array[i];
-	}
 	let mean = sum / len;
 	let devs = 0;
-	for(let i=0; i<len; i++) {
+	for(let i=0; i<len; i++)
 		devs += Math.pow(array[i]-mean, 2);
-	}
 	return Math.sqrt(devs / (len-1) );	
 }
 
 function resetStats() {
-	let statMods = $('.statMod');
-	for(let i=0; i<statMods.length; i++) {
-		statMods[i].selectedIndex = 0;
-	}
+	$('.statMod').prop('selectedIndex',0);
 }
 
 //todo: use this
 function percentile(num) {
 	num -= 3;
 	let val=0;
-	for(i=0; i<num; i++) {
+	for(i=0; i<num; i++)
 		val += odds[i];
-	}
 	val += Math.ceil(odds[num]/2);
 	val /= 1296;
 	return val;
