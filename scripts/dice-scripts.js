@@ -54,22 +54,22 @@ $(document).ready(function() {
 
 // ---------------- get url params ----------------
 //atob decodes base 64
-  let url = new URL(window.location.href);
-  let m = url.searchParams.get("m");
-  if(m) {
-  	m = atob(m).split(' ');
-  	for(let i=0; i<m.length; i++) {
-  		$('#'+modNames[i]).val(m[i] || 0);
-  	}
-  }
+	let url = new URL(window.location.href);
+	let m = url.searchParams.get("m");
+	if(m) {
+		m = atob(m).split(' ');
+		for(let i=0; i<m.length; i++) {
+			$('#'+modNames[i]).val(m[i] || 0);
+		}
+	}
 
-  // let n = url.searchParams.get("n");
-  // if(n=="1") {
-  // 	$('#nightButton').click();
-  // }
+	// let n = url.searchParams.get("n");
+	// if(n=="1") {
+	// 	$('#nightButton').click();
+	// }
 
-  //update params
-  updateParams();
+	//update params
+	updateParams();
 
 // ---------------- update display of console, speak button, night ----------------
 
@@ -134,12 +134,12 @@ $(document).ready(function() {
 // ---------------- when modal opens focus the input ----------------
 
 	numDiceModal.on('shown.bs.modal', function () {
-    	numDiceModalInput.focus();
-    	numDiceModalInput.select();
+		numDiceModalInput.focus();
+		numDiceModalInput.select();
 	});
 	diceSidesModal.on('shown.bs.modal', function () {
-    	diceSidesModalInput.focus();
-    	diceSidesModalInput.select();
+		diceSidesModalInput.focus();
+		diceSidesModalInput.select();
 	});
 
 // ---------------- on enter click submit ----------------
@@ -228,18 +228,18 @@ $(document).ready(function() {
 	});
 
 	$("#fileInput").change(function() {
-	  	if(!window.FileReader) { 
-	  		return; //browser not supported TODO: error alert
-	  	}
+		if(!window.FileReader) { 
+			return; //browser not supported TODO: error alert
+		}
 		let input = $('#fileInput').get(0);
 		let reader = new FileReader();
 		if(input.files.length) { //file exists
 			let textFile = input.files[0];
-		 	reader.readAsText(textFile);
-		 	$(reader).on('load', processFile);
-		 	//TODO: fix not updating. for now must click the button again
+			reader.readAsText(textFile);
+			$(reader).on('load', processFile);
+			//TODO: fix not updating. for now must click the button again
 		}
-  	});
+	});
 
 	$('#modModal input[type=number]').on('change', function() {
 		updateParams();
@@ -252,17 +252,17 @@ $(document).ready(function() {
 
 //https://stackoverflow.com/questions/19038919/is-it-possible-to-upload-a-text-file-to-input-in-html-js?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
 function processFile(e) {
-  let file = e.target.result, results;
-  if(file && file.length) {
-    results = file.split("\r\n");
-    for(let i=2; i<results.length-1; i++) {
-	  if(results[i].trim() != "") {
-	  	//index 5 is 6th character, which is number after 3 char abrev and then colon and space. 4 is length which is max for -999
-		$('#'+modNames[i-2]).val(parseInt(results[i].substr(5,4) ) );
-	  }
-	}
+	let file = e.target.result, results;
+	if(file && file.length) {
+		results = file.split("\r\n");
+		for(let i=2; i<results.length-1; i++) {
+			if(results[i].trim() != "") {
+				//index 5 is 6th character, which is number after 3 char abrev and then colon and space. 4 is length which is max for -999
+				$('#'+modNames[i-2]).val(parseInt(results[i].substr(5,4) ) );
+			}
+		}
 	updateParams();
-  }
+	}
 }
 
 // ---------------- utility ----------------
@@ -271,7 +271,7 @@ function updateParams() {
 	for(let i=0; i<modNames.length-1; i++) {
 		m += $('#'+modNames[i]).val() + ' ';
 	}
-	m +=  $('#'+modNames[modNames.length-1]).val();
+	m += $('#'+modNames[modNames.length-1]).val();
 	//btoa encodes base 64
 	m = btoa(m);
 	history.replaceState({}, "", "?m=" + m);
@@ -341,7 +341,7 @@ function doRolls(numDice = getNumDice(), diceSides = getDiceSides(), advantage =
 	}
 
 	result += modifier + attr1 + attr2;
-  
+
 	let rollText = 'Rolled ' + numDice + ' D' + diceSides + (advantage==0 ? '' : advantage=='1' ? ' (advantage)' : ' (disadvantage)') + 
 		(modifier==0 ? '' : modifier>0 ? ' +' + modifier : ' ' + modifier) +
 		(attr1Name=='non' ? '' : ' +' + attr1Name + '(' + attr1 + ')') + 
