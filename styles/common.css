@@ -111,7 +111,7 @@ img, br {
 	position: -webkit-sticky; /* Safari */
 	position: sticky;
 	top: 0;
-	z-index: 99;
+	z-index: 101; /* typeahead (.tt-menu) is 100 */
 	background-color: rgba(255,255,255,.8);
 	padding-bottom: 10px;
 	padding-top: 5px;
