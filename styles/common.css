@@ -3,6 +3,7 @@
 }
 body {
 	margin: 20px;
+	margin-top: 0px;
 	background-color: #fff;
 	background-size: 40px 40px;
 	background-image: linear-gradient(to right, rgba(204,204,204,0.25) 1px, transparent 1px), linear-gradient(to bottom, rgba(204,204,204,0.25) 1px, transparent 1px);
@@ -110,7 +111,8 @@ img, br {
 .sticky-top {
 	position: -webkit-sticky; /* Safari */
 	position: sticky;
-	top: 0;
+	margin-top: 20px;
+	top: 20px;
 	z-index: 101; /* typeahead (.tt-menu) is 100 */
 	background-color: rgba(255,255,255,.8);
 	padding-bottom: 10px;
