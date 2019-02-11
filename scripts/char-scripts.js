@@ -254,6 +254,7 @@ function displayRolling() {
 	$('#statsInfo').css('display', 'none');
 	$('#statsInfoAvg').css('display', 'none');
 	$('#statsInfoStdDev').css('display', 'none');
+	$('.statRolls').addClass('rolling');
 	// roll every 100ms for 1000ms
 	let intvl = setInterval(function() {
 		$('.statRolls').each(function(idx) {
@@ -266,6 +267,7 @@ function displayRolling() {
 		$('#statsInfo').css('display', '');
 		$('#statsInfoAvg').css('display', '');
 		$('#statsInfoStdDev').css('display', '');
+		$('.statRolls').removeClass('rolling');
 		displayRolls();
 	}, 1000);
 }
