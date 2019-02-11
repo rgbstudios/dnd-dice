@@ -85,10 +85,14 @@ function toggleFullscreen() {
 
 // side menu
 function openNav() {
-	$('#sideNav').css('width', '250px');
+  $('#sideNav').css('width', '250px');
 	$('#menuButton').css('display', 'none');
+  $('#sideNav a').css('display', 'none');
+  let mils = parseFloat($('#sideNav').css('transition-duration') )*1000;
+  setTimeout(function() { $('#sideNav a').css('display', ''); }, mils);
 }
 function closeNav() {
 	$('#sideNav').css('width', '0px');
 	$('#menuButton').css('display', '');
+  $('#sideNav a').css('display', 'none');
 }

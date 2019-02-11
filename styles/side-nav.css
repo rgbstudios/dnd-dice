@@ -8,7 +8,7 @@
     background-color: rgba(255,255,255,.8);
     overflow-x: hidden;
     padding-top: 75px;
-    transition: 0.4s ease-in-out;
+    transition: 0.25s ease-in-out;
     border-right: 1px solid #ccc;
 }
 
@@ -17,7 +17,7 @@
     text-decoration: none;
     font-size: 20px;
     display: block;
-    transition: 0.3s;
+    transition: 0.2s;
 }
 
 /*#sideNav .closebtn {
@@ -36,11 +36,11 @@
     color: #333;
 }
 .fa-bars:hover, .closebtn:hover {
-    color: #66c;
+    color: #369;
 }
 
 #sideNav a:not(.closebtn) {
-    background-color: #66c;
+    background-color: #369;
 }
 #sideNav a:not(.closebtn):hover {
     background-color: #339;

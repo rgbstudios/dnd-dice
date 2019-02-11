@@ -19,5 +19,7 @@ speak roller character stats option
 
 speak spell option
 
+copy spell info option, download spell info (txt) option
+
 
 have pwa store memory from last use, settings like night mode
