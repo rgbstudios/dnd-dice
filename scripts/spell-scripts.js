@@ -11,11 +11,6 @@ let resultData = {};
 let spellNames = [];
 
 function getData() {
-  // console.log(window.location.href.indexOf('https') );
-  if(window.location.href.indexOf('https')!=-1) {
-    results.html('The api is not https. Please replace "https" with "http" in the website url.');
-    // window.location.href = window.location.href.replace('https','http'); //bleh
-  }
   try {
   $.ajax({
       // url: 'http://www.dnd5eapi.co/api/spells',
