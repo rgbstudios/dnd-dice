@@ -52,7 +52,7 @@ function getSpellData(num) {
       dataType: 'json',
       method: 'GET',
       success: function(data) {
-      	// console.log(data);
+      	console.log(data);
        	for(item in data) {
           if(item=='_id' || item=='url' || item=='index') {
             continue; //skip id and url
@@ -66,7 +66,9 @@ function getSpellData(num) {
     	     	itemDescription = (data[item].name ? data[item].name : data[item]).toString();
             itemDescription = itemDescription.replace('phb ',''); //page number fix
     			}
-    			itemDescription = itemDescription.split('â€™').join('\''); //fix apostrophie that wasn't escaped properly in api
+          itemDescription = itemDescription.split('â€™').join('\''); //fix apostrophie that wasn't escaped properly in api
+          itemDescription = itemDescription.split('â€œ').join('\''); //fix apostrophie that wasn't escaped properly in api
+    			itemDescription = itemDescription.split('â€�').join('\''); //fix apostrophie that wasn't escaped properly in api
           itemDescription = itemDescription.split(',-').join('<br>').split('.,').join('.<br>');
    	    	results.html(results.html() + '<p style="text-align:left !important;">' + item.replace('_',' ').replace('desc','description').capitalize() + ': ' + itemDescription + '</p>');
         	}
