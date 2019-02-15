@@ -8,8 +8,6 @@ make pages keep track of night between menu clicks. cookies? url param?
 
 update readme with in depth description of each page and what they can do, with screenshots
 
-add your rolls to graph on char.html
-
 see if empty alert still displays on char
 
 spellsearch: add custom spellbooks with lists of spell and characters. 
