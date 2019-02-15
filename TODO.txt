@@ -15,11 +15,8 @@ see if empty alert still displays on char
 spellsearch: add custom spellbooks with lists of spell and characters. 
 options to download/upload
 
-speak roller character stats option
-
-speak spell option
-
 copy spell info option, download spell info (txt) option
 
+improve speak option on dnd dice, add option to char creator and to read spell too
 
 have pwa store memory from last use, settings like night mode

@@ -60,4 +60,25 @@ function drawChart() {
 
   chart = new google.visualization.ColumnChart(document.getElementById('barchart') );
   chart.draw(data, options);
+
+
+/*
+
+
+    //bar2
+    let chartdata = [['','', { role: 'style' } ]];
+    for(let i=0; i<odds.length; i++) {
+      chartdata.push([i+3, odds[i], graphColor]);
+    }
+
+    for(let i=0; i<6; i++) {
+      //hardcoded 20 to display larger as if 20 occurences of stat
+      //todo: doesnt work for repeats of same stat
+      chartdata.push([characters[characters.length-1].stats[i].value, 20, graphColor]);
+   }
+
+    data = google.visualization.arrayToDataTable(chartdata);
+
+*/
+
 }
