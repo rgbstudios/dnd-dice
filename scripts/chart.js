@@ -71,14 +71,11 @@ function drawChart() {
 
     chartdata = [['','', { role: 'style' } ]];
 
-    let values = [];
-    for(let i=0; i<6; i++)
-      values.push(characters[characters.length-1].stats[i].value);
-    console.log(values);
+
 
    let occurences = new Array(16).fill(0);
    for(let i=0; i<6; i++)
-      occurences[ values[i]-3 ]++;
+      occurences[ characters[characters.length-1].stats[i].value -3 ]++;
 
     console.log(occurences);
 
