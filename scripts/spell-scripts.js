@@ -88,12 +88,13 @@ function doSearch(term) {
     	if(resultData[idx].name.toLowerCase().replace(' ','').indexOf(term.toLowerCase().replace(' ','') ) != -1) {
     		results.html('<b style="display:inline-block;" class="spell-name"> <i class="fas fa-book"></i> ' + resultData[idx].name + '</b><hr>');
     		// getSpellData(resultData[idx].url);
-        let tmpArr = resultData[idx].url.split('/');
-        let num = tmpArr[tmpArr.length-1];
-        getSpellData(num);
-        $('#input').val(resultData[idx].name);
-    		history.replaceState({}, '', '?q=' + resultData[idx].name);
-    		return;
+	        let tmpArr = resultData[idx].url.split('/');
+	        let num = tmpArr[tmpArr.length-1];
+	        getSpellData(num);
+	        $('#input').val(resultData[idx].name);
+	    	history.replaceState({}, '', '?q=' + resultData[idx].name);
+	    	document.title = resultData[idx].name + ' - Spell Searcher';
+	    	return;
     	}
     }
     results.html('No results found...');
