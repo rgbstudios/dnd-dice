@@ -6,12 +6,12 @@ function makeChart() {
 
 function drawChart() {
 
-  let graphColor = isNight ? '#999' : '#333';
+  let graphColor = isNight ? '#ccc' : '#333';
 
   //bar
   let chartdata = [['','', { role: 'style' } ]];
   for(let i=0; i<odds.length; i++) {
-    chartdata.push([i+3, odds[i], graphColor]);
+    chartdata.push([i+3, odds[i], '#369']);
   }
 
  //  for(let i=0; i<6; i++) {
@@ -35,7 +35,7 @@ function drawChart() {
       },
       gridlines: {
         count: 16,
-        color: graphColor
+        color: '#ccc'
       },
       textStyle:{color: graphColor},
       titleTextStyle:{color: graphColor}
@@ -44,7 +44,7 @@ function drawChart() {
       title: 'Odds of each stat (of 1296)',
       gridlines: {
         count: 8,
-        color: graphColor
+        color: '#ccc'
       },
       textStyle:{color: graphColor},
       titleTextStyle:{color: graphColor}
@@ -62,23 +62,39 @@ function drawChart() {
   chart.draw(data, options);
 
 
-/*
 
 
-    //bar2
-    let chartdata = [['','', { role: 'style' } ]];
-    for(let i=0; i<odds.length; i++) {
-      chartdata.push([i+3, odds[i], graphColor]);
-    }
 
-    for(let i=0; i<6; i++) {
-      //hardcoded 20 to display larger as if 20 occurences of stat
-      //todo: doesnt work for repeats of same stat
-      chartdata.push([characters[characters.length-1].stats[i].value, 20, graphColor]);
+    //my rolls barchart
+
+    options.vAxis.title = 'Frequency';
+
+    chartdata = [['','', { role: 'style' } ]];
+
+    let values = [];
+    for(let i=0; i<6; i++)
+      values.push(characters[characters.length-1].stats[i].value);
+    console.log(values);
+
+   let occurences = new Array(16).fill(0);
+   for(let i=0; i<6; i++)
+      occurences[ values[i]-3 ]++;
+
+    console.log(occurences);
+
+   for(let i=0; i<16; i++) {
+      chartdata.push([i+3, occurences[i], '#369']);
+      // chartdata.push([characters[characters.length-1].stats[i].value, 1, graphColor]);
    }
 
     data = google.visualization.arrayToDataTable(chartdata);
 
-*/
+
+
+  chart = new google.visualization.ColumnChart(document.getElementById('my-rolls-barchart') );
+  chart.draw(data, options);
+
+
+
 
 }
