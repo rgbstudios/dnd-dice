@@ -51,7 +51,7 @@ $(document).ready(function() {
 	consoleRollButton = $('#consoleRollButton');
 
 
-	$('#nightButton').on('click', function() {
+	$('#nightButton').click(function() {
 		handleNight(); //in common.js
 		$('#titleImg').prop('src', isNight ? 'img/d20-white.svg' : 'img/d20.svg');
 	});
@@ -79,18 +79,18 @@ $(document).ready(function() {
 // ---------------- update display of console, speak button, night ----------------
 
 	consoleDiv.css('display','none');
-	consoleButton.on('click', function() {
+	consoleButton.click(function() {
 		consoleDiv.css('display', consoleDiv.css('display')=='none'?'':'none');
 	});
 
-	speakButton.on('click', function() {
+	speakButton.click(function() {
 		speakButton.html(isSpeak?"Speak Roll Results <i class='fas fa-volume-up'></i>":"Don't Speak Roll Results <i class='fas fa-volume-off'></i>");
 		isSpeak = !isSpeak;		
 	});
 
 // ---------------- update num dice and dice sides on modal submit ----------------
 
-	numDiceSubmit.on('click', function() {
+	numDiceSubmit.click(function() {
 		let verifiedInput = Math.min(Math.max(numDiceModalInput.val(),6),999);
 		numDiceButtonCustom.html(verifiedInput);
 		numDiceModalInput.val(verifiedInput);
@@ -98,7 +98,7 @@ $(document).ready(function() {
 		numDiceDiv.children()[5].click();
 	});
 
-	diceSidesSubmit.on('click', function() {
+	diceSidesSubmit.click(function() {
 		let verifiedInput = Math.min(Math.max(diceSidesModalInput.val(),2),999);
 		diceSidesButtonCustom.html('D' + verifiedInput);
 		diceSidesModalInput.val(verifiedInput);
@@ -108,7 +108,7 @@ $(document).ready(function() {
 
 // ---------------- set active class on num dice and dice sides button click ----------------
 
-	numDiceDiv.children().on('click', function() {
+	numDiceDiv.children().click(function() {
 		if($(this).html() == '+') {
 			return;			
 		} 
@@ -121,7 +121,7 @@ $(document).ready(function() {
 		advantageSelect.prop('disabled',($(this).html()!='1') );
 	});
 
-	diceSidesDiv.children().on('click', function() {
+	diceSidesDiv.children().click(function() {
 		if($(this).html() != '+') {
 			diceSidesDiv.children().removeClass('active');
 			$(this).addClass('active');			
@@ -164,18 +164,16 @@ $(document).ready(function() {
 		}
 	});
 
-	consoleRollButton.on('click', function() {
+	consoleRollButton.click(function() {
 		doConsoleRoll(consoleInput.val() );
 	});
 	
 
 // ---------------- roll and reset buttons onclick ----------------
 
-	rollButton.on('click', function() {	
-		doRolls();
-	});
+	rollButton.click(doRolls);
 
-	resetButton.on('click', function() {
+	resetButton.click(function() {
 		modifierInput.val(0);
 		advantageSelect.val(0);
 		attributeSelect1.val('non');
@@ -185,36 +183,36 @@ $(document).ready(function() {
 
 // ---------------- clear and download history, notes, and mods, copy url, upload mods ----------------
 
-	clearHistory.on('click', function() {
+	clearHistory.click(function() {
 		historyText.val('');
 		numDiceRolled.html('0');
 	});
 
-	downloadHistory.on('click', function() {
+	downloadHistory.click(function() {
 		downloadFile('History:\r\nYou rolled ' + numDiceRolled.html() + ' dice.\r\n' + historyText.val().replace(/\r?\n/g, '\r\n'), 
 			'history ' + getFormattedDate(), 'downloadHistoryLink');
 	});
 
-	clearNotes.on('click', function() {
+	clearNotes.click(function() {
 		notes.val('');
 	});
 
-	downloadNotes.on('click', function() {
+	downloadNotes.click(function() {
 		downloadFile('Notes:\r\n' + notes.val().replace(/\r?\n/g, '\r\n'), 
 			'notes ' + getFormattedDate(), 'downloadNotesLink');
 	});
 
-	$('#copyUrl').on('click', function() {
+	$('#copyUrl').click(function() {
 		updateParams();
 		copyUrl();
 	});
 
-	clearMods.on('click', function() {
+	clearMods.click(function() {
 		$('#modModal input[type=number]').val('0');
 		updateParams();
 	});
 
-	downloadMods.on('click', function() {
+	downloadMods.click(function() {
 		let modText = '';
 		for(let i=0; i<modNames.length; i++) {
 			modText += '\r\n' + modNames[i] + ': ' + $('#'+modNames[i]).val();
@@ -223,7 +221,7 @@ $(document).ready(function() {
 		downloadFile('Mods:\r\n' + window.location.href + modText, 'modifiers ' + getFormattedDate(), 'downloadModsLink')
 	});
 
-	uploadMods.on('click', function() {
+	uploadMods.click(function() {
 		$('#fileInput').click();
 	});
 
@@ -241,13 +239,9 @@ $(document).ready(function() {
 		}
 	});
 
-	$('#modModal input[type=number]').on('change', function() {
-		updateParams();
-	});
+	$('#modModal input[type=number]').on('change', updateParams);
 
 }); //end doc ready
-
-
 
 //https://stackoverflow.com/questions/19038919/is-it-possible-to-upload-a-text-file-to-input-in-html-js?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
 function processFile(e) {
