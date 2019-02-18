@@ -30,7 +30,7 @@ function Character(givenRolls) {
 	this.stats = [];
 	this.statTotal = 0;
 	this.modTotal = 0;
-	for(let i=0; i<6; i++) { //6 stats
+	for(let i=0; i<6; i++) { // 6 stats
 		let newStat = givenRolls ? new Stat(givenRolls[i]) : new Stat(false);
 		this.stats.push(newStat);
 		this.statTotal += newStat.value;
@@ -38,18 +38,18 @@ function Character(givenRolls) {
 	}
 }
 
-function Stat(givenRolls) { //rolls is array of 4 dice results
+function Stat(givenRolls) { // rolls is array of 4 dice results
 	if(givenRolls) {
 		this.rolls = givenRolls;
 	} else {
 		this.rolls = [];
-		for(let i=0; i<4; i++) { //4 rolls take highest 3
+		for(let i=0; i<4; i++) { // 4 rolls take highest 3
 			this.rolls.push(getRoll(6) );
 		}		
 	}
 	this.value = 0;
 	for(let i=0, minIdx=this.rolls.indexOf(Math.min.apply(Math, this.rolls) ); i<4; i++) {
-		if(i != minIdx) { //don't count lowest roll
+		if(i != minIdx) { // don't count lowest roll
 			this.value += this.rolls[i];
 		}
 	}
@@ -114,7 +114,7 @@ $(function() {
 
 		$('#downloadLink').prop('download', 'Character - ' + $('#nameInput').val() + '.txt');
 		$('#downloadLink').prop('href', URL.createObjectURL(file) );
-		document.getElementById('downloadLink').click(); //idk why this doesn't work with jquery selector
+		document.getElementById('downloadLink').click(); // IDK why this doesn't work with jquery selector
 	});
 	
 	$('#genButton').click(function() {
@@ -128,7 +128,7 @@ $(function() {
 		else
 			displayRolls();
 
-		//if loaded from roll params earlier, remove alert and url param
+		// if loaded from roll params earlier, remove alert and url param
 		$('#givenRollsAlert').css('display', 'none');
 		history.replaceState({}, '', '?r=');
 
@@ -143,7 +143,7 @@ $(function() {
 		let allSelected = true;
 		for(let j=0; j<6; j++) {
 			let idx = $('#stat' + (j+1) + 'Mod').prop('selectedIndex');
-			let isThis = $('#stat' + (j+1) + 'Mod').is($(this) ); //don't count this element's current selection
+			let isThis = $('#stat' + (j+1) + 'Mod').is($(this) ); // don't count this element's current selection
 			if(idx != 0 && ! isThis)
 				evt.target.options[idx].disabled = true;
 			if(idx == 0)
@@ -164,7 +164,7 @@ $(function() {
 	$('#resetStat').click(resetStats);
 
 	$('#nightButton').click(function() {
-		handleNight(); //in common.js
+		handleNight(); // in common.js
 		$('#titleImg').prop('src', isNight ? 'img/d6-white.svg' : 'img/d6.svg');
 		$('select').css('color', isNight ? '#fff' : '#333');
 		$('input').css('color', isNight ? '#fff' : '#333');
@@ -227,7 +227,7 @@ $(function() {
 		displayRolls();
 		console.log(characters[0]);
 
-		$('#givenRollsAlertSpan').html('Loaded rolls from url'); //add window.location.href?
+		$('#givenRollsAlertSpan').html('Loaded rolls from url'); // add window.location.href?
 		$('#givenRollsAlert').css('display', 'inline-block');
 
 	} else {
@@ -297,24 +297,24 @@ function displayRolls() {
 }
 
 function getRollLink() {
-	//url params
+	// url params
 	let r = '';
 	for(let i=0; i<6; i++) {
 		for(let j=0; j<4; j++) {
-			//no need to delimit since all possible vals 1-6 are 1 digit
+			// no need to delimit since all possible vals 1-6 are 1 digit
 			r += characters[characters.length-1].stats[i].rolls[j];
 		}
 	}
 	for(let i=0; i<6; i++) {
-		//these values are also 1-7 so one digit
+		// these values are also 1-7 so one digit
 		r += $('#stat' + (i+1) + 'Mod').prop('selectedIndex');
 	}
 	r += $('#nameInput').val();
-	r = btoa(r); //encode base64
+	r = btoa(r); // encode base64
 	return window.location.href.split('char.html')[0] + 'char.html' + '?r=' + r;
 }
 
-//todo: add this?
+// TODO: add this?
 function downloadMany(num) {
 	for(let i=0; i<num; i++) {
 		$('#genButton').click();
@@ -344,7 +344,7 @@ function getDieRollerParams() {
 		m += characters[characters.length-1].stats[j].mod + ' ';
 	}
 	m += '0 0 0';
-	m = btoa(m); //encode base 64
+	m = btoa(m); // encode base 64
 	return '?m=' + m;
 }
 
@@ -362,7 +362,7 @@ function statsToMods(stats) {
 	return mods;
 }
 
-function stdDev(array) { //standard deviation
+function stdDev(array) { // standard deviation
 	let sum = 0, len = array.length;
 	for(let i=0; i<len; i++)
 		sum += array[i];
@@ -377,7 +377,7 @@ function resetStats() {
 	$('.statMod').prop('selectedIndex',0);
 }
 
-//todo: use this
+// TODO: use this
 function percentile(num) {
 	num -= 3;
 	let val=0;
