@@ -52,6 +52,11 @@ $(document).ready(function() {
 	consoleRollButton = $('#consoleRollButton');
 
 
+	$('#nightButton').on('click', function() {
+		handleNight(); //in common.js
+		$('#titleImg').prop('src', isNight ? 'img/d20-white.svg' : 'img/d20.svg');
+	});
+
 // ---------------- get url params ----------------
 //atob decodes base 64
 	let url = new URL(window.location.href);
@@ -63,10 +68,11 @@ $(document).ready(function() {
 		}
 	}
 
-	// let n = url.searchParams.get("n");
-	// if(n=="1") {
-	// 	$('#nightButton').click();
-	// }
+	if(url.searchParams.get('n')=='1') { // if night in url
+		url.searchParams.delete('n');
+		history.replaceState({}, '', '?' + url.searchParams.toString() ); // remove from url
+		$('#nightButton').click(); // then set night
+	}
 
 	//update params
 	updateParams();
@@ -81,11 +87,6 @@ $(document).ready(function() {
 	speakButton.on('click', function() {
 		speakButton.html(isSpeak?"Speak Roll Results <i class='fas fa-volume-up'></i>":"Don't Speak Roll Results <i class='fas fa-volume-off'></i>");
 		isSpeak = !isSpeak;		
-	});
-
-	$('#nightButton').on('click', function() {
-		handleNight(); //in common.js
-		$('#titleImg').prop('src', isNight ? 'img/d20-white.svg' : 'img/d20.svg');
 	});
 
 // ---------------- update num dice and dice sides on modal submit ----------------
@@ -244,7 +245,6 @@ $(document).ready(function() {
 	$('#modModal input[type=number]').on('change', function() {
 		updateParams();
 	});
-
 
 }); //end doc ready
 

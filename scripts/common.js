@@ -5,10 +5,21 @@ function handleNight() {
     $('#nightButton').html("Day Theme <i class='fas fa-sun'></i>");
     $('#nightTheme').prop('href', 'styles/night.css');
     // $('#titleImg').prop('src', 'img/d20-white.svg');
+
+    $('#sideNav a:not(.closebtn)').each(function() {
+      console.log($(this) );
+      $(this).prop('href', $(this).prop('href') + '?n=1');
+    });
+
   } else {
     $('#nightButton').html("Night Theme <i class='fas fa-moon'></i>");
     $('#nightTheme').prop('href', '');
     // $('#titleImg').prop('src', 'img/d20.svg');
+
+    $('#sideNav a:not(.closebtn)').each(function(){
+      $(this).prop('href', $(this).prop('href').replace('?n=1','') );
+    });
+
   }
   isNight = !isNight;
 }

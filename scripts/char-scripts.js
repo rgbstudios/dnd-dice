@@ -78,6 +78,7 @@ function getDiceCodes(rolls) {
 }
 
 $(function() {
+
 	$('#download').click(function() {
 		if(characters.length == 0)
 			return -1;
@@ -190,10 +191,12 @@ $(function() {
 	});
 
 	let url = new URL(window.location.href);
-	// let n = url.searchParams.get("n");
-	// if(n=="1") {
-	// 	$('#nightButton').click();
-	// }
+
+	if(url.searchParams.get('n')=='1') { // if night in url
+		url.searchParams.delete('n');
+		history.replaceState({}, '', '?' + url.searchParams.toString() ); // remove from url
+		$('#nightButton').click(); // then set night
+	}
 
 	let r = url.searchParams.get('r');
 	if(r) {

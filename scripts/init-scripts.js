@@ -33,6 +33,14 @@ $(document).ready(function() {
 		$('#titleImg').prop('src', isNight ? 'img/d20-white.svg' : 'img/d20.svg');
 	});
 
+	//get url params
+	let url = new URL(window.location.href);
+	if(url.searchParams.get('n')=='1') { // if night in url
+		url.searchParams.delete('n');
+		history.replaceState({}, '', '?' + url.searchParams.toString() ); // remove from url
+		$('#nightButton').click(); // then set night
+	}
+
 	//tracker functionality
 	$('#newCharButton').on('click', function() {
 		$('#charsDiv').append('	<div class="charDiv"><button onclick="$(this).parent().remove();" class="btn btn-sm btn-danger delete-char-button"><i class="fas fa-times"></i> Remove</button> Character Name: <input type="text" class="form-control input-sm char-name-input" value="Character 1"> Initiative Bonus <input type="number" class="form-control input-sm init-bonus-input" value="0"><br><br><button onclick="rollChar($(this) )" class="btn btn-sm btn-primary roll-char-button"><i class="fas fa-dice"></i> Roll</button> Roll Result: <input type="number" class="form-control input-sm roll-result-output" value=""> Total Result: <input disabled type="number" class="form-control input-sm total-result-output" value=""></div>');});

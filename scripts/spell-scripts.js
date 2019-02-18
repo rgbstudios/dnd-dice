@@ -109,10 +109,21 @@ $(function() {
   results = $('#results');
   input = $('#input');
 
+  $('#nightButton').on('click', function() {
+    handleNight(); //in common.js
+    $('#titleImg').prop('src', isNight ? 'img/d8-white.svg' : 'img/d8.svg');
+  });
+
   //get url params
   let url = new URL(window.location.href);
   let q = url.searchParams.get('q');
   input.val(q || 'magic missile');
+
+  if(url.searchParams.get('n')=='1') { // if night in url
+    url.searchParams.delete('n');
+    history.replaceState({}, '', '?' + url.searchParams.toString() ); // remove from url
+    $('#nightButton').click(); // then set night
+  }
 
   getData();
 
@@ -126,15 +137,9 @@ $(function() {
   	}
   });
 
-  $('#nightButton').on('click', function() {
-    handleNight(); //in common.js
-    $('#titleImg').prop('src', isNight ? 'img/d8-white.svg' : 'img/d8.svg');
-  });
-
   // input.select();
 
 });
-
 
 //-------- typeahead --------
 function makeTypeAhead() {
