@@ -4,8 +4,6 @@ add sharethis back
 
 finish init tracker
 
-make pages keep track of night between menu clicks. cookies? url param?
-
 update readme with in depth description of each page and what they can do, with screenshots
 
 see if empty alert still displays on char
