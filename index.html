@@ -3,7 +3,6 @@
 <head>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-
 	<meta charset="utf-8">
 	<meta name="title=" content="D&D Dice Roller">
 	<meta name="robots" content="index, follow">
@@ -52,7 +51,6 @@
 <body>
 
 <div class="sticky-top">
-
 	<button id="menuButton" onclick="openNav()"><i class="fas fa-bars"></i></button>
 	<div id="sideNav">
 		<a href="#" class="closebtn" onclick="closeNav()">&times;</a>
@@ -60,7 +58,6 @@
 		<a class="nav-green" href="spell.html"><img src="img/d8-white.svg" width="32px"> Spell Searcher</a>
 		<!-- <a href="init.html">Initiative Tracker</a> -->
 	</div>
-
 
 	<h3 class="text-center">D&D <img id="titleImg" src="img/d20.svg" width="32px"> Dice</h3>
 
@@ -77,7 +74,6 @@
 	</div>
 
 	<hr>
-
 </div>
 
 	<div class="modal fade" id="modModal">
@@ -147,7 +143,6 @@
 		</div>
 	</div>
 	
-
 	<div class="modal fade" id="historyModal">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -156,11 +151,9 @@
 					<h4 class="modal-title">History <i class="fas fa-history"></i></h4>
 				</div>
 				<div class="modal-body">
-
 					<textarea id="historyText" class="form-control" rows="10"></textarea>
 					<br>
 					<p>You've rolled <span id="numDiceRolled">0</span> dice</p>
-
 				</div>
 				<div class="modal-footer">
 					<div class="btn-group">
@@ -292,20 +285,12 @@
 <div class="row">
 	<div class="col-sm-12 col-md-4">
 		<label>Modifier:</label>
-		<form id="modifierForm">
+		<form>
 			<label class="radio-inline"><input checked type="radio" name="plusMinusRadio" value="+">+</label>
 			<label class="radio-inline"><input type="radio" name="plusMinusRadio" value="-">-</label>
 		</form>
 		<input id="modifierInput" class="form-control input-sm" type="number" value="0" min="0" max="999" maxlength="3">
 	</div>
-<!-- 	<div class="col-sm-6 col-md-3">
-	<label>Multiplier:</label>
-		<form id="multiplierForm">
-			<label class="radio-inline"><input checked type="radio" name="optradio" value="x">&times;</label>
-			<label class="radio-inline"><input type="radio" name="optradio" value="/">/</label>
-		</form>
-		<input id="multiplierInput" class="form-control input-sm" type="number" value="1" min="0" max="999" maxlength="3"> 
-	</div> -->
 	<div class="col-sm-6 col-md-4">
 		<label>Advantage:</label>
 		<select id="advantageSelect" class="form-control input-sm">
@@ -334,7 +319,6 @@
 			<option value="spl">Spell Atk</option>
 			<option value="itv">Initiative</option>
 		</select>
-
 	</div>
 </div>
 

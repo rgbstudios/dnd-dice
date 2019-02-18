@@ -2,7 +2,7 @@ let consoleDiv, consoleButton, speakButton;
 let numDiceModalInput, numDiceSubmit, numDiceButtonCustom, numDiceModal, diceSidesModalInput, diceSidesSubmit, diceSidesButtonCustom, diceSidesModal;
 let numDiceDiv, numDiceButtonPlus, diceSidesDiv, diceSidesButtonPlus;
 let output, rollButton, resetButton, historyText, numDiceRolled, clearHistory, downloadHistory, notes, clearNotes, downloadNotes, clearMods, downloadMods, uploadMods;
-let modifierForm, modifierInput, advantageSelect, attributeSelect1, attributeSelect2;
+let modifierInput, advantageSelect, attributeSelect1, attributeSelect2;
 let consoleInput, consoleRollButton;
 
 let isSpeak = false;
@@ -42,7 +42,6 @@ $(document).ready(function() {
 	downloadMods = $('#downloadMods');
 	uploadMods = $('#uploadMods');
 
-	modifierForm = $('#modifierForm');
 	modifierInput = $('#modifierInput');
 	advantageSelect = $('#advantageSelect');
 	attributeSelect1 = $('#attributeSelect1');
