@@ -318,7 +318,9 @@ function display(text) {
 
 // ---------------- function for rolling dice ----------------
 //advantage is 0 if none, 1 if advantage, -1 if disadvantage. values are strings
-function doRolls(numDice = getNumDice(), diceSides = getDiceSides(), advantage = getAdvantage(), modifier = getModifier(), attr1 = getAttribute1(), attr1Name = getAttribute1Name(), attr2 = getAttribute2(), attr2Name = getAttribute2Name() ) {
+function doRolls() {
+	let numDice = getNumDice(), diceSides = getDiceSides(), advantage = getAdvantage(), modifier = getModifier(), attr1 = getAttribute1(), attr1Name = getAttribute1Name(), attr2 = getAttribute2(), attr2Name = getAttribute2Name();
+
 	let result = 0, rolls = [];
 
 	if(numDice==1 && advantage!='0') {
