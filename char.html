@@ -14,9 +14,9 @@
 	<meta name="apple-mobile-web-app-status-bar-style" content="#339">
 	<link rel="manifest" href="manifest.webmanifest">
 
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
 
 	<link rel="stylesheet" type="text/css" href="styles/common.css">
@@ -46,9 +46,6 @@
 		});
 	}
 	</script>
-
-	<!-- sharethis -->
-	<script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5b864aad7b4f100011fe46e7&product=inline-share-buttons' async='async'></script>
 
 </head>
 <body>
@@ -266,8 +263,19 @@
 				<h4 class="modal-title">Settings <i class="fas fa-cog"></i></h4>
 			</div>
 			<div class="modal-body">
+
+<!-- 				<div class="custom-control custom-checkbox">
+					<input id="enableUnicodeCheckbox" type="checkbox" class="custom-control-input">
+					<label class="custom-control-label" for="enableUnicodeCheckbox">Use dice unicode characters when downloading stats</label>
+				</div>
+				<div class="custom-control custom-checkbox">
+					<input checked id="displayRollingCheckbox" type="checkbox" class="custom-control-input">
+					<label class="custom-control-label" for="displayRollingCheckbox">Display rolling animation</label>
+				</div> -->
+
 				<label><input id="enableUnicodeCheckbox" type="checkbox">Use dice unicode characters when downloading stats</label><br>
 				<label><input checked id="displayRollingCheckbox" type="checkbox">Display rolling animation</label>
+				
 				<br>
 				<button id="nightButton" title="Night mode" class="btn"> Night Theme <i class="fas fa-moon"></i> </button>
 				<button id="fullscreen" title="Fullscreen" class="btn"> Fullscreen <i class="fas fa-arrows-alt"></i> </button>
@@ -335,6 +343,9 @@ gtag('js', new Date());
 
 gtag('config', 'UA-104632692-3');
 </script>
+
+<!-- sharethis -->
+<script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5b864aad7b4f100011fe46e7&product=inline-share-buttons' async='async'></script>
 
 </body>
 </html>
